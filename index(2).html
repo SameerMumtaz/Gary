@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>[Your Campaign Name] &mdash; Party HQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0604;
+    --surface: #161008;
+    --surface2: #1e1509;
+    --border: #3a2a08;
+    --border-bright: #8b6914;
+    --gold: #c9a227;
+    --gold-dim: #7a6015;
+    --gold-bright: #d4a017;
+    --astral: #7b2fff;
+    --astral-glow: #a855f7;
+    --dragon: #e05c1a;
+    --red: #c0392b;
+    --green: #2ecc71;
+    --text: #e8d5a3;
+    --text-dim: #a08c5a;
+    --text-faint: #6b5a35;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  body {
+    background: var(--bg);
+    font-family: 'IM Fell English', serif;
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 60px;
+    background-image:
+      radial-gradient(ellipse at 10% 20%, #1a0a00 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 80%, #0a001a 0%, transparent 55%);
+  }
+
+  /* -- HERO -- */
+  .hero {
+    text-align: center;
+    padding: 36px 20px 28px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-bright);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '&#9876;';
+    position: absolute; top: -30px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 180px; opacity: 0.025; pointer-events: none;
+    color: var(--gold);
+  }
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 6px; color: var(--gold-dim);
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(22px, 6vw, 38px);
+    font-weight: 900; color: var(--gold);
+    line-height: 1.15;
+    text-shadow: 0 0 40px rgba(201,162,39,0.25);
+    margin-bottom: 8px;
+  }
+  .hero-sub {
+    font-style: italic; font-size: 13px;
+    color: var(--text-dim); margin-bottom: 16px;
+  }
+  .hero-edit-hint {
+    display: inline-block;
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; color: var(--text-faint);
+    border: 1px dashed var(--border);
+    padding: 4px 14px; text-transform: uppercase;
+  }
+
+  /* -- NAV -- */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    background: #0e0b04;
+    border-bottom: 2px solid var(--border-bright);
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    font-family: 'Cinzel', serif; font-size: 10px;
+    letter-spacing: 2px; padding: 13px 18px;
+    border: none; border-bottom: 3px solid transparent;
+    color: var(--text-faint); background: transparent;
+    cursor: pointer; white-space: nowrap;
+    text-transform: uppercase; transition: all 0.2s;
+    touch-action: manipulation; min-height: 46px;
+    flex-shrink: 0;
+  }
+  .nav-btn.active, .nav-btn:active {
+    color: var(--gold-bright);
+    border-bottom-color: var(--gold-bright);
+  }
+
+  .panel { display: none; max-width: 860px; margin: 0 auto; padding: 22px 14px 40px; }
+  .panel.active { display: block; animation: fadeIn 0.35s ease-out; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
+
+  /* ==========================
+     PARTY TAB
+  ========================== */
+  .party-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-bottom: 20px;
+  }
+
+  .char-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    padding: 14px 14px 16px;
+    position: relative; overflow: hidden;
+    text-decoration: none; color: inherit;
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s, background 0.2s;
+    touch-action: manipulation;
+    min-height: 160px;
+  }
+  .char-card:active { background: rgba(201,162,39,0.04); border-color: var(--gold); }
+  .char-card.empty {
+    border-top-color: var(--border);
+    border-style: dashed; opacity: 0.45;
+    align-items: center; justify-content: center;
+    cursor: default;
+  }
+  .char-card::after {
+    content: attr(data-emoji);
+    position: absolute; bottom: -8px; right: 4px;
+    font-size: 56px; opacity: 0.07; pointer-events: none;
+    line-height: 1;
+  }
+
+  .card-race {
+    font-family: 'Cinzel', serif; font-size: 8px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-faint); margin-bottom: 4px;
+  }
+  .card-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--text); line-height: 1.2; margin-bottom: 2px;
+  }
+  .card-player {
+    font-style: italic; font-size: 11px;
+    color: var(--text-dim); margin-bottom: 8px;
+  }
+  .card-tagline {
+    font-size: 11px; font-style: italic;
+    color: var(--text-dim); line-height: 1.4;
+    border-left: 2px solid var(--border-bright);
+    padding-left: 8px; margin-bottom: 12px;
+    flex: 1;
+  }
+  .card-cta {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; color: var(--gold);
+    text-transform: uppercase; align-self: flex-start;
+    border: 1px solid var(--border-bright);
+    padding: 5px 12px;
+  }
+  .card-empty-text {
+    text-align: center;
+  }
+  .card-empty-icon { font-size: 28px; opacity: 0.3; display: block; margin-bottom: 8px; }
+  .card-empty-label {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; color: var(--text-faint);
+    text-transform: uppercase; line-height: 1.6;
+  }
+
+  .party-hint {
+    text-align: center; padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-size: 11px; font-style: italic;
+    color: var(--text-faint); line-height: 1.6;
+  }
+
+  /* ==========================
+     CAMPAIGN LOG TAB
+  ========================== */
+  .section-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold-bright);
+    padding: 16px; margin-bottom: 16px;
+  }
+  .section-block.astral-top { border-top-color: var(--astral); }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 10px;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold-bright); margin-bottom: 4px; font-weight: 700;
+  }
+  .section-title.astral { color: var(--astral-glow); }
+  .section-hint {
+    font-size: 11px; font-style: italic;
+    color: var(--text-faint); margin-bottom: 14px; line-height: 1.5;
+  }
+
+  /* entry form */
+  .entry-form { background: rgba(0,0,0,0.25); border: 1px solid var(--border); padding: 14px; margin-bottom: 12px; }
+  .form-title {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .field-label {
+    font-family: 'Cinzel', serif; font-size: 8px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-faint); display: block; margin-bottom: 4px;
+  }
+  .field-input {
+    width: 100%; background: var(--surface2);
+    border: 1px solid var(--border); color: var(--text);
+    font-family: 'IM Fell English', serif;
+    font-size: 15px; padding: 9px 10px;
+    border-radius: 2px; -webkit-appearance: none;
+    margin-bottom: 8px; display: block;
+  }
+  .field-input:focus { outline: none; border-color: var(--gold); }
+  .field-textarea { min-height: 66px; resize: vertical; }
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* action buttons */
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  .btn {
+    flex: 1; min-height: 42px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; touch-action: manipulation;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; padding: 8px;
+  }
+  .btn.primary { border-color: var(--gold-bright); color: var(--gold-bright); }
+  .btn.primary:active { background: rgba(201,162,39,0.1); }
+  .btn:active { background: rgba(255,255,255,0.04); }
+  .flash {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; color: var(--green);
+    text-transform: uppercase; opacity: 0;
+    transition: opacity 0.3s; text-align: center; margin-top: 6px;
+  }
+
+  /* log entries */
+  .log-list { display: flex; flex-direction: column; gap: 10px; }
+  .log-entry {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 12px 36px 12px 14px;
+    position: relative;
+  }
+  .log-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 4px; }
+  .log-session { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+  .log-date { font-size: 10px; color: var(--text-faint); font-style: italic; }
+  .log-location { font-family: 'Cinzel', serif; font-size: 10px; color: var(--gold-bright); margin-bottom: 5px; }
+  .log-events { margin-bottom: 5px; }
+  .log-event { font-size: 12px; color: var(--text-dim); padding: 1px 0; }
+  .log-meta-label { font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 1px; color: var(--text-faint); text-transform: uppercase; }
+  .log-text { font-size: 12px; font-style: italic; color: var(--text-dim); line-height: 1.5; white-space: pre-wrap; }
+  .log-hook { padding: 6px 8px; border-left: 2px solid var(--astral); background: rgba(123,47,255,0.04); margin-top: 6px; }
+  .log-delete { position: absolute; top: 8px; right: 8px; background: transparent; border: none; color: var(--text-faint); font-size: 18px; cursor: pointer; padding: 4px 8px; touch-action: manipulation; line-height: 1; }
+  .log-delete:active { color: var(--red); }
+  .log-empty { text-align: center; padding: 28px; font-style: italic; color: var(--text-faint); font-size: 13px; }
+
+  /* ==========================
+     ADD CHARACTER TAB
+  ========================== */
+  .step-list { display: flex; flex-direction: column; gap: 10px; }
+  .step-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px; background: var(--surface2); border: 1px solid var(--border); }
+  .step-num { font-family: 'Cinzel Decorative', serif; font-size: 20px; color: var(--gold); line-height: 1; flex-shrink: 0; width: 26px; }
+  .step-body { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+  .step-body strong { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 1px; color: var(--text); font-style: normal; display: block; margin-bottom: 3px; }
+  .code-block {
+    font-family: monospace; font-size: 12px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--astral);
+    padding: 10px 12px; margin-top: 8px;
+    color: var(--astral-glow); line-height: 1.7;
+    white-space: pre-wrap; word-break: break-all;
+    overflow-x: auto;
+  }
+
+  .what-you-get {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-top: 0;
+  }
+  .wyg-card { padding: 10px 12px; background: var(--surface2); border: 1px solid var(--border); }
+  .wyg-label { font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 5px; }
+  .wyg-text { font-size: 11px; color: var(--text-dim); line-height: 1.4; font-style: italic; }
+
+  /* ==========================
+     RESPONSIVE
+  ========================== */
+  @media (max-width: 480px) {
+    .party-grid { grid-template-columns: 1fr; }
+    .field-grid { grid-template-columns: 1fr; }
+    .what-you-get { grid-template-columns: 1fr; }
+    .hero-title { font-size: 22px; }
+    .char-card { min-height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">&#10022; Party Headquarters &#10022;</div>
+  <div class="hero-title">[Your Campaign Name]</div>
+  <div class="hero-sub"><em>Character sheets &middot; campaign log &middot; session notes</em></div>
+  <div class="hero-edit-hint">Edit campaign name in index.html line 8 &amp; hero-title div</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav-btn active" onclick="showPanel('party')">&#9876; The Party</button>
+  <button class="nav-btn" onclick="showPanel('log')">&#128220; Campaign Log</button>
+  <button class="nav-btn" onclick="showPanel('add')">&#128736; Add Character</button>
+</nav>
+
+<!-- ==== PARTY TAB ==== -->
+<div id="panel-party" class="panel active">
+
+  <div class="party-grid">
+
+    <!-- GARY &mdash; ACTIVE -->
+    <a class="char-card" href="gary-wicksworth.html" data-emoji="&#9889;">
+      <div class="card-race">Githyanki &middot; Wild Magic Sorcerer &middot; Lvl 1</div>
+      <div class="card-name">Gary Wicksworth III</div>
+      <div class="card-player">played by Sandy</div>
+      <div class="card-tagline">Chaotic Neutral. Always working an angle. 9 active cross-planar summons. Strategic wariness around cows.</div>
+      <span class="card-cta">Open Sheet &#8594;</span>
+    </a>
+
+    <!-- SLOT 2 -->
+    <div class="char-card empty">
+      <div class="card-empty-text">
+        <span class="card-empty-icon">&#9876;</span>
+        <div class="card-empty-label">Character slot open<br>See Add Character tab</div>
+      </div>
+    </div>
+
+    <!-- SLOT 3 -->
+    <div class="char-card empty">
+      <div class="card-empty-text">
+        <span class="card-empty-icon">&#9876;</span>
+        <div class="card-empty-label">Character slot open<br>See Add Character tab</div>
+      </div>
+    </div>
+
+    <!-- SLOT 4 -->
+    <div class="char-card empty">
+      <div class="card-empty-text">
+        <span class="card-empty-icon">&#9876;</span>
+        <div class="card-empty-label">Character slot open<br>See Add Character tab</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="party-hint">
+    Tap a character card to open their full sheet &middot; All sheets work offline &middot; Notes save to each player's device
+  </div>
+
+</div>
+
+<!-- ==== CAMPAIGN LOG TAB ==== -->
+<div id="panel-log" class="panel">
+
+  <div class="section-block">
+    <div class="section-title">&#128220; Shared Campaign Log</div>
+    <div class="section-hint">The objective record &mdash; what actually happened each session. Export as JSON and share with the party to sync across devices.</div>
+
+    <div class="entry-form">
+      <div class="form-title">+ New Session Entry</div>
+
+      <div class="field-grid">
+        <div>
+          <label class="field-label">Session #</label>
+          <input type="number" id="sh-session" class="field-input" placeholder="1" min="1">
+        </div>
+        <div>
+          <label class="field-label">Date</label>
+          <input type="text" id="sh-date" class="field-input" placeholder="Jun 1, 2026">
+        </div>
+      </div>
+
+      <label class="field-label">Location / Scene</label>
+      <input type="text" id="sh-location" class="field-input" placeholder="Where did the session take place?">
+
+      <label class="field-label">Key Events</label>
+      <input type="text" id="sh-e1" class="field-input" placeholder="Event 1">
+      <input type="text" id="sh-e2" class="field-input" placeholder="Event 2">
+      <input type="text" id="sh-e3" class="field-input" placeholder="Event 3 (optional)">
+
+      <div class="field-grid">
+        <div>
+          <label class="field-label">NPCs Met</label>
+          <textarea id="sh-npcs" class="field-input field-textarea" placeholder="Name &mdash; who they are"></textarea>
+        </div>
+        <div>
+          <label class="field-label">Loot / Rewards</label>
+          <textarea id="sh-loot" class="field-input field-textarea" placeholder="Gold, items, XP..."></textarea>
+        </div>
+      </div>
+
+      <label class="field-label">Next Session Hook</label>
+      <input type="text" id="sh-hook" class="field-input" placeholder="What are you walking into next time?">
+
+      <label class="field-label">Free Notes</label>
+      <textarea id="sh-free" class="field-input field-textarea" style="min-height:80px;" placeholder="Quotes, decisions, funny moments..."></textarea>
+
+      <div class="btn-row">
+        <button class="btn primary" onclick="saveEntry()">+ Save Entry</button>
+        <button class="btn" onclick="clearForm()">Clear</button>
+      </div>
+      <div class="flash" id="flash">&#10003; Saved</div>
+    </div>
+
+    <div class="btn-row" style="margin-bottom:14px;">
+      <button class="btn primary" onclick="exportLog()">&#11015; Export JSON</button>
+      <label class="btn" style="cursor:pointer;">
+        &#11014; Import JSON
+        <input type="file" id="importFile" accept=".json" onchange="importLog(event)" style="display:none;">
+      </label>
+    </div>
+
+    <div class="log-list" id="logList">
+      <div class="log-empty">No sessions logged yet. Add the first entry above.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==== ADD CHARACTER TAB ==== -->
+<div id="panel-add" class="panel">
+
+  <div class="section-block">
+    <div class="section-title">&#128736; Adding a New Character</div>
+    <div class="section-hint">Each player gets their own HTML file. Five steps, no coding required.</div>
+    <ul class="step-list">
+
+      <li class="step-item">
+        <span class="step-num">1</span>
+        <div class="step-body">
+          <strong>Duplicate gary-wicksworth.html</strong>
+          In your GitHub repo, copy the file and rename it &mdash; e.g. <code style="color:var(--astral-glow);">petra-stormhand.html</code>. This is now that player's character file.
+        </div>
+      </li>
+
+      <li class="step-item">
+        <span class="step-num">2</span>
+        <div class="step-body">
+          <strong>Find the CHARACTER_KEY in the file</strong>
+          Search for <code style="color:var(--astral-glow);">CHARACTER_KEY</code> near the top of the script block. Change it to match the new filename:
+          <div class="code-block">const CHARACTER_KEY = 'petra-stormhand';</div>
+          This ensures notes save separately for each character on the same device.
+        </div>
+      </li>
+
+      <li class="step-item">
+        <span class="step-num">3</span>
+        <div class="step-body">
+          <strong>Replace the character content</strong>
+          Search through the HTML for the player sheet section and update: name, race/class, alignment, backstory, stats, spells, traits, appearance, want, fear. The structure is already built &mdash; just swap the text.
+        </div>
+      </li>
+
+      <li class="step-item">
+        <span class="step-num">4</span>
+        <div class="step-body">
+          <strong>Add their card to this dashboard</strong>
+          Open <code style="color:var(--astral-glow);">index.html</code> and find an empty character slot. Replace it with:
+          <div class="code-block">&lt;a class="char-card" href="petra-stormhand.html" data-emoji="&#128293;"&gt;
+  &lt;div class="card-race"&gt;Human &middot; Paladin &middot; Lvl 1&lt;/div&gt;
+  &lt;div class="card-name"&gt;Petra Stormhand&lt;/div&gt;
+  &lt;div class="card-player"&gt;played by [Name]&lt;/div&gt;
+  &lt;div class="card-tagline"&gt;One line about who they are.&lt;/div&gt;
+  &lt;span class="card-cta"&gt;Open Sheet &#8594;&lt;/span&gt;
+&lt;/a&gt;</div>
+        </div>
+      </li>
+
+      <li class="step-item">
+        <span class="step-num">5</span>
+        <div class="step-body">
+          <strong>Push to GitHub and share the link</strong>
+          Commit both files. The new character sheet is live at <code style="color:var(--astral-glow);">yourusername.github.io/repo-name/petra-stormhand.html</code> and linked from the dashboard automatically.
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="section-block">
+    <div class="section-title" style="margin-bottom:12px;">&#128203; What Each Player Gets</div>
+    <div class="what-you-get">
+      <div class="wyg-card"><div class="wyg-label">&#9876; Player Sheet</div><div class="wyg-text">Stats, spells, backstory, traits, appearance, quick reference bar</div></div>
+      <div class="wyg-card"><div class="wyg-label">&#127922; DM Companion</div><div class="wyg-text">Encounter system, NPC roster, arc guide &mdash; DM eyes only</div></div>
+      <div class="wyg-card"><div class="wyg-label">&#128009; Arc Guide</div><div class="wyg-text">Full story arc for character-specific NPCs and campaign events</div></div>
+      <div class="wyg-card"><div class="wyg-label">&#128221; Dice & Notes</div><div class="wyg-text">Dice roller, campaign log, personal notes, export/import JSON</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // -- NAV --
+  function showPanel(name) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({top: 56, behavior: 'smooth'});
+  }
+
+  // -- CAMPAIGN LOG --
+  const LOG_KEY = 'party-campaign-log';
+
+  function getEntries() {
+    try { return JSON.parse(localStorage.getItem(LOG_KEY) || '[]'); } catch(e) { return []; }
+  }
+
+  function saveEntry() {
+    const session = document.getElementById('sh-session').value.trim();
+    const date = document.getElementById('sh-date').value.trim() ||
+      new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    const location = document.getElementById('sh-location').value.trim();
+    const events = ['sh-e1','sh-e2','sh-e3'].map(id => document.getElementById(id).value.trim()).filter(Boolean);
+    const npcs = document.getElementById('sh-npcs').value.trim();
+    const loot = document.getElementById('sh-loot').value.trim();
+    const hook = document.getElementById('sh-hook').value.trim();
+    const free = document.getElementById('sh-free').value.trim();
+    if (!session && !location && !events.length && !free) return;
+    const entries = getEntries();
+    entries.unshift({ session: session || (entries.length + 1), date, location, events, npcs, loot, hook, free, ts: Date.now() });
+    localStorage.setItem(LOG_KEY, JSON.stringify(entries));
+    renderLog(entries);
+    clearForm();
+    showFlash('flash', '&#10003; Saved');
+    if (navigator.vibrate) navigator.vibrate(20);
+  }
+
+  function clearForm() {
+    ['sh-session','sh-location','sh-e1','sh-e2','sh-e3','sh-npcs','sh-loot','sh-hook','sh-free']
+      .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  }
+
+  function deleteEntry(i) {
+    const entries = getEntries();
+    entries.splice(i, 1);
+    localStorage.setItem(LOG_KEY, JSON.stringify(entries));
+    renderLog(entries);
+  }
+
+  function renderLog(entries) {
+    const el = document.getElementById('logList');
+    if (!entries || !entries.length) {
+      el.innerHTML = '<div class="log-empty">No sessions logged yet. Add the first entry above.</div>';
+      return;
+    }
+    el.innerHTML = entries.map((e, i) => `
+      <div class="log-entry">
+        <button class="log-delete" onclick="deleteEntry(${i})">&#10005;</button>
+        <div class="log-header">
+          <span class="log-session">Session ${e.session}</span>
+          <span class="log-date">${e.date}</span>
+        </div>
+        ${e.location ? `<div class="log-location">&#128205; ${esc(e.location)}</div>` : ''}
+        ${e.events && e.events.length ? `<div class="log-events">${e.events.map(ev=>`<div class="log-event">&middot; ${esc(ev)}</div>`).join('')}</div>` : ''}
+        ${e.npcs ? `<div style="margin-bottom:4px;"><span class="log-meta-label">NPCs &middot; </span><span class="log-text">${esc(e.npcs).replace(/\n/g,'<br>')}</span></div>` : ''}
+        ${e.loot ? `<div style="margin-bottom:4px;"><span class="log-meta-label">Loot &middot; </span><span class="log-text">${esc(e.loot)}</span></div>` : ''}
+        ${e.hook ? `<div class="log-hook"><span class="log-meta-label" style="color:var(--astral-glow);">Next &middot; </span><span class="log-text">${esc(e.hook)}</span></div>` : ''}
+        ${e.free ? `<div class="log-text" style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">${esc(e.free).replace(/\n/g,'<br>')}</div>` : ''}
+      </div>`).join('');
+  }
+
+  function esc(s) { return String(s).replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function exportLog() {
+    const entries = getEntries();
+    const blob = new Blob([JSON.stringify({ type:'party-campaign-log', exported: new Date().toISOString(), entries }, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'campaign-log.json'; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function importLog(event) {
+    const file = event.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const payload = JSON.parse(e.target.result);
+        const entries = payload.entries || (Array.isArray(payload) ? payload : []);
+        localStorage.setItem(LOG_KEY, JSON.stringify(entries));
+        renderLog(entries);
+        showFlash('flash', '&#10003; Imported');
+      } catch(err) { alert('Import failed &mdash; check the file is a valid campaign log JSON.'); }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+  }
+
+  function showFlash(id, msg) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const orig = el.textContent;
+    el.textContent = msg || orig;
+    el.style.opacity = 1;
+    setTimeout(() => { el.style.opacity = 0; if (msg) setTimeout(() => el.textContent = orig, 400); }, 2200);
+  }
+
+  // -- INIT --
+  document.addEventListener('DOMContentLoaded', () => {
+    renderLog(getEntries());
+    const d = document.getElementById('sh-date');
+    if (d) d.value = new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  });
+</script>
+</body>
+</html>

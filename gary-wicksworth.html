@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gary Wicksworth III &mdash; Complete Dossier</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f4e8c1;
+    --parchment-dark: #e8d5a3;
+    --parchment-aged: #d4b896;
+    --ink: #1a0f0a;
+    --ink-faded: #3d2b1f;
+    --astral: #4a0e8f;
+    --astral-bright: #7b2fff;
+    --astral-glow: #a855f7;
+    --gold: #b8860b;
+    --gold-bright: #d4a017;
+    --red-ink: #8b1a1a;
+    --chaos-pink: #d946a8;
+    --dragon-red: #c0392b;
+    --dragon-orange: #e67e22;
+    --green: #2a7a4a;
+    --green-bright: #2ecc71;
+    --surface-dm: #1a1208;
+    --surface2-dm: #221a0a;
+    --border-dm: #4a3510;
+    --border-bright-dm: #8b6914;
+    --text-dm: #e8d5a3;
+    --text-dim-dm: #a08c5a;
+    --text-faint-dm: #6b5a35;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: #0d0208;
+    font-family: 'IM Fell English', serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, #1a0533 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, #0d0d2b 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, #2a0800 0%, transparent 50%);
+  }
+
+  /* -- NAV -- */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: #0a0604;
+    border-bottom: 2px solid var(--gold);
+    padding: 10px 24px;
+    display: flex; gap: 6px; flex-wrap: wrap;
+    align-items: center;
+  }
+  .nav-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 12px; color: var(--gold-bright);
+    letter-spacing: 1px; margin-right: 12px;
+    white-space: nowrap;
+  }
+  .nav-btn {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 1px; padding: 4px 10px;
+    border: 1px solid #3a2a08;
+    color: #a08c5a; background: transparent;
+    cursor: pointer; text-transform: uppercase;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    border-color: var(--gold);
+    color: var(--gold-bright);
+    background: rgba(184,134,11,0.08);
+  }
+  .nav-btn.dm-btn { border-color: #3a1a08; color: #a06030; }
+  .nav-btn.dm-btn:hover, .nav-btn.dm-btn.active {
+    border-color: var(--dragon-orange);
+    color: var(--dragon-orange);
+    background: rgba(224,92,26,0.08);
+  }
+
+  /* -- PANELS -- */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+     PLAYER PANEL &mdash; PARCHMENT
+  &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; */
+  .parchment-page {
+    max-width: 900px; margin: 0 auto;
+    background: var(--parchment);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"),
+      linear-gradient(135deg,#f9f0d8 0%,#f4e8c1 30%,#ead5a0 70%,#e0c88a 100%);
+    padding: 40px;
+    position: relative;
+    box-shadow:
+      0 0 0 2px var(--parchment-aged),
+      0 0 0 4px #8b1a0b,
+      0 0 40px rgba(192,57,43,0.2),
+      0 0 80px rgba(123,47,255,0.15),
+      0 20px 80px rgba(0,0,0,0.8),
+      inset 0 0 100px rgba(180,140,80,0.12);
+    animation: fadeIn 0.8s ease-out;
+  }
+  .parchment-page::before {
+    content:'';
+    position:absolute; top:0;left:0;right:0;bottom:0;
+    background:
+      radial-gradient(ellipse at 95% 5%,rgba(139,26,26,.3) 0%,transparent 20%),
+      radial-gradient(ellipse at 5% 95%,rgba(107,58,31,.25) 0%,transparent 18%);
+    pointer-events:none;
+  }
+  .parchment-page::after {
+    content:'&#10022; &#5815; &#5817; &#5825; &#5810; &#5809; &#10022; &#5834; &#5817; &#5855; &#5809; &#5798; &#10022; &#5825; &#5825; &#5825; &#10022; &#5810; &#5818; &#5800; &#5854; &#10022;';
+    position:absolute; bottom:12px; left:0; right:0;
+    text-align:center; font-size:11px;
+    color:var(--astral); opacity:0.35; letter-spacing:4px;
+    pointer-events:none;
+  }
+
+  @keyframes fadeIn {
+    from{opacity:0;transform:translateY(16px) scale(0.98);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+  }
+
+  /* -- HEADER -- */
+  .header {
+    text-align:center;
+    border-bottom:3px double var(--gold);
+    padding-bottom:24px; margin-bottom:28px;
+    position:relative;
+  }
+  .warrant-stamp {
+    position:absolute; top:-10px; right:0;
+    width:100px; height:100px;
+    border:3px solid var(--red-ink); border-radius:50%;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    transform:rotate(12deg); color:var(--red-ink);
+    font-family:'Cinzel',serif; font-size:7px;
+    font-weight:700; letter-spacing:1px;
+    text-align:center; padding:8px; opacity:0.85;
+    animation:stampPop 0.5s ease-out 0.8s both;
+    background:rgba(244,232,193,0.5);
+  }
+  @keyframes stampPop {
+    from{opacity:0;transform:rotate(12deg) scale(0.5);}
+    to{opacity:0.85;transform:rotate(12deg) scale(1);}
+  }
+  .warrant-stamp::before {
+    content:''; position:absolute; inset:4px;
+    border:1px solid var(--red-ink); border-radius:50%;
+  }
+  .subtitle-tag {
+    font-family:'Cinzel',serif; font-size:10px;
+    letter-spacing:6px; color:var(--astral);
+    text-transform:uppercase; margin-bottom:8px; opacity:0.8;
+  }
+  .char-name {
+    font-family:'Cinzel Decorative',serif;
+    font-size:36px; font-weight:900; color:var(--ink);
+    line-height:1.1; text-shadow:2px 2px 0 rgba(180,140,80,.4);
+    letter-spacing:2px;
+  }
+  .char-name .alias-note {
+    font-family:'IM Fell English',serif; font-size:13px;
+    font-style:italic; color:var(--ink-faded); font-weight:400;
+    display:block; letter-spacing:1px; margin-top:2px;
+  }
+  .char-tagline {
+    font-style:italic; font-size:15px;
+    color:var(--astral); margin-top:8px;
+  }
+  .identity-row {
+    display:flex; justify-content:center;
+    gap:10px; margin-top:16px; flex-wrap:wrap;
+  }
+  .identity-pill {
+    background:var(--ink); color:var(--parchment);
+    font-family:'Cinzel',serif; font-size:10px;
+    letter-spacing:2px; padding:4px 14px;
+    clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+  }
+
+  /* -- PARCHMENT SECTIONS -- */
+  .p-section {
+    border:1px solid var(--parchment-aged);
+    border-top:3px solid var(--gold);
+    padding:16px; background:rgba(255,255,255,0.15);
+    margin-bottom:20px;
+  }
+  .p-section.red-top { border-top-color:var(--red-ink); }
+  .p-section.astral-top { border-top-color:var(--astral-bright); }
+  .p-section.dragon-top { border-top-color:var(--dragon-red); }
+  .p-section-title {
+    font-family:'Cinzel',serif; font-size:10px;
+    letter-spacing:3px; text-transform:uppercase;
+    color:var(--gold); margin-bottom:12px; font-weight:700;
+  }
+  .p-section-title.red { color:var(--red-ink); }
+  .p-section-title.astral { color:var(--astral-bright); }
+  .p-section-title.dragon { color:var(--dragon-red); }
+
+  /* -- WANTED -- */
+  .wanted-box {
+    border:3px solid var(--red-ink); padding:16px;
+    text-align:center; margin-bottom:20px;
+    background:rgba(139,26,26,.05);
+  }
+  .wanted-title {
+    font-family:'Cinzel Decorative',serif;
+    font-size:22px; font-weight:900;
+    color:var(--red-ink); letter-spacing:6px;
+  }
+  .wanted-sub {
+    font-family:'Cinzel',serif; font-size:9px;
+    letter-spacing:4px; color:var(--red-ink); margin-bottom:10px;
+  }
+  .wanted-list { list-style:none; font-size:12px; color:var(--ink-faded); font-style:italic; text-align:left; display:inline-block; }
+  .wanted-list li::before { content:'&#9876; '; color:var(--red-ink); }
+  .wanted-list li { margin:3px 0; }
+  .reward-line { font-family:'Cinzel',serif; font-size:13px; font-weight:700; color:var(--red-ink); margin-top:10px; letter-spacing:2px; }
+
+  /* -- COMBAT STATS -- */
+  .combat-row { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+  .stat-bubble {
+    flex:1; min-width:75px; text-align:center;
+    border:2px solid var(--gold); padding:10px 8px;
+    background:rgba(255,255,255,.2);
+  }
+  .stat-bubble.chaos { border-color:var(--astral-bright); background:rgba(123,47,255,.05); }
+  .stat-bubble .val {
+    font-family:'Cinzel Decorative',serif; font-size:26px;
+    font-weight:700; color:var(--ink); line-height:1; display:block;
+  }
+  .stat-bubble.chaos .val { color:var(--astral); }
+  .stat-bubble .lbl {
+    font-family:'Cinzel',serif; font-size:8px;
+    letter-spacing:2px; text-transform:uppercase;
+    color:var(--ink-faded); margin-top:4px; display:block;
+  }
+
+  /* -- ABILITIES -- */
+  .abilities { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .ability {
+    flex:1; min-width:68px; text-align:center;
+    border:2px solid var(--parchment-aged);
+    padding:10px 6px 8px; background:rgba(255,255,255,.1);
+  }
+  .ability-name { font-family:'Cinzel',serif; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:4px; }
+  .ability-score { font-family:'Cinzel Decorative',serif; font-size:22px; font-weight:700; display:block; line-height:1; }
+  .ability-mod { font-family:'Cinzel',serif; font-size:13px; font-weight:600; color:var(--astral); display:block; border-top:1px solid var(--parchment-aged); margin-top:4px; padding-top:4px; }
+
+  /* -- BACKSTORY -- */
+  .backstory-text { font-style:italic; font-size:14px; line-height:1.85; color:var(--ink-faded); }
+  .backstory-text strong { color:var(--ink); font-style:normal; font-family:'Cinzel',serif; font-size:11px; letter-spacing:1px; }
+
+  /* -- GRID -- */
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+
+  /* -- SPELLS -- */
+  .spell-row { display:flex; flex-direction:column; gap:6px; }
+  .spell { display:flex; align-items:flex-start; gap:10px; padding:6px 8px; background:rgba(255,255,255,.15); border-left:3px solid var(--astral-bright); }
+  .spell.cantrip { border-left-color:var(--gold); }
+  .spell.racial-spell { border-left-color:var(--chaos-pink); }
+  .spell-name { font-family:'Cinzel',serif; font-size:11px; font-weight:600; color:var(--ink); min-width:120px; }
+  .spell-desc { font-style:italic; font-size:12px; color:var(--ink-faded); line-height:1.3; }
+  .spell-tag { font-family:'Cinzel',serif; font-size:8px; padding:2px 6px; margin-left:auto; white-space:nowrap; flex-shrink:0; }
+  .spell-tag.ct { background:var(--gold); color:var(--parchment); }
+  .spell-tag.s1 { background:var(--astral); color:white; }
+  .spell-tag.rc { background:var(--chaos-pink); color:white; }
+
+  /* -- SKILLS -- */
+  .skill-list { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
+  .skill-item { display:flex; align-items:center; gap:6px; font-size:12px; padding:3px 0; }
+  .skill-dot { width:10px; height:10px; border:1px solid var(--parchment-aged); border-radius:50%; flex-shrink:0; }
+  .skill-dot.prof { background:var(--gold); border-color:var(--gold); }
+  .skill-dot.exp { background:var(--astral-bright); border-color:var(--astral-bright); }
+  .skill-bonus { margin-left:auto; font-family:'Cinzel',serif; font-size:11px; font-weight:600; color:var(--astral); }
+
+  /* -- TRAITS -- */
+  .trait-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px; }
+  .trait-box { padding:12px; border:1px solid var(--parchment-aged); background:rgba(255,255,255,.1); }
+  .trait-label { font-family:'Cinzel',serif; font-size:8px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:6px; }
+  .trait-text { font-style:italic; font-size:13px; line-height:1.5; color:var(--ink-faded); }
+
+  /* -- SURGE TABLE -- */
+  .surge-box {
+    border:2px solid var(--astral-bright); padding:16px;
+    margin-bottom:20px; background:rgba(123,47,255,.04);
+    position:relative; overflow:hidden;
+  }
+  .surge-box::before { content:'&#10022;'; position:absolute; top:-20px; right:-20px; font-size:120px; color:var(--astral-bright); opacity:.05; pointer-events:none; }
+  .surge-title { font-family:'Cinzel Decorative',serif; font-size:13px; font-weight:700; color:var(--astral-bright); letter-spacing:3px; margin-bottom:10px; }
+  .surge-list { display:grid; grid-template-columns:1fr 1fr; gap:4px; font-size:12px; color:var(--ink-faded); font-style:italic; list-style:none; }
+  .surge-list li::before { content:'~ '; color:var(--astral-bright); font-style:normal; }
+
+  /* -- MORADIN JOURNAL -- */
+  .journal-box {
+    border:1px dashed var(--ink-faded); padding:14px;
+    background:rgba(255,255,255,.25); margin-bottom:20px;
+    position:relative;
+  }
+  .journal-label {
+    font-family:'Cinzel',serif; font-size:8px;
+    letter-spacing:3px; text-transform:uppercase;
+    color:var(--ink-faded); margin-bottom:10px; display:block;
+  }
+  .journal-entry { font-style:italic; font-size:12px; line-height:1.7; color:var(--ink-faded); }
+  .journal-entry .crossed { text-decoration:line-through; opacity:0.5; }
+  .journal-entry .margin-note { color:var(--red-ink); font-size:11px; }
+
+  /* -- QUICK REF -- */
+  .quick-ref { background:var(--ink); color:var(--parchment); padding:20px; margin-top:8px; }
+  .quick-ref-title { font-family:'Cinzel Decorative',serif; font-size:12px; letter-spacing:4px; color:var(--gold-bright); margin-bottom:14px; text-align:center; }
+  .qr-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .qr-item { text-align:center; }
+  .qr-val { font-family:'Cinzel Decorative',serif; font-size:22px; color:var(--astral-glow); display:block; line-height:1; }
+  .qr-lbl { font-family:'Cinzel',serif; font-size:8px; letter-spacing:2px; color:#a08c5a; display:block; margin-top:3px; }
+
+  .divider { text-align:center; color:var(--gold); font-size:14px; margin:18px 0; letter-spacing:8px; opacity:0.55; }
+
+  /* &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+     DM PANEL &mdash; DARK
+  &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; */
+  .dm-page {
+    max-width: 900px; margin: 0 auto;
+    padding: 32px 28px;
+    animation: fadeIn 0.8s ease-out;
+    color: var(--text-dm);
+  }
+
+  .dm-masthead {
+    text-align:center;
+    border:2px solid var(--border-bright-dm);
+    border-top:6px solid var(--gold-bright);
+    padding:24px 20px 18px;
+    margin-bottom:24px;
+    background:var(--surface-dm);
+    position:relative; overflow:hidden;
+  }
+  .dm-masthead::before {
+    content:'&#9878;'; position:absolute; top:-20px; left:50%;
+    transform:translateX(-50%);
+    font-size:120px; opacity:.04; pointer-events:none;
+  }
+  .dm-label-top { font-family:'Cinzel',serif; font-size:10px; letter-spacing:6px; color:var(--border-bright-dm); text-transform:uppercase; margin-bottom:10px; }
+  .dm-title { font-family:'Cinzel Decorative',serif; font-size:24px; font-weight:900; color:var(--gold-bright); line-height:1.2; text-shadow:0 0 30px rgba(201,162,39,.3); }
+  .dm-sub { font-style:italic; font-size:13px; color:var(--text-dim-dm); margin-top:6px; }
+  .dm-pills { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  .dm-pill { font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; padding:3px 12px; border:1px solid var(--border-dm); color:var(--text-dim-dm); text-transform:uppercase; }
+  .dm-pill.gold { border-color:var(--gold-bright); color:var(--gold-bright); }
+  .dm-pill.red { border-color:#c0392b; color:#c0392b; }
+  .dm-pill.astral { border-color:var(--astral-bright); color:var(--astral-bright); }
+
+  /* DM BLOCKS */
+  .dm-block {
+    background:var(--surface-dm);
+    border:1px solid var(--border-dm);
+    border-top:3px solid var(--gold-bright);
+    padding:18px 20px; margin-bottom:18px;
+  }
+  .dm-block.red-top { border-top-color:#c0392b; }
+  .dm-block.astral-top { border-top-color:var(--astral-bright); }
+  .dm-block.dragon-top { border-top-color:var(--dragon-orange); }
+  .dm-block.green-top { border-top-color:var(--green-bright); }
+  .dm-block-title { font-family:'Cinzel',serif; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--gold-bright); margin-bottom:14px; font-weight:700; }
+  .dm-block-title.red { color:#e74c3c; }
+  .dm-block-title.astral { color:var(--astral-glow); }
+  .dm-block-title.dragon { color:var(--dragon-orange); }
+  .dm-block-title.green { color:var(--green-bright); }
+
+  /* RULES */
+  .rule-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .rule-item { display:flex; gap:12px; align-items:flex-start; padding:10px 12px; background:var(--surface2-dm); border-left:3px solid var(--border-bright-dm); font-size:13px; line-height:1.6; color:var(--text-dim-dm); }
+  .rule-item.trigger { border-left-color:#c0392b; }
+  .rule-item.save { border-left-color:var(--green-bright); }
+  .rule-item.chaos { border-left-color:var(--astral-bright); }
+  .rule-num { font-family:'Cinzel Decorative',serif; font-size:18px; color:var(--gold-bright); line-height:1; flex-shrink:0; width:24px; text-align:center; }
+  .rule-num.red { color:#e74c3c; }
+  .rule-num.green { color:var(--green-bright); }
+  .rule-num.astral { color:var(--astral-glow); }
+  .rule-body strong { font-family:'Cinzel',serif; font-size:10px; letter-spacing:1px; color:var(--text-dm); font-style:normal; display:block; margin-bottom:2px; }
+
+  /* ENCOUNTER FLOW */
+  .flow-row { display:flex; gap:0; margin-bottom:18px; flex-wrap:wrap; }
+  .flow-step { flex:1; min-width:110px; padding:12px 10px; text-align:center; background:var(--surface2-dm); border:1px solid var(--border-dm); border-right:none; position:relative; }
+  .flow-step:last-child { border-right:1px solid var(--border-dm); }
+  .flow-step::after { content:'&#8250;'; position:absolute; right:-10px; top:50%; transform:translateY(-50%); font-size:18px; color:var(--gold-bright); z-index:2; background:var(--surface2-dm); padding:0 2px; }
+  .flow-step:last-child::after { display:none; }
+  .flow-num { font-family:'Cinzel Decorative',serif; font-size:20px; color:var(--gold-bright); display:block; line-height:1; }
+  .flow-label { font-family:'Cinzel',serif; font-size:8px; letter-spacing:1px; text-transform:uppercase; color:var(--text-faint-dm); display:block; margin-top:4px; }
+  .flow-desc { font-size:10px; font-style:italic; color:var(--text-dim-dm); margin-top:5px; line-height:1.3; }
+
+  /* TRIGGER CARDS */
+  .trigger-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .trigger-card { padding:14px; border:1px solid var(--border-dm); background:var(--surface2-dm); }
+  .trigger-card.armed { border-color:#5a1a1a; }
+  .trigger-type { font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:6px; }
+  .trigger-type.armed { color:#e74c3c; }
+  .trigger-type.social { color:var(--gold-bright); }
+  .trigger-name { font-family:'Cinzel Decorative',serif; font-size:14px; font-weight:700; color:var(--text-dm); margin-bottom:8px; }
+  .trigger-desc { font-size:12px; font-style:italic; color:var(--text-dim-dm); line-height:1.5; }
+  .trigger-outcome { margin-top:10px; padding:8px 10px; font-size:11px; font-style:italic; color:var(--text-faint-dm); border-top:1px solid var(--border-dm); line-height:1.6; }
+  .outcome-label { font-style:normal; font-family:'Cinzel',serif; font-size:9px; letter-spacing:1px; display:block; margin-top:6px; margin-bottom:2px; }
+  .outcome-label.cat { color:#e74c3c; }
+  .outcome-label.comp { color:var(--dragon-orange); }
+  .outcome-label.surv { color:#b8b030; }
+  .outcome-label.save { color:var(--green-bright); }
+
+  /* BABY MAMA CARDS */
+  .bm-card { border:1px solid var(--border-dm); background:var(--surface2-dm); margin-bottom:14px; position:relative; overflow:hidden; }
+  .bm-card::before { content:attr(data-emoji); position:absolute; top:-10px; right:8px; font-size:70px; opacity:.07; pointer-events:none; line-height:1; }
+  .bm-header { display:flex; align-items:flex-start; gap:14px; padding:14px 14px 10px; border-bottom:1px solid var(--border-dm); margin-bottom:12px; }
+  .bm-number { font-family:'Cinzel Decorative',serif; font-size:30px; color:var(--border-bright-dm); line-height:1; flex-shrink:0; }
+  .bm-name { font-family:'Cinzel Decorative',serif; font-size:17px; font-weight:700; color:var(--text-dm); line-height:1.1; }
+  .bm-race { font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--text-faint-dm); text-transform:uppercase; margin-top:2px; }
+  .bm-tagline { font-style:italic; font-size:12px; color:#e74c3c; margin-top:4px; }
+  .bm-body { padding:0 14px 14px; }
+  .bm-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+  .bm-stat-label { font-family:'Cinzel',serif; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--border-bright-dm); display:block; margin-bottom:3px; }
+  .bm-stat-val { font-size:12px; font-style:italic; color:var(--text-dim-dm); line-height:1.4; }
+  .entrance-box { background:rgba(192,57,43,.06); border-left:3px solid #c0392b; padding:10px 12px; margin-top:10px; }
+  .entrance-label { font-family:'Cinzel',serif; font-size:8px; letter-spacing:3px; text-transform:uppercase; color:#e74c3c; display:block; margin-bottom:6px; }
+  .entrance-lines { list-style:none; }
+  .entrance-lines li { font-style:italic; font-size:12px; color:var(--text-dim-dm); padding:3px 0; border-bottom:1px solid rgba(255,255,255,.03); line-height:1.4; }
+  .entrance-lines li::before { content:'"'; color:#e74c3c; }
+  .entrance-lines li::after { content:'"'; color:#e74c3c; }
+  .app-row { display:flex; gap:8px; align-items:center; padding:8px 14px; background:rgba(0,0,0,.3); border-top:1px solid var(--border-dm); }
+  .app-label { font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--text-faint-dm); text-transform:uppercase; margin-right:4px; }
+  .app-slot { width:26px; height:26px; border:2px solid var(--border-dm); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--text-faint-dm); font-family:'Cinzel',serif; }
+  .app-slot.last { border-color:var(--border-bright-dm); }
+
+  /* CHAD DM SECTION */
+  .chad-dm {
+    border:2px solid var(--dragon-orange);
+    background:linear-gradient(135deg,rgba(224,92,26,.05) 0%,rgba(123,47,255,.04) 100%);
+    padding:20px; margin-bottom:18px;
+    position:relative; overflow:hidden;
+  }
+  .chad-dm::before { content:'&#128009;'; position:absolute; bottom:-20px; right:-10px; font-size:120px; opacity:.06; pointer-events:none; }
+  .chad-dm-title { font-family:'Cinzel Decorative',serif; font-size:20px; font-weight:900; color:var(--dragon-orange); margin-bottom:4px; text-shadow:0 0 20px rgba(224,92,26,.3); }
+  .chad-dm-sub { font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; color:var(--dragon-orange); opacity:.6; margin-bottom:14px; text-transform:uppercase; }
+  .chad-dm-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+  .chad-dm-label { font-family:'Cinzel',serif; font-size:8px; letter-spacing:2px; color:var(--dragon-orange); text-transform:uppercase; display:block; margin-bottom:4px; }
+  .chad-dm-val { font-size:12px; font-style:italic; color:var(--text-dim-dm); line-height:1.5; }
+  .chad-note { padding:10px 14px; background:rgba(0,0,0,.3); border-left:3px solid var(--dragon-orange); font-size:13px; font-style:italic; color:var(--text-dim-dm); line-height:1.6; margin-bottom:10px; }
+  .chad-note strong { font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--dragon-orange); font-style:normal; display:block; margin-bottom:3px; }
+  .power-list { list-style:none; font-size:12px; color:var(--text-dim-dm); font-style:italic; }
+  .power-list li { margin:4px 0; }
+  .power-list li::before { content:'&#8767; '; color:var(--dragon-orange); font-style:normal; }
+
+  /* SURGE ESCALATION */
+  .surge-escalation { display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin-top:12px; }
+  .surge-stage { text-align:center; padding:8px 4px; border:1px solid var(--border-dm); background:var(--surface2-dm); }
+  .surge-num { font-family:'Cinzel Decorative',serif; font-size:16px; color:var(--astral-bright); display:block; opacity:0.4; }
+  .surge-num.active { opacity:1; }
+  .surge-stage-label { font-size:9px; font-style:italic; color:var(--text-faint-dm); margin-top:3px; line-height:1.3; }
+
+  /* METER */
+  .meter-bar { height:8px; background:var(--surface2-dm); border:1px solid var(--astral-bright); opacity:0.4; margin-bottom:8px; position:relative; overflow:hidden; }
+  .meter-fill { height:100%; width:15%; background:linear-gradient(90deg,#3d1a7a,var(--astral-bright)); }
+  .meter-fill::after { content:''; position:absolute; right:0; top:0; bottom:0; width:4px; background:var(--astral-bright); animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+  .meter-labels { display:flex; justify-content:space-between; font-family:'Cinzel',serif; font-size:8px; letter-spacing:1px; color:var(--text-faint-dm); }
+
+  /* XALIXX */
+  .xalixx-block { border:2px solid var(--dragon-orange); background:linear-gradient(135deg,rgba(224,92,26,.06) 0%,rgba(123,47,255,.04) 100%); padding:18px; margin-bottom:18px; position:relative; overflow:hidden; }
+  .xalixx-block::before { content:'&#128009;'; position:absolute; bottom:-20px; right:-10px; font-size:120px; opacity:.06; pointer-events:none; }
+  .xalixx-title { font-family:'Cinzel Decorative',serif; font-size:20px; font-weight:900; color:var(--dragon-orange); margin-bottom:4px; text-shadow:0 0 20px rgba(224,92,26,.3); }
+  .xalixx-sub { font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; color:var(--dragon-orange); opacity:.6; margin-bottom:12px; text-transform:uppercase; }
+  .xalixx-rule { padding:10px 14px; background:rgba(0,0,0,.3); border-left:3px solid var(--dragon-orange); font-size:13px; font-style:italic; color:var(--text-dim-dm); line-height:1.6; margin-bottom:10px; }
+  .xalixx-rule strong { font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--dragon-orange); font-style:normal; display:block; margin-bottom:3px; }
+
+  /* RETIREMENT TRACKER */
+  .tracker-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .tracker-item { padding:10px 12px; border:1px solid var(--border-dm); background:var(--surface2-dm); }
+  .tracker-name { font-family:'Cinzel',serif; font-size:10px; color:var(--text-dm); margin-bottom:6px; }
+  .tracker-slots { display:flex; gap:8px; align-items:center; }
+
+  /* DM SECRET NOTE */
+  .dm-secret {
+    border-left:4px solid var(--astral-bright); padding:12px 16px;
+    background:rgba(123,47,255,.05); margin-bottom:18px;
+    font-style:italic; font-size:13px; color:var(--astral-glow); line-height:1.6;
+  }
+  .dm-secret strong { font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; font-style:normal; color:var(--astral-bright); display:block; margin-bottom:4px; }
+
+  .dm-divider { text-align:center; color:var(--border-bright-dm); font-size:12px; margin:18px 0; letter-spacing:8px; opacity:.5; }
+
+  /* -- RESPONSIVE -- */
+  @media (max-width:620px) {
+    .parchment-page, .dm-page { padding:20px 16px; }
+    .grid-2,.trait-grid,.trigger-grid,.bm-grid,.chad-dm-grid,.tracker-grid { grid-template-columns:1fr; }
+    .abilities { gap:5px; }
+    .qr-grid,.surge-escalation { grid-template-columns:repeat(2,1fr); }
+    .char-name { font-size:22px; }
+    .combat-row { gap:7px; }
+    .skill-list,.surge-list { grid-template-columns:1fr; }
+    .warrant-stamp { display:none; }
+    .flow-row { flex-direction:column; }
+    .flow-step { border-right:1px solid var(--border-dm); border-bottom:none; }
+    .flow-step::after { content:'&#8595;'; right:auto; left:50%; top:auto; bottom:-12px; transform:translateX(-50%); }
+    .dm-title { font-size:18px; }
+  }
+
+  /* -- iOS / MOBILE OPTIMIZATIONS -- */
+  * { -webkit-tap-highlight-color: transparent; }
+  input, textarea, button, select { -webkit-appearance: none; font-size: 16px; } /* prevent iOS zoom */
+
+  .nav {
+    padding: 8px 12px;
+    gap: 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-title { display: none; }
+  .nav-btn {
+    font-size: 11px;
+    padding: 8px 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-height: 36px;
+    touch-action: manipulation;
+  }
+
+  /* Dice & Notes Tab */
+  .tools-page {
+    max-width: 900px; margin: 0 auto;
+    padding: 20px 16px 40px;
+    color: var(--text-dm);
+    animation: fadeIn 0.5s ease-out;
+  }
+  .tools-section {
+    background: var(--surface-dm);
+    border: 1px solid var(--border-dm);
+    border-top: 3px solid var(--gold-bright);
+    padding: 18px 16px;
+    margin-bottom: 18px;
+  }
+  .tools-section.red-top { border-top-color: #c0392b; }
+  .tools-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold-bright);
+    margin-bottom: 16px; font-weight: 700;
+  }
+  .tools-title.red { color: #e74c3c; }
+
+  /* DICE ROLLER */
+  .dice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .dice-btn {
+    background: var(--surface2-dm);
+    border: 2px solid var(--border-dm);
+    color: var(--text-dm);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    padding: 16px 8px 10px;
+    cursor: pointer;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 4px;
+    transition: all 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    min-height: 70px;
+    border-radius: 2px;
+    user-select: none;
+  }
+  .dice-btn:active {
+    background: rgba(184,134,11,0.15);
+    border-color: var(--gold-bright);
+    transform: scale(0.96);
+  }
+  .dice-btn .dice-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px; letter-spacing: 2px;
+    color: var(--text-faint-dm); text-transform: uppercase;
+  }
+  .dice-btn.d20-btn {
+    grid-column: span 3;
+    font-size: 24px; padding: 18px 8px 12px;
+    border-color: var(--astral-bright);
+    background: rgba(123,47,255,0.06);
+    min-height: 80px;
+  }
+  .dice-btn.d20-btn .dice-label { color: var(--astral-glow); }
+  .dice-btn.d20-btn:active { border-color: var(--astral-glow); background: rgba(123,47,255,0.15); }
+
+  .dice-result-area {
+    text-align: center;
+    padding: 20px 12px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border-dm);
+    margin-bottom: 14px;
+    min-height: 100px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 6px;
+  }
+  .dice-result-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 64px; color: var(--gold-bright);
+    line-height: 1;
+    transition: all 0.2s;
+  }
+  .dice-result-num.chaos { color: var(--astral-glow); }
+  .dice-result-num.nat20 { color: #2ecc71; text-shadow: 0 0 20px rgba(46,204,113,0.5); }
+  .dice-result-num.nat1 { color: #e74c3c; text-shadow: 0 0 20px rgba(231,76,60,0.4); }
+  .dice-result-label {
+    font-family: 'Cinzel', serif; font-size: 10px;
+    letter-spacing: 3px; color: var(--text-faint-dm);
+    text-transform: uppercase;
+  }
+  .dice-result-flavor {
+    font-style: italic; font-size: 12px;
+    color: var(--text-dim-dm); margin-top: 4px;
+    min-height: 18px;
+  }
+
+  .modifier-row {
+    display: flex; gap: 10px; align-items: center;
+    margin-bottom: 14px;
+  }
+  .mod-label {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-faint-dm); flex-shrink: 0;
+  }
+  .mod-input {
+    background: var(--surface2-dm);
+    border: 1px solid var(--border-dm);
+    color: var(--text-dm);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 20px; text-align: center;
+    padding: 8px; width: 70px;
+    border-radius: 2px;
+    -webkit-appearance: none;
+  }
+  .mod-input:focus { outline: none; border-color: var(--gold-bright); }
+  .roll-history {
+    display: flex; flex-direction: column; gap: 4px;
+    max-height: 140px; overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .history-item {
+    display: flex; justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    background: var(--surface2-dm);
+    font-family: 'Cinzel', serif; font-size: 10px;
+    letter-spacing: 1px; color: var(--text-dim-dm);
+  }
+  .history-val { color: var(--gold-bright); font-size: 14px; }
+  .clear-btn {
+    background: transparent;
+    border: 1px solid var(--border-dm);
+    color: var(--text-faint-dm);
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; padding: 6px 14px;
+    cursor: pointer; text-transform: uppercase;
+    touch-action: manipulation;
+    margin-top: 8px;
+    width: 100%;
+  }
+  .clear-btn:active { border-color: #e74c3c; color: #e74c3c; }
+
+  /* SOCIAL ROLL HELPER */
+  .social-roll-result {
+    padding: 14px;
+    background: var(--surface2-dm);
+    border-left: 3px solid var(--border-dm);
+    font-size: 13px; font-style: italic;
+    color: var(--text-dim-dm); line-height: 1.5;
+    margin-top: 10px; min-height: 60px;
+  }
+  .social-outcome-tag {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; font-style: normal;
+    display: block; margin-bottom: 4px;
+  }
+
+  /* NOTES */
+  .notes-textarea {
+    width: 100%; min-height: 200px;
+    background: var(--surface2-dm);
+    border: 1px solid var(--border-dm);
+    color: var(--text-dm);
+    font-family: 'IM Fell English', serif;
+    font-size: 15px; line-height: 1.7;
+    padding: 14px; resize: vertical;
+    border-radius: 2px;
+    -webkit-appearance: none;
+    margin-bottom: 10px;
+  }
+  .notes-textarea:focus { outline: none; border-color: var(--gold-bright); }
+  .notes-textarea::placeholder { color: var(--text-faint-dm); font-style: italic; }
+  .notes-meta {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; color: var(--text-faint-dm);
+    text-transform: uppercase;
+  }
+  .notes-actions { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+  .notes-btn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--border-dm);
+    color: var(--text-dim-dm);
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; padding: 10px 8px;
+    cursor: pointer; text-transform: uppercase;
+    touch-action: manipulation; text-align: center;
+    min-height: 40px;
+  }
+  .notes-btn.save-btn { border-color: var(--gold-bright); color: var(--gold-bright); }
+  .notes-btn.save-btn:active { background: rgba(184,134,11,0.15); }
+  .notes-btn:active { background: rgba(255,255,255,0.05); }
+  .save-indicator {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; color: #2ecc71;
+    text-transform: uppercase; opacity: 0;
+    transition: opacity 0.3s; text-align: center;
+    margin-top: 6px;
+  }
+
+  /* session log */
+  .session-log { display: flex; flex-direction: column; gap: 8px; }
+  .log-entry {
+    background: var(--surface2-dm);
+    border: 1px solid var(--border-dm);
+    padding: 12px 14px;
+    position: relative;
+  }
+  .log-entry-header {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 6px;
+  }
+  .log-session-tag {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; color: var(--gold-bright);
+    text-transform: uppercase;
+  }
+  .log-date { font-size: 10px; color: var(--text-faint-dm); font-style: italic; }
+  .log-text { font-size: 13px; color: var(--text-dim-dm); font-style: italic; line-height: 1.5; white-space: pre-wrap; }
+  .log-delete {
+    background: transparent; border: none;
+    color: var(--text-faint-dm); font-size: 16px;
+    cursor: pointer; padding: 4px 8px;
+    touch-action: manipulation;
+    position: absolute; top: 8px; right: 8px;
+  }
+  .log-delete:active { color: #e74c3c; }
+  .empty-log {
+    text-align: center; padding: 24px;
+    font-style: italic; color: var(--text-faint-dm); font-size: 13px;
+  }
+
+  /* Chad approach tracker */
+  .phase-tracker { display: flex; flex-direction: column; gap: 8px; }
+  .phase-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; background: var(--surface2-dm);
+    border: 1px solid var(--border-dm);
+    cursor: pointer; touch-action: manipulation;
+    user-select: none;
+  }
+  .phase-item.completed { border-color: #2ecc71; background: rgba(46,204,113,0.05); }
+  .phase-item.active-phase { border-color: var(--gold-bright); background: rgba(184,134,11,0.05); }
+  .phase-check {
+    width: 24px; height: 24px; border: 2px solid var(--border-dm);
+    border-radius: 50%; flex-shrink: 0; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 12px; color: transparent;
+  }
+  .phase-item.completed .phase-check { border-color: #2ecc71; color: #2ecc71; }
+  .phase-item.active-phase .phase-check { border-color: var(--gold-bright); }
+  .phase-text { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 1px; color: var(--text-dim-dm); }
+  .phase-item.completed .phase-text { color: #2ecc71; }
+  .phase-item.active-phase .phase-text { color: var(--gold-bright); }
+
+  /* BM Tracker interactive */
+  .bm-tracker-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .bm-tracker-card {
+    background: var(--surface2-dm);
+    border: 1px solid var(--border-dm);
+    padding: 10px 12px;
+  }
+  .bm-tracker-name {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 1px; color: var(--text-dm);
+    margin-bottom: 8px; text-transform: uppercase;
+  }
+  .bm-slot-row { display: flex; gap: 6px; }
+  .bm-slot {
+    width: 28px; height: 28px;
+    border: 2px solid var(--border-dm);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--text-faint-dm);
+    cursor: pointer; touch-action: manipulation;
+    user-select: none; flex-shrink: 0;
+    transition: all 0.15s;
+  }
+  .bm-slot.used { border-color: #e74c3c; background: rgba(192,57,43,0.15); color: #e74c3c; }
+  .bm-slot.sendoff { border-color: var(--gold-bright); }
+  .bm-slot.sendoff.used { border-color: #2ecc71; background: rgba(46,204,113,0.1); color: #2ecc71; }
+  .bm-slot:active { transform: scale(0.9); }
+
+  @media (max-width: 400px) {
+    .dice-grid { grid-template-columns: repeat(2,1fr); }
+    .dice-btn.d20-btn { grid-column: span 2; }
+    .bm-tracker-grid { grid-template-columns: 1fr; }
+  }
+
+
+  /* -- DM SUB-NAV -- */
+  .dm-subnav {
+    font-family: 'Cinzel', serif; font-size: 10px;
+    letter-spacing: 2px; padding: 10px 16px;
+    border: none; border-bottom: 3px solid transparent;
+    color: var(--text-faint-dm); background: transparent;
+    cursor: pointer; white-space: nowrap;
+    text-transform: uppercase; transition: all 0.2s;
+    touch-action: manipulation; min-height: 42px;
+    flex-shrink: 0;
+  }
+  .dm-subnav:hover, .dm-subnav.active {
+    color: var(--gold-bright); border-bottom-color: var(--gold-bright);
+  }
+  .dm-subtab { display: none; }
+  .dm-subtab.active { display: block; animation: fadeIn 0.3s ease-out; }
+
+  /* DM QUICK CARDS */
+  .dm-quick-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .dm-quick-card { padding: 12px; background: var(--surface2-dm); border: 1px solid var(--border-dm); }
+  .dm-quick-label { font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .dm-quick-label.red { color: #e74c3c; }
+  .dm-quick-label.gold { color: var(--gold-bright); }
+  .dm-quick-val { font-family: 'Cinzel', serif; font-size: 11px; color: var(--text-dm); margin-bottom: 4px; }
+  .dm-quick-sub { font-size: 11px; font-style: italic; color: var(--text-faint-dm); line-height: 1.3; }
+
+  /* ROLL TABLE */
+  .dm-roll-row { display: flex; gap: 10px; align-items: flex-start; padding: 7px 10px; background: var(--surface2-dm); border-left: 3px solid var(--border-dm); }
+  .dm-roll-range { font-family: 'Cinzel Decorative', serif; font-size: 14px; flex-shrink: 0; width: 36px; line-height: 1.3; }
+  .dm-roll-result { font-size: 12px; color: var(--text-dim-dm); line-height: 1.4; }
+
+  /* STEPS */
+  .dm-step { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; background: var(--surface2-dm); font-size: 12px; color: var(--text-dim-dm); line-height: 1.5; }
+  .dm-step-num { font-family: 'Cinzel Decorative', serif; font-size: 16px; color: var(--gold-bright); line-height: 1; flex-shrink: 0; width: 22px; text-align: center; background: rgba(201,162,39,0.1); padding: 2px 4px; }
+  .dm-step-text { padding-top: 2px; }
+
+  /* BM COMPACT CARDS */
+  .bm-compact { background: var(--surface2-dm); border: 1px solid var(--border-dm); border-left: 3px solid #c0392b; overflow: hidden; }
+  .bm-compact-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 12px; gap: 10px; cursor: pointer; touch-action: manipulation; user-select: none; }
+  .bm-compact-name { font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700; color: var(--text-dm); margin-bottom: 2px; }
+  .bm-compact-sub { font-size: 11px; font-style: italic; color: var(--text-faint-dm); line-height: 1.3; }
+  .bm-compact-slot { width: 28px; height: 28px; border: 2px solid var(--border-dm); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--text-faint-dm); cursor: pointer; flex-shrink: 0; touch-action: manipulation; user-select: none; transition: all 0.15s; }
+  .bm-compact-slot.used { border-color: #e74c3c; color: #e74c3c; background: rgba(192,57,43,0.1); }
+  .bm-compact-slot.dragon-slot { border-color: #5a2a08; }
+  .bm-compact-slot.dragon-slot.used { border-color: var(--dragon-orange); color: var(--dragon-orange); background: rgba(224,92,26,0.1); }
+  .bm-compact-body { display: none; padding: 0 12px 12px; border-top: 1px solid var(--border-dm); }
+  .bm-compact.open .bm-compact-body { display: block; padding-top: 10px; }
+  .bm-entrance-line { font-style: italic; font-size: 12px; color: var(--text-dim-dm); padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); line-height: 1.4; }
+  .bm-entrance-line::before { content: '"'; color: #e74c3c; }
+  .bm-entrance-line::after { content: '"'; color: #e74c3c; }
+  .bm-what-she-wants { margin-top: 8px; padding: 7px 10px; background: rgba(0,0,0,0.3); font-size: 11px; color: var(--text-faint-dm); font-style: italic; border-left: 2px solid var(--gold-dim); }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-title">Gary Wicksworth III</div>
+  <button class="nav-btn active" onclick="showPanel('player')">&#9876; Player Sheet</button>
+  <button class="nav-btn dm-btn" onclick="showPanel('dm')">&#127922; DM Companion</button>
+  <button class="nav-btn dm-btn" onclick="showPanel('arc')">&#128009; Chad &amp; Xal'ixx Arc</button>
+  <button class="nav-btn" onclick="showPanel('tools')">&#127922; Dice &amp; Notes</button>
+</nav>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; PLAYER PANEL &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div id="panel-player" class="panel active">
+<div class="parchment-page">
+
+  <!-- 1. HEADER -->
+  <div class="header">
+    <div class="warrant-stamp">&#9888;<br>ACTIVE<br>WARRANT<br>&mdash;&mdash;<br>DO NOT<br>APPROACH<br>ALONE</div>
+    <div class="subtitle-tag">&#10022; Official Adventurer's Dossier &#10022;</div>
+    <div class="char-name">
+      Gary Wicksworth III
+      <span class="alias-note">born: Zar'veth of the Astral Warband &mdash; alias maintained to evade 9 active cross-planar summons</span>
+    </div>
+    <div class="char-tagline">"The cosmos is my oyster. Child support is not my problem."</div>
+    <div class="identity-row">
+      <span class="identity-pill">Githyanki</span>
+      <span class="identity-pill">Wild Magic Sorcerer &middot; Lvl 1</span>
+      <span class="identity-pill">Chaotic Neutral</span>
+      <span class="identity-pill">Soldier (Deserter)</span>
+    </div>
+  </div>
+
+  <!-- CHARACTER AT A GLANCE -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+    <div style="padding:14px;border:1px solid var(--parchment-aged);background:rgba(255,255,255,0.15);border-top:3px solid var(--gold);">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Appearance</div>
+      <div style="font-style:italic;font-size:13px;color:var(--ink-faded);line-height:1.5;">Tall and imposing. Yellow-green skin, angular features, eyes that sit slightly wrong in the face &mdash; unsettling in the specific way of something that learned to smile from observation rather than instinct. Carries himself like he owns every room. Half the time it works.</div>
+    </div>
+    <div style="padding:14px;border:1px solid var(--parchment-aged);background:rgba(255,255,255,0.15);border-top:3px solid var(--gold);">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">How He Acts</div>
+      <div style="font-style:italic;font-size:13px;color:var(--ink-faded);line-height:1.5;">Always working an angle. Always three sentences into a pitch before you realize you're in one. Treats every interaction like a negotiation he intends to win &mdash; and usually does, right up until the moment he absolutely doesn't.</div>
+    </div>
+    <div style="padding:14px;border:1px solid var(--parchment-aged);background:rgba(255,255,255,0.15);border-top:3px solid var(--astral-bright);">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--astral-bright);margin-bottom:8px;">One Thing He Wants</div>
+      <div style="font-style:italic;font-size:13px;color:var(--ink-faded);line-height:1.5;">Wicksworth & Associate to become real. One Associate slot, always open, never filled. He hasn't examined what that actually means. He thinks about it constantly.</div>
+    </div>
+    <div style="padding:14px;border:1px solid var(--parchment-aged);background:rgba(255,255,255,0.15);border-top:3px solid var(--red-ink);">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--red-ink);margin-bottom:8px;">One Thing He Fears</div>
+      <div style="font-style:italic;font-size:13px;color:var(--ink-faded);line-height:1.5;">Cows. Specifically, any cow he encounters in the wild may be a former mate he is desperately trying to forget. He calls this a "strategic wariness." He will not elaborate. He has elaborated to no one. He thinks about it every time he sees a cow, which is more often than anyone should.</div>
+    </div>
+  </div>
+
+  <!-- 2. WANTED NOTICE -->
+  <div class="wanted-box">
+    <div class="wanted-sub">&mdash; ASTRAL PLANE FAMILY COURT TRIBUNAL &mdash;</div>
+    <div class="wanted-title">&#9876; WANTED &#9876;</div>
+    <div class="wanted-sub">FOR WILLFUL ABANDONMENT OF FINANCIAL OBLIGATIONS ACROSS MULTIPLE PLANES</div>
+    <ul class="wanted-list">
+      <li>Thrak'veth Ironbone &mdash; Human Warrior, 2 children, 14 months arrears, has a ledger</li>
+      <li>Sylmara Dawnweave &mdash; Elven Ranger, 1 child, "He vanished mid-sentence." She has centuries.</li>
+      <li>Lady Bryndis Stonehammer &mdash; Dwarf Cleric, 3 children, Moradin personally involved</li>
+      <li>Vel "The Quiet" Ashborn &mdash; Tiefling Guild Matriarch, 1 child, never raises her voice</li>
+      <li>Mira of the Tides &mdash; Half-Orc Paladin, 2 children, believes Gary can be redeemed (she is wrong)</li>
+      <li><strong>Xal'ixx the Molten &mdash; Red Dragon. 1 child. Actively hunting. This one is not a joke.</strong></li>
+    </ul>
+    <div class="reward-line">REWARD: 500gp per verified payment receipt &middot; Dead or Alive &middot; Xal'ixx prefers Dead</div>
+  </div>
+
+  <!-- 3. COMBAT STATS -->
+  <div class="p-section-title" style="margin-bottom:10px;">&#9876; Combat Statistics</div>
+  <div class="combat-row">
+    <div class="stat-bubble"><span class="val">13</span><span class="lbl">Armor Class</span></div>
+    <div class="stat-bubble"><span class="val">8</span><span class="lbl">Hit Points</span></div>
+    <div class="stat-bubble"><span class="val">30</span><span class="lbl">Speed ft</span></div>
+    <div class="stat-bubble chaos"><span class="val">+3</span><span class="lbl">Initiative</span></div>
+    <div class="stat-bubble chaos"><span class="val">DC 13</span><span class="lbl">Spell Save</span></div>
+    <div class="stat-bubble chaos"><span class="val">+5</span><span class="lbl">Spell Atk</span></div>
+    <div class="stat-bubble"><span class="val">12</span><span class="lbl">Passive Perc</span></div>
+  </div>
+
+  <!-- 4. ABILITY SCORES -->
+  <div class="p-section-title" style="margin-bottom:10px;">&#9889; Ability Scores</div>
+  <div class="abilities">
+    <div class="ability"><span class="ability-name">STR</span><span class="ability-score">10</span><span class="ability-mod">+0</span></div>
+    <div class="ability"><span class="ability-name">DEX</span><span class="ability-score">14</span><span class="ability-mod">+2</span></div>
+    <div class="ability"><span class="ability-name">CON</span><span class="ability-score">14</span><span class="ability-mod">+2</span></div>
+    <div class="ability"><span class="ability-name">INT</span><span class="ability-score">12</span><span class="ability-mod">+1</span></div>
+    <div class="ability"><span class="ability-name">WIS</span><span class="ability-score">10</span><span class="ability-mod">+0</span></div>
+    <div class="ability" style="border-color:var(--astral-bright);">
+      <span class="ability-name" style="color:var(--astral-bright);">CHA &#9733;</span>
+      <span class="ability-score" style="color:var(--astral);">17</span>
+      <span class="ability-mod">+3</span>
+    </div>
+  </div>
+
+  <div class="divider">&middot; &middot; &middot; &#10022; &middot; &middot; &middot;</div>
+
+  <!-- 5. GARY'S BACKSTORY -->
+  <div class="p-section" style="margin-bottom:20px;">
+    <div class="p-section-title">&#128220; The Dossier of Gary Wicksworth III</div>
+    <div class="backstory-text">
+      <strong>Born:</strong> Zar'veth, 4th Astral Warband. Trained from birth to hunt Mind Flayers. Exceptional warrior. Catastrophically charming.<br><br>
+      <strong>The Incident:</strong> Over fourteen years, Zar'veth accumulated entanglements across multiple planes &mdash; three human women, two elves, a dwarf cleric (who has since involved her deity), a sea hag (he does not discuss this), a tiefling merchant, a half-orc paladin, and &mdash; in what his commanding officer described as "a diplomatic incident of staggering stupidity" &mdash; Xal'ixx the Molten, Red Dragon. Offspring: eight to eleven. Gary has stopped counting.<br><br>
+      <strong>The Desertion:</strong> When child support summons began arriving via Astral projection &mdash; interrupting actual combat missions &mdash; Zar'veth made a pragmatic decision. He stole from the warband's treasury, forged papers identifying himself as "Gary Wicksworth III, Human Merchant of Waterdeep," and stepped through a planar rift. He has been outrunning his obligations ever since.<br><br>
+      <strong>The Alias:</strong> He chose "Gary" because it is the least threatening name in any language. "Wicksworth" because it sounds wealthy. "III" because it implies a family legacy that pays its debts. None of this has worked. He is nonetheless committed to the bit.
+    </div>
+  </div>
+
+  <!-- 6. SPELLS + SKILLS + GEAR -->
+  <div class="grid-2">
+    <div class="p-section" style="margin-bottom:0;">
+      <div class="p-section-title">&#10024; Spells & Cantrips</div>
+      <div class="spell-row">
+        <div class="spell cantrip"><div><div class="spell-name">Fire Bolt</div><div class="spell-desc">Hurl a bolt of fire. 1d10 damage at range.</div></div><span class="spell-tag ct">CANTRIP</span></div>
+        <div class="spell cantrip"><div><div class="spell-name">Shocking Grasp</div><div class="spell-desc">Touch attack, 1d8 lightning, target can't react.</div></div><span class="spell-tag ct">CANTRIP</span></div>
+        <div class="spell cantrip"><div><div class="spell-name">Minor Illusion</div><div class="spell-desc">Create a sound or image. Excellent for faking your death to dodge summons.</div></div><span class="spell-tag ct">CANTRIP</span></div>
+        <div class="spell"><div><div class="spell-name">Chaos Bolt</div><div class="spell-desc">2d8+1d6 random damage. May chain to another enemy.</div></div><span class="spell-tag s1">SLOT 1</span></div>
+        <div class="spell"><div><div class="spell-name">Shield</div><div class="spell-desc">Reaction: +5 AC until next turn. Stay alive. Don't pay.</div></div><span class="spell-tag s1">SLOT 1</span></div>
+        <div class="spell"><div><div class="spell-name">Thunderwave</div><div class="spell-desc">15ft cube of thunder. Flings everything away from you.</div></div><span class="spell-tag s1">SLOT 1</span></div>
+        <div class="spell racial-spell"><div><div class="spell-name">Misty Step &#10022;</div><div class="spell-desc">Githyanki racial &mdash; teleport 30ft as bonus action. Primary child support evasion tool.</div></div><span class="spell-tag rc">RACIAL</span></div>
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:var(--ink-faded);font-style:italic;">2&#215; Level 1 Slots &middot; Recharge on long rest</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="p-section" style="margin-bottom:0;">
+        <div class="p-section-title">&#127919; Key Skills</div>
+        <div class="skill-list">
+          <div class="skill-item"><div class="skill-dot prof"></div><span>Arcana</span><span class="skill-bonus">+3</span></div>
+          <div class="skill-item"><div class="skill-dot exp"></div><span>Deception</span><span class="skill-bonus">+5</span></div>
+          <div class="skill-item"><div class="skill-dot exp"></div><span>Persuasion</span><span class="skill-bonus">+5</span></div>
+          <div class="skill-item"><div class="skill-dot prof"></div><span>Athletics</span><span class="skill-bonus">+2</span></div>
+          <div class="skill-item"><div class="skill-dot prof"></div><span>Intimidation</span><span class="skill-bonus">+5</span></div>
+          <div class="skill-item"><div class="skill-dot"></div><span>Stealth</span><span class="skill-bonus">+2</span></div>
+          <div class="skill-item"><div class="skill-dot prof"></div><span>History</span><span class="skill-bonus">+3</span></div>
+          <div class="skill-item"><div class="skill-dot"></div><span>Insight</span><span class="skill-bonus">+0</span></div>
+        </div>
+        <div style="margin-top:6px;font-size:10px;font-style:italic;color:var(--ink-faded);">&#9673; Expert = lifetime of excuses, honed to perfection</div>
+      </div>
+      <div class="p-section" style="margin-bottom:0;">
+        <div class="p-section-title">&#127890; Equipment</div>
+        <div style="font-size:12px;line-height:1.9;color:var(--ink-faded);font-style:italic;">
+          &middot; Githyanki Silver Shortsword (+4 to hit, 1d6+2)<br>
+          &middot; Half-plate armor (AC 13)<br>
+          &middot; Component pouch<br>
+          &middot; 3 sets of false identity papers<br>
+          &middot; Worn locket &mdash; Chad's portrait, age 7<br>
+          &middot; 12gp (claims considerably less)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider">&middot; &middot; &middot; &#10022; &middot; &middot; &middot;</div>
+
+  <!-- 7. TRAITS -->
+  <div class="trait-grid">
+    <div class="trait-box">
+      <span class="trait-label">&#9889; Personality</span>
+      <div class="trait-text">Aggressively confident. Interprets every magical catastrophe as "going according to plan." Has a practiced speech for every situation involving payment. Will attempt to negotiate his way out of anything, including a dragon.</div>
+    </div>
+    <div class="trait-box">
+      <span class="trait-label">&#9876; Ideal</span>
+      <div class="trait-text">Freedom. No court, dragon, or Astral Tribunal gets to tell Gary Wicksworth III what he owes. The cosmos belongs to those bold enough to take it and fast enough to run.</div>
+    </div>
+    <div class="trait-box">
+      <span class="trait-label">&#128279; Bond &mdash; "Business Interest"</span>
+      <div class="trait-text">Gary does not love Chad. Gary has identified Chad as a high-potential future business partner and has made several seed investments in his direction. The locket is due diligence. "Wicksworth & Associate" is a contingency plan. There is only one Associate slot. Gary has not examined why.</div>
+    </div>
+    <div class="trait-box">
+      <span class="trait-label">&#128128; Flaw</span>
+      <div class="trait-text">Constitutionally incapable of admitting he cares about anything. Also: Xal'ixx the Molten is hunting him across planes, she is not letting this go, and she is the mother of a child who is currently traveling toward Gary unsupervised.</div>
+    </div>
+  </div>
+
+  <div class="divider">&middot; &middot; &middot; &#10022; &middot; &middot; &middot;</div>
+
+  <!-- 8. WILD MAGIC SURGE -->
+  <div class="surge-box">
+    <div class="surge-title">&#8767; Wild Magic Surge &mdash; Sample Results (Roll d20 after casting; surge on 1)</div>
+    <ul class="surge-list">
+      <li>Fireball centered on yourself</li>
+      <li>Turn into a potted plant until next turn</li>
+      <li>All creatures within 30ft teleport randomly</li>
+      <li>Speak only in rhymes for 1 minute</li>
+      <li>Surge produces the smell of something unfamiliar &mdash; slightly smoky, slightly draconic</li>
+      <li>A single small boot appears in your hand. It fits no one present. It is warm.</li>
+    </ul>
+  </div>
+
+  <!-- 8b. THE MORADIN JOURNAL -->
+  <div class="journal-box">
+    <span class="journal-label">&#10022; Gary's Personal Field Notes &mdash; "The Moradin Situation" (Private. Do Not Read.)</span>
+    <div class="journal-entry">
+      <em>Entry 1:</em> Tavern sign fell on me again. Third time this month. <span class="crossed">Coincidence.</span> Pattern. Bryndis's god is clearly running a minor inconvenience campaign. Petty. Expected.<br><br>
+      <em>Entry 4:</em> Food caught fire. Not from a spell. Just &mdash; caught fire. Also a goat appeared. <span class="margin-note">&#8592; WHERE DID IT COME FROM</span> Working theory: Moradin has enlisted a goat-based divine messenger system. Sophisticated. Underestimated him.<br><br>
+      <em>Entry 9:</em> The surges are getting worse. <span class="crossed">Bryndis escalated.</span> <span class="crossed">Residual planar instability from the desertion.</span> <span class="crossed">Cosmic punishment for the sea hag situation.</span> Unknown. Filed under: The Moradin Situation (ongoing). Am handling it.<br><br>
+      <em>Entry 14:</em> Smelled something. Smoke. Fire. Not from me. Gone in a second. <span class="margin-note">&#8592; Draconic? No. Impossible. Unrelated. Moving on.</span>
+    </div>
+  </div>
+
+  <!-- ROLEPLAY QUICK REF -->
+  <div class="p-section" style="margin-bottom:20px;">
+    <div class="p-section-title">&#127917; Roleplay Cheat Sheet</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px;">
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold);margin-bottom:5px;">WHY ADVENTURING?</div>
+        <div style="font-style:italic;color:var(--ink-faded);line-height:1.5;">The bounty hunters. Plural. Also the dragon. Staying mobile, staying paid by others, staying alive and ahead of nine active summons.</div>
+      </div>
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold);margin-bottom:5px;">WHY WORK WITH A GROUP?</div>
+        <div style="font-style:italic;color:var(--ink-faded);line-height:1.5;">A party is excellent cover. Gary cannot currently afford to operate alone. He frames this as "enjoying the camaraderie." The party has not pushed back on this framing.</div>
+      </div>
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold);margin-bottom:5px;">GENERAL PERSONALITY</div>
+        <div style="font-style:italic;color:var(--ink-faded);line-height:1.5;">Smooth talker. Always working an angle. Warm, funny, impossible to fully distrust &mdash; which is exactly what he wants. Every conversation is a negotiation he intends to win.</div>
+      </div>
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold);margin-bottom:5px;">REACTION TO DANGER</div>
+        <div style="font-style:italic;color:var(--ink-faded);line-height:1.5;">Negotiate first. Misty Step second. If cornered: unhinged magic violence, delivered with complete confidence that this was the plan all along.</div>
+      </div>
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold);margin-bottom:5px;">WHAT MOTIVATES HIM</div>
+        <div style="font-style:italic;color:var(--ink-faded);line-height:1.5;">Survival, freedom, and making Wicksworth & Associate real &mdash; though he hasn't examined what that means or why there's only one Associate slot.</div>
+      </div>
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--red-ink);margin-bottom:5px;">&#9888; DO NOT APPROACH COWS</div>
+        <div style="font-style:italic;color:var(--ink-faded);line-height:1.5;">Any cow encountered in the wild may be a former mate Gary is desperately trying to forget. He calls this strategic wariness. He will not discuss it further.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16. QUICK REFERENCE BAR -->
+  <div class="quick-ref">
+    <div class="quick-ref-title">&#10022; Session 1 Quick Reference &#10022;</div>
+    <div class="qr-grid">
+      <div class="qr-item"><span class="qr-val">13</span><span class="qr-lbl">Armor Class</span></div>
+      <div class="qr-item"><span class="qr-val">8</span><span class="qr-lbl">Hit Points</span></div>
+      <div class="qr-item"><span class="qr-val">+3</span><span class="qr-lbl">Initiative</span></div>
+      <div class="qr-item"><span class="qr-val">30ft</span><span class="qr-lbl">Move Speed</span></div>
+      <div class="qr-item"><span class="qr-val">+4</span><span class="qr-lbl">Sword Atk</span></div>
+      <div class="qr-item"><span class="qr-val">1d6+2</span><span class="qr-lbl">Sword Dmg</span></div>
+      <div class="qr-item"><span class="qr-val">+5</span><span class="qr-lbl">Spell Attack</span></div>
+      <div class="qr-item"><span class="qr-val">DC 13</span><span class="qr-lbl">Spell Save</span></div>
+      <div class="qr-item"><span class="qr-val">12</span><span class="qr-lbl">Passive Perc</span></div>
+      <div class="qr-item"><span class="qr-val">2</span><span class="qr-lbl">Spell Slots</span></div>
+    </div>
+    <div style="margin-top:16px;border-top:1px solid #3a2a08;padding-top:14px;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--gold-dim);text-align:center;margin-bottom:10px;text-transform:uppercase;">Best Skills</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;">
+        <span style="font-family:'Cinzel',serif;font-size:10px;padding:4px 10px;border:1px solid #3a2a08;color:#c9a227;">Deception +5</span>
+        <span style="font-family:'Cinzel',serif;font-size:10px;padding:4px 10px;border:1px solid #3a2a08;color:#c9a227;">Persuasion +5</span>
+        <span style="font-family:'Cinzel',serif;font-size:10px;padding:4px 10px;border:1px solid #3a2a08;color:#c9a227;">Intimidation +5</span>
+        <span style="font-family:'Cinzel',serif;font-size:10px;padding:4px 10px;border:1px solid #3a2a08;color:#a08c5a;">Arcana +3</span>
+        <span style="font-family:'Cinzel',serif;font-size:10px;padding:4px 10px;border:1px solid #3a2a08;color:#a08c5a;">History +3</span>
+        <span style="font-family:'Cinzel',serif;font-size:10px;padding:4px 10px;border:1px solid #3a2a08;color:#a08c5a;">Investigation +3</span>
+      </div>
+    </div>
+    <div style="margin-top:12px;border-top:1px solid #3a2a08;padding-top:12px;text-align:center;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--gold-dim);margin-bottom:6px;text-transform:uppercase;">Character Goal</div>
+      <div style="font-style:italic;font-size:12px;color:#a08c5a;line-height:1.5;">Make Wicksworth & Associate real.<br><span style="font-size:11px;color:#6b5a35;">(He hasn't examined what that actually means.)</span></div>
+    </div>
+  </div>
+
+</div><!-- /parchment-page -->
+</div><!-- /panel-player -->
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; DM PANEL &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div id="panel-dm" class="panel">
+<div class="dm-page">
+
+  <!-- DM SUB-NAV -->
+  <div style="display:flex;gap:0;border-bottom:1px solid var(--border-dm);margin-bottom:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+    <button class="dm-subnav active" onclick="showDMTab('rules')">&#9878; Rules</button>
+    <button class="dm-subnav" onclick="showDMTab('mamas')">&#128081; Baby Mamas</button>
+    <button class="dm-subnav" onclick="showDMTab('chad')">&#128009; Chad & Xal'ixx</button>
+  </div>
+
+  <!-- -- RULES SUB-TAB -- -->
+  <div id="dmtab-rules" class="dm-subtab active">
+
+    <!-- TRIGGER DECISION -->
+    <div class="dm-block">
+      <div class="dm-block-title">&#9889; When to Fire an Encounter</div>
+      <div class="dm-quick-row">
+        <div class="dm-quick-card trigger-card-dm">
+          <div class="dm-quick-label red">Trigger A</div>
+          <div class="dm-quick-val">Gary surrounded / no escape</div>
+          <div class="dm-quick-sub">Almost always saves him &mdash; chaos lets him Misty Step out</div>
+        </div>
+        <div class="dm-quick-card trigger-card-dm">
+          <div class="dm-quick-label gold">Trigger B</div>
+          <div class="dm-quick-val">Gary in critical social moment</div>
+          <div class="dm-quick-sub">Roll d20 &#8594; see table below</div>
+        </div>
+      </div>
+      <div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;color:var(--text-faint-dm);text-transform:uppercase;margin:14px 0 8px;">d20 Social Encounter Outcome</div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div class="dm-roll-row" style="border-left-color:#e74c3c;"><span class="dm-roll-range" style="color:#e74c3c;">1&ndash;2</span><span class="dm-roll-result">&#128128; Noble IS a baby mama. She's been here the whole time.</span></div>
+        <div class="dm-roll-row" style="border-left-color:var(--dragon-orange);"><span class="dm-roll-range" style="color:var(--dragon-orange);">3&ndash;10</span><span class="dm-roll-result">&#10007; Gary thrown out. Mission stalls. New approach needed.</span></div>
+        <div class="dm-roll-row" style="border-left-color:#b8b030;"><span class="dm-roll-range" style="color:#b8b030;">11&ndash;17</span><span class="dm-roll-result">~ Survives awkwardly. Everyone saw it. No one mentions it.</span></div>
+        <div class="dm-roll-row" style="border-left-color:var(--green-bright);"><span class="dm-roll-range" style="color:var(--green-bright);">18&ndash;20</span><span class="dm-roll-result">&#10003; Noble loves it. Gary takes full credit.</span></div>
+      </div>
+    </div>
+
+    <!-- ENCOUNTER FLOW -->
+    <div class="dm-block">
+      <div class="dm-block-title">&#128260; Encounter Flow</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div class="dm-step"><span class="dm-step-num">1</span><span class="dm-step-text">Gary is in danger or critical social moment</span></div>
+        <div class="dm-step"><span class="dm-step-num">2</span><span class="dm-step-text">Pick next pursuer in rotation &#8594; read her entrance line</span></div>
+        <div class="dm-step"><span class="dm-step-num">3</span><span class="dm-step-text">Third parties react &mdash; allegiances shift, everyone confused</span></div>
+        <div class="dm-step"><span class="dm-step-num">4</span><span class="dm-step-text">Gary gets one free Misty Step or Deception/Persuasion at advantage</span></div>
+        <div class="dm-step"><span class="dm-step-num">5</span><span class="dm-step-text">She keeps chasing &mdash; original threat may chase both of them</span></div>
+      </div>
+    </div>
+
+    <!-- CORE RULES -->
+    <div class="dm-block">
+      <div class="dm-block-title">&#128203; Key Rules</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--text-dim-dm);line-height:1.5;">
+        <div style="padding:8px 10px;background:var(--surface2-dm);border-left:3px solid var(--gold-bright);">Max <strong style="color:var(--text-dm);">once every 2&ndash;3 sessions</strong> &mdash; frequency kills the joke</div>
+        <div style="padding:8px 10px;background:var(--surface2-dm);border-left:3px solid #e74c3c;">Each baby mama gets <strong style="color:var(--text-dm);">1 appearance</strong> then retires from active rotation</div>
+        <div style="padding:8px 10px;background:var(--surface2-dm);border-left:3px solid var(--astral-bright);">Wild Magic surge threshold tightens as Chad approaches &mdash; start at 1, escalate to 1&ndash;5 by arrival</div>
+        <div style="padding:8px 10px;background:var(--surface2-dm);border-left:3px solid var(--dragon-orange);">Xal'ixx gets <strong style="color:var(--text-dm);">2 appearances</strong> &mdash; mid-campaign (comedic) and final session (reckoning)</div>
+      </div>
+    </div>
+
+    <!-- CHAD SURGE TRACKER -->
+    <div class="dm-block" style="border-top-color:var(--astral-bright);">
+      <div class="dm-block-title astral">&#8767; Chad Approach &mdash; Surge Escalation</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">
+        <div class="surge-stage"><span class="surge-num active">1</span><div class="surge-stage-label">Early<br><em>Session 1+</em></div></div>
+        <div class="surge-stage"><span class="surge-num">1&ndash;2</span><div class="surge-stage-label">Chad moving<br><em>Surges odd</em></div></div>
+        <div class="surge-stage"><span class="surge-num">1&ndash;3</span><div class="surge-stage-label">Chad close<br><em>Boot appears</em></div></div>
+        <div class="surge-stage"><span class="surge-num">1&ndash;4</span><div class="surge-stage-label">Xal'ixx mid<br><em>Gary knows</em></div></div>
+        <div class="surge-stage"><span class="surge-num">1&ndash;5</span><div class="surge-stage-label">Chad arrives<br><em>Reality hiccups</em></div></div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;font-style:italic;color:var(--text-faint-dm);">Gary attributes all surge weirdness to "The Moradin Situation." He is spectacularly wrong.</div>
+    </div>
+
+  </div><!-- /dmtab-rules -->
+
+  <!-- -- BABY MAMAS SUB-TAB -- -->
+  <div id="dmtab-mamas" class="dm-subtab">
+
+    <div style="font-size:12px;font-style:italic;color:var(--text-faint-dm);margin-bottom:14px;line-height:1.5;">One appearance each. Pick the next one in order. Tap a card to see her entrance line.</div>
+
+    <!-- BM CARDS &mdash; COMPACT -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+
+      <div class="bm-compact" onclick="toggleBM(this)">
+        <div class="bm-compact-header">
+          <div>
+            <div class="bm-compact-name">01 &middot; Thrak'veth Ironbone</div>
+            <div class="bm-compact-sub">Human Warrior &middot; Military precision &middot; Has a ledger, receipts, witnesses</div>
+          </div>
+          <div class="bm-compact-slot" id="slot-0" onclick="event.stopPropagation();toggleSlot2(0)">&#9711;</div>
+        </div>
+        <div class="bm-compact-body">
+          <div class="bm-entrance-line">"Gary Wicksworth. I have a notarized document and fourteen months of patience that have both run out simultaneously."</div>
+          <div class="bm-entrance-line">"Don't run. I am wearing boots specifically purchased for running. I have been training."</div>
+          <div class="bm-entrance-line">"Gentlemen &mdash; I apologize for the interruption. This will take four minutes and then Gary will be free to die for your cause."</div>
+          <div class="bm-what-she-wants">Wants: The money + Gary to sign the paperwork while she watches. Needs closure more than gold.</div>
+        </div>
+      </div>
+
+      <div class="bm-compact" onclick="toggleBM(this)">
+        <div class="bm-compact-header">
+          <div>
+            <div class="bm-compact-name">02 &middot; Sylmara Dawnweave</div>
+            <div class="bm-compact-sub">Elven Ranger &middot; Glacially calm &middot; Has been tracking him for decades as a side project</div>
+          </div>
+          <div class="bm-compact-slot" id="slot-1" onclick="event.stopPropagation();toggleSlot2(1)">&#9711;</div>
+        </div>
+        <div class="bm-compact-body">
+          <div class="bm-entrance-line">"Hello Gary. I've been in this city for three days. I wanted to see how long it took you to notice. You didn't notice."</div>
+          <div class="bm-entrance-line">"Please don't run. I have an arrow nocked. It's non-lethal. Mostly."</div>
+          <div class="bm-entrance-line">"I'll wait. Unlike your obligations, I have centuries."</div>
+          <div class="bm-what-she-wants">Wants: Gary to say out loud that he left. Not got lost. Left. She will wait as long as it takes.</div>
+        </div>
+      </div>
+
+      <div class="bm-compact" onclick="toggleBM(this)">
+        <div class="bm-compact-header">
+          <div>
+            <div class="bm-compact-name">03 &middot; Lady Bryndis Stonehammer</div>
+            <div class="bm-compact-sub">Dwarf Cleric &middot; Moradin personally involved &middot; Will cast Sacred Flame while demanding payment</div>
+          </div>
+          <div class="bm-compact-slot" id="slot-2" onclick="event.stopPropagation();toggleSlot2(2)">&#9711;</div>
+        </div>
+        <div class="bm-compact-body">
+          <div class="bm-entrance-line">"The light of Moradin led me here, Gary. A god. Personally involved."</div>
+          <div class="bm-entrance-line">"I'd like to introduce you to a Writ of Divine Debt. I had it invented. For you specifically."</div>
+          <div class="bm-entrance-line">"You may continue your foolishness &mdash; I'll wait. I've waited twelve years. What's five more minutes."</div>
+          <div class="bm-what-she-wants">Wants: Payment + divine justice. Gary is banned from the afterlife until the debt is settled.</div>
+        </div>
+      </div>
+
+      <div class="bm-compact" onclick="toggleBM(this)">
+        <div class="bm-compact-header">
+          <div>
+            <div class="bm-compact-name">04 &middot; Vel "The Quiet" Ashborn</div>
+            <div class="bm-compact-sub">Tiefling Guild Matriarch &middot; Never raises her voice &middot; May already own the building you're in</div>
+          </div>
+          <div class="bm-compact-slot" id="slot-3" onclick="event.stopPropagation();toggleSlot2(3)">&#9711;</div>
+        </div>
+        <div class="bm-compact-body">
+          <div class="bm-entrance-line">"Gary. Don't make that face. I'm not here to cause a scene. I am the scene."</div>
+          <div class="bm-entrance-line">"I've already spoken to your friends. Very productive conversation about your financial history."</div>
+          <div class="bm-entrance-line">"You can run. I've already arranged what happens after. Would you like to know how it ends?"</div>
+          <div class="bm-what-she-wants">Wild card &mdash; may know the noble, own the tavern, or have bribed the guards. Reshuffles every power dynamic in the room.</div>
+        </div>
+      </div>
+
+      <div class="bm-compact" onclick="toggleBM(this)">
+        <div class="bm-compact-header">
+          <div>
+            <div class="bm-compact-name">05 &middot; Mira of the Tides</div>
+            <div class="bm-compact-sub">Half-Orc Paladin &middot; Believes Gary can be redeemed &middot; Sends encouraging notes after he flees</div>
+          </div>
+          <div class="bm-compact-slot" id="slot-4" onclick="event.stopPropagation();toggleSlot2(4)">&#9711;</div>
+        </div>
+        <div class="bm-compact-body">
+          <div class="bm-entrance-line">"Gary! Don't worry &mdash; I'm not angry. I'm concerned. There's a difference and I need you to understand that right now."</div>
+          <div class="bm-entrance-line">"Running is just evidence of emotional unavailability and we can work through that &mdash; Gary. Gary please stop walking away while I'm&mdash;"</div>
+          <div class="bm-entrance-line">"I've spoken to several of your children. They miss you. I told them you were on a journey. Are you on a journey, Gary?"</div>
+          <div class="bm-what-she-wants">Wants Gary's redemption more than payment. The most dangerous pursuer &mdash; she will never stop believing in him.</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div><!-- /dmtab-mamas -->
+
+  <!-- -- CHAD & XAL'IXX SUB-TAB -- -->
+  <div id="dmtab-chad" class="dm-subtab">
+
+    <!-- CHAD QUICK CARD -->
+    <div class="dm-block dragon-top">
+      <div class="dm-block-title dragon">Chad &mdash; Who He Is</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+        <div style="padding:8px 10px;background:var(--surface2-dm);border-left:3px solid var(--dragon-orange);font-size:13px;color:var(--text-dim-dm);">Age 10&ndash;12. Half-Githyanki / half-Red-Dragon. Gary's eyes. Scales appear when emotional.</div>
+        <div style="padding:8px 10px;background:var(--surface2-dm);border-left:3px solid var(--dragon-orange);font-size:13px;color:var(--text-dim-dm);">Conniving, witty, two steps ahead of everyone. Grew up an outcast. Already left home to find Gary.</div>
+        <div style="padding:8px 10px;background:var(--surface2-dm);border-left:3px solid var(--astral-bright);font-size:13px;color:var(--text-dim-dm);">Reality-bending powers tied to emotion &mdash; probability warps, distances shift, objects slide. Involuntary.</div>
+        <div style="padding:8px 10px;background:var(--surface2-dm);border-left:3px solid var(--gold-bright);font-size:13px;color:var(--text-dim-dm);">Gary calls him a "future business partner." There is one Associate slot. Gary has not examined why.</div>
+      </div>
+    </div>
+
+    <!-- 6 PHASES COMPRESSED -->
+    <div class="dm-block">
+      <div class="dm-block-title">&#128205; Arc Phases &mdash; Quick Reference</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div class="dm-step"><span class="dm-step-num" style="background:rgba(123,47,255,0.2);color:var(--astral-glow);">1</span><span class="dm-step-text"><strong style="color:var(--text-dm);">The Frequency</strong> &mdash; Surges get weird. Boot appears. Locket gets warm. Gary blames Moradin.</span></div>
+        <div class="dm-step"><span class="dm-step-num" style="background:rgba(123,47,255,0.2);color:var(--astral-glow);">2</span><span class="dm-step-text"><strong style="color:var(--text-dm);">Party Finds Out</strong> &mdash; Gary talks in his sleep. Tell other players privately. No one says anything. Party starts quietly covering for him.</span></div>
+        <div class="dm-step"><span class="dm-step-num" style="background:rgba(123,47,255,0.2);color:var(--astral-glow);">3</span><span class="dm-step-text"><strong style="color:var(--text-dm);">The Monologue</strong> &mdash; Gary gives his "no attachments" speech. Party listens with straight faces. One of them is already looking at the door.</span></div>
+        <div class="dm-step"><span class="dm-step-num" style="background:rgba(224,92,26,0.3);color:var(--dragon-orange);">4</span><span class="dm-step-text"><strong style="color:var(--text-dm);">First Contact</strong> &mdash; Door opens mid-sentence. Chad looks at Gary, looks at the party, says <em>"He does this a lot, doesn't he."</em> Sits down. Waits.</span></div>
+        <div class="dm-step"><span class="dm-step-num" style="background:rgba(224,92,26,0.3);color:var(--dragon-orange);">5</span><span class="dm-step-text"><strong style="color:var(--text-dm);">Chad Joins</strong> &mdash; He's not going home. Gary calls him "a temporary operational asset." Chad calls Gary "my associate." This is the funniest thing he could do.</span></div>
+        <div class="dm-step"><span class="dm-step-num" style="background:rgba(192,57,43,0.3);color:#e74c3c;">6</span><span class="dm-step-text"><strong style="color:var(--text-dm);">Xal'ixx Arrives</strong> &mdash; Final session. Everything is good. Wall stops being a wall. See below.</span></div>
+      </div>
+    </div>
+
+    <!-- XAL'IXX TWO APPEARANCES -->
+    <div class="dm-block" style="border-top-color:var(--dragon-orange);">
+      <div class="dm-block-title dragon">&#128009; Xal'ixx &mdash; Two Appearances</div>
+
+      <div style="margin-bottom:10px;">
+        <div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;color:var(--dragon-orange);text-transform:uppercase;margin-bottom:6px;">
+          Appearance 1 &mdash; Mid-Campaign &middot; Comedic
+          <span class="bm-compact-slot" id="slot-5" onclick="toggleSlot2(5)" style="display:inline-block;margin-left:8px;vertical-align:middle;">&#9711;</span>
+        </div>
+        <div style="padding:10px 12px;background:var(--surface2-dm);border-left:3px solid var(--dragon-orange);font-size:13px;color:var(--text-dim-dm);line-height:1.6;">
+          Gary is already losing. A baby mama is already screaming. Shadow falls. Temperature rises 30&#176;. Xal'ixx lands. She ignores everyone. She looks at Gary.<br><br>
+          <em style="color:var(--text-dm);">"Our son has left to find you. He is ten years old. He is traveling alone across the planes. This is your fault. You will help me find him or I will end you and then find him myself."</em><br><br>
+          <span style="font-size:11px;color:var(--text-faint-dm);">She leaves after. No team-up. Gary now knows the clock is ticking.</span>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;color:var(--dragon-orange);text-transform:uppercase;margin-bottom:6px;">
+          Appearance 2 &mdash; Final Session &middot; The Reckoning
+          <span class="bm-compact-slot" id="slot-6" onclick="toggleSlot2(6)" style="display:inline-block;margin-left:8px;vertical-align:middle;">&#9711;</span>
+        </div>
+        <div style="padding:10px 12px;background:var(--surface2-dm);border-left:3px solid var(--dragon-orange);font-size:13px;color:var(--text-dim-dm);line-height:1.6;">
+          Campaign resolved. Everything optimistic. Gary is present &mdash; actually present, not running. Chad is there. Party is there.<br><br>
+          Wall ceases to be a wall. Xal'ixx looks at Chad (entire conversation about leaving without telling your mother, to be had later). She looks at Gary.<br><br>
+          <em style="color:var(--text-dm);">"You stayed."</em><br><br>
+          <span style="font-size:11px;color:var(--text-faint-dm);">Not a compliment. Not an accusation. She sounds almost surprised. Gary's player answers. Whatever they say is the campaign's ending note.</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dmtab-chad -->
+
+</div><!-- /dm-page -->
+</div><!-- /panel-dm -->
+
+
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; ARC PANEL &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div id="panel-arc" class="panel">
+<div class="dm-page">
+
+  <div class="dm-masthead">
+    <div class="dm-label-top">&#10022; Dungeon Master Arc Guide &mdash; For DM Eyes Only &#10022;</div>
+    <div class="dm-title">The Chad & Xal'ixx Arc<br>An Interleaved Story Guide</div>
+    <div class="dm-sub"><em>Two arcs. One collision course. Gary in the middle, as always.</em></div>
+    <div class="dm-pills">
+      <span class="dm-pill gold">6 Phases</span>
+      <span class="dm-pill red">Interleaved Arcs</span>
+      <span class="dm-pill astral">Chad Approaches</span>
+      <span class="dm-pill" style="border-color:var(--dragon-orange);color:var(--dragon-orange);">Xal'ixx Is The End</span>
+    </div>
+  </div>
+
+  <!-- DESIGN NOTE -->
+  <div class="dm-secret" style="margin-bottom:18px;">
+    <strong>READ THIS FIRST &mdash; THE SHAPE OF THE STORY</strong>
+    Chad and Xal'ixx are not separate arcs running in parallel. They are one story told from two directions. Chad is moving toward Gary because he chose to. Xal'ixx is moving toward Gary because she has to. Gary is standing still and calling it a plan. The comedy of the baby mama system has been the surface layer &mdash; underneath it, this is a story about a man who built something real by accident and has spent years pretending he didn't. These phases don't replace your campaign's main plot. They bleed into it. The DM's job is timing &mdash; knowing when to let a phase breathe and when to let it land.
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="dm-block astral-top">
+    <div class="dm-block-title astral">Phase 1 &mdash; The Frequency (Early Campaign)</div>
+    <div style="font-size:13px;color:var(--text-dim-dm);font-style:italic;line-height:1.7;margin-bottom:14px;">
+      Chad has left home. He is traveling. He is 10 years old and his reality-bending powers are tied directly to his emotional state. As he moves through the world &mdash; excited, nervous, determined &mdash; the fabric of probability around him stutters. Gary feels it. He does not know what it is. The Moradin Situation journal entries begin.
+    </div>
+    <ul class="rule-list">
+      <li class="rule-item chaos">
+        <span class="rule-num astral">&#8767;</span>
+        <div class="rule-body">
+          <strong>Gary's Surges Get Stranger</strong>
+          Surge results start producing anomalies that don't fit the standard table &mdash; a single small boot appears, something smells faintly of smoke and scales, a goat materializes and stares at Gary with unusual intentionality. Gary updates his journal. His theory about Moradin becomes more elaborate and more wrong with each entry. The party notices the surges are changing. Gary insists it's fine.
+        </div>
+      </li>
+      <li class="rule-item">
+        <span class="rule-num">~</span>
+        <div class="rule-body">
+          <strong>Rumors &mdash; Towns With Impossible Weather</strong>
+          NPCs mention in passing: a village three days east had a week where all the doors opened to the wrong rooms. A merchant reports his wagon arrived before it left. A shepherd says the probability of rain was 0% and it rained for six hours. These reports follow a route. The party may notice. Gary does not connect it.
+        </div>
+      </li>
+      <li class="rule-item">
+        <span class="rule-num">~</span>
+        <div class="rule-body">
+          <strong>The Locket Gets Warm</strong>
+          Once per session, Gary's locket &mdash; Chad's portrait at age 7 &mdash; is slightly warm to the touch. Not hot. Just warm. Gary has no explanation for this. He checks it when he thinks no one is looking. He has checked it every day since the surges started changing. Do not draw attention to this mechanically. Just describe it if Gary reaches for it. Let it sit.
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="dm-block">
+    <div class="dm-block-title">Phase 2 &mdash; The Party Finds Out (Mid-Early Campaign)</div>
+    <div style="font-size:13px;color:var(--text-dim-dm);font-style:italic;line-height:1.7;margin-bottom:14px;">
+      Gary talks in his sleep. He has always talked in his sleep. The party has never mentioned it because it's usually incoherent. But somewhere in the last few weeks, a name started appearing. Just one name. Repeated. Sometimes with instructions attached. <em>"Don't take the coastal road, Chad."</em> <em>"Chad, the fire goes out before you sleep, not after."</em> <em>"Chad."</em>
+    </div>
+    <ul class="rule-list">
+      <li class="rule-item trigger">
+        <span class="rule-num red">!</span>
+        <div class="rule-body">
+          <strong>The Discovery &mdash; Run This Out of Session</strong>
+          Tell the other players privately &mdash; not Gary's player &mdash; that their characters have been hearing the name Chad for weeks. They don't know who Chad is yet. They know it matters. The group has silently agreed, without discussion, to wait and let Gary get there himself. This is the most important instruction in this entire document: the party knows. Gary doesn't know they know. No one says anything. This runs quietly in the background until the meeting.
+        </div>
+      </li>
+      <li class="rule-item">
+        <span class="rule-num">~</span>
+        <div class="rule-body">
+          <strong>How the Party Plays It</strong>
+          Subtly. A party member might cover Gary with a blanket without explanation. Someone might steer conversation away from children unprompted. Someone might pause, almost say something, and then not. Gary's player should feel a vague warmth from the group without understanding why. This is the party quietly loving Gary in the only way they can &mdash; by giving him the space to arrive at it himself.
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="dm-block red-top">
+    <div class="dm-block-title red">Phase 3 &mdash; Gary's "No Attachments" Monologue (The Session Before)</div>
+    <div style="font-size:13px;color:var(--text-dim-dm);font-style:italic;line-height:1.7;margin-bottom:14px;">
+      This phase is a single scene. It should happen naturally &mdash; ideally triggered by a moment in the main plot where the party is asked what they're fighting for, or what they'd lose if the mission failed. Gary gives his answer. It's the speech he always gives. The party listens with faces they have carefully arranged to reveal nothing.
+    </div>
+    <div class="dm-block" style="background:rgba(0,0,0,0.3);border:1px solid var(--border-dm);border-top:none;padding:16px;margin-bottom:14px;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold-bright);margin-bottom:10px;text-transform:uppercase;">Gary's Monologue &mdash; What He Says</div>
+      <div style="font-style:italic;font-size:13px;color:var(--text-dim-dm);line-height:1.8;">
+        <em>"I'll tell you what I fight for. I fight for the next door. The next city. The next job that pays enough to stay ahead of &mdash; whatever's behind me. I don't fight for people because people are &mdash; they're complicated. They want things from you. They remember things you did. They show up. I travel light. Always have. No attachments. No &mdash; obligations. Nothing that slows you down or finds you in the middle of something important and &mdash; and I'm not &mdash; I don't have &mdash; there's no one. That's the whole point. There's no one."</em>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--text-faint-dm);font-style:italic;">
+        DM note: Let the silence hold for a beat after he finishes. The party says nothing. One of them is looking at the door. Gary notices, but doesn't understand why. Then: the door opens.
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 &mdash; THE MEETING -->
+  <div class="dm-block dragon-top">
+    <div class="dm-block-title dragon">Phase 4 &mdash; First Contact (The Meeting)</div>
+    <div style="font-size:13px;color:var(--text-dim-dm);font-style:italic;line-height:1.7;margin-bottom:14px;">
+      Chad walks in mid-sentence. He has found them &mdash; found Gary specifically &mdash; through a combination of his mother's tracking instincts, his own terrifying intelligence, and the fact that Gary's wild magic surges have been leaving a trail a child could follow. He is 10 years old. He is wearing traveling clothes that have been repaired several times. His eyes are Gary's eyes. His scales are barely visible &mdash; he is calm. He has been preparing for this moment.
+    </div>
+    <ul class="rule-list">
+      <li class="rule-item save">
+        <span class="rule-num green">&#9733;</span>
+        <div class="rule-body">
+          <strong>The Entrance &mdash; Script This Beat Exactly</strong>
+          The door opens. Chad steps in. He looks at Gary &mdash; really looks, the way someone looks at a thing they've been imagining for years and are now calibrating against reality. Then he looks at the party. He reads the room in approximately two seconds. He says: <em>"He does this a lot, doesn't he."</em> It is not a question. He sits down.
+        </div>
+      </li>
+      <li class="rule-item">
+        <span class="rule-num">~</span>
+        <div class="rule-body">
+          <strong>What Chad Does Not Do</strong>
+          He does not cry. He does not accuse. He does not explain how he found Gary or how long it took or what it cost him. He does not ask for anything. He sits down, folds his hands on the table, and waits &mdash; with the absolute patience of someone who has been waiting his entire life and has decided that this particular wait is over. He is 10. This is more unsettling than anything else he could have done.
+        </div>
+      </li>
+      <li class="rule-item chaos">
+        <span class="rule-num astral">&#8767;</span>
+        <div class="rule-body">
+          <strong>The Reality Bleed</strong>
+          The moment Chad sits down, Gary's wild magic threshold hits its maximum &mdash; surges on 1&ndash;5 for the rest of the session. More immediately: the locket in Gary's pocket is suddenly, uncomfortably hot. The candles in the room flicker without wind. A cup slides two inches to the left on its own. Chad glances at it. Looks back at Gary. Does not comment. He is used to this. Gary is not used to any of this.
+        </div>
+      </li>
+      <li class="rule-item trigger">
+        <span class="rule-num red">!</span>
+        <div class="rule-body">
+          <strong>Gary's Move &mdash; The Only Thing That Matters Here</strong>
+          Gary's player gets to decide what Gary does next. Do not rush this. Do not fill the silence. The party already knows. Chad already knows. The only person in the room who hasn't caught up is Gary. Whatever he says or does &mdash; whether he runs the rationalization ("business partner, high potential, seed investment") or whether something in him finally breaks toward something honest &mdash; that decision defines the rest of the campaign. Either is valid. Either is interesting. Let it breathe.
+        </div>
+      </li>
+    </ul>
+    <div style="margin-top:14px;padding:12px 14px;background:rgba(224,92,26,0.06);border-left:3px solid var(--dragon-orange);">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--dragon-orange);margin-bottom:6px;text-transform:uppercase;">If Gary Runs The Rationalization</div>
+      <div style="font-size:12px;font-style:italic;color:var(--text-dim-dm);line-height:1.5;">Chad listens to the whole thing with the patience of someone who expected exactly this. When Gary finishes, Chad reaches into his pack and puts the locket &mdash; Gary's locket, the one Gary left outside his village &mdash; on the table next to the one Gary is currently carrying. Two lockets. Same portrait. Different ages. He says: <em>"You left that one when I was seven. I found the second one when I was nine. You were getting closer."</em> Then he waits again.</div>
+    </div>
+    <div style="margin-top:10px;padding:12px 14px;background:rgba(123,47,255,0.06);border-left:3px solid var(--astral-bright);">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--astral-bright);margin-bottom:6px;text-transform:uppercase;">If Gary Breaks Toward Something Honest</div>
+      <div style="font-size:12px;font-style:italic;color:var(--text-dim-dm);line-height:1.5;">Chad's scales &mdash; barely visible until now &mdash; fade completely. Just for a moment. He looks like a kid. He says nothing. He nods once, slowly, the way someone does when a thing they'd stopped letting themselves hope for turns out to be real. The candles stop flickering. The cup slides back. Gary's locket goes cold. The party finds somewhere else to look.</div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="dm-block">
+    <div class="dm-block-title">Phase 5 &mdash; Chad In The Party (Post-Meeting)</div>
+    <div style="font-size:13px;color:var(--text-dim-dm);font-style:italic;line-height:1.7;margin-bottom:14px;">
+      Chad is not going home. He has decided. His reality-bending powers make him simultaneously the most useful and most unpredictable addition to any group dynamic. Gary officially refers to him as "a temporary operational asset." The party refers to him as Chad. Chad refers to Gary as "my associate." This is the funniest and most devastating thing he could possibly do.
+    </div>
+    <ul class="rule-list">
+      <li class="rule-item">
+        <span class="rule-num">~</span>
+        <div class="rule-body">
+          <strong>Chad's Role In The Party</strong>
+          Chad is a 10-year-old NPC with the social intelligence of someone three times his age and the impulse control of someone half his age. He is conniving, observant, and deeply funny in ways Gary recognizes and refuses to acknowledge. He gravitates toward whoever in the party treats him most like a person rather than a problem. He never asks Gary for anything directly. He just stays close. He has always been good at staying close to things that might leave.
+        </div>
+      </li>
+      <li class="rule-item chaos">
+        <span class="rule-num astral">&#8767;</span>
+        <div class="rule-body">
+          <strong>Reality Bleed &mdash; Living With Chad</strong>
+          Small reality anomalies become background texture when Chad is present. Probability skews slightly in the party's favor when Chad is calm &mdash; dice feel lucky, the right door is always unlocked, the right person is always around the corner. When Chad is upset or scared, the opposite: things fail at wrong rates, distances stretch, the DM may call for saves on actions that wouldn't normally require them. The party learns to read his scales. Gary learns fastest, without admitting he's been watching.
+        </div>
+      </li>
+      <li class="rule-item save">
+        <span class="rule-num green">~</span>
+        <div class="rule-body">
+          <strong>The Slow Thing That Happens To Gary</strong>
+          Gary stops running the "business partner" rationalization out loud. He still uses it internally. But the party stops hearing it. Instead Gary starts doing things &mdash; small, deniable things. Positioning himself between Chad and danger. Knowing Chad's preferences without being told. Leaving better gifts, less anonymously. He does not acknowledge any of this. If called out, he will explain it in operational terms. The explanation will not convince anyone, including Gary.
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- PHASE 6 &mdash; XAL'IXX -->
+  <div class="xalixx-block" style="margin-bottom:0;">
+    <div class="xalixx-title">Phase 6 &mdash; Xal'ixx the Molten</div>
+    <div class="xalixx-sub">&middot; The Final Reckoning &middot; Not A Comedy Encounter &middot; Not A Team-Up &middot; The End &middot;</div>
+
+    <div class="xalixx-rule">
+      <strong>WHEN SHE ARRIVES</strong>
+      Late campaign. The main story has resolved. The party is in a genuinely good place &mdash; a victory, a celebration, a rare moment of optimism. Gary is present and, against all odds, seems to be present in the other sense too. Not running. Not rationalizing. Just &mdash; there. Chad is there. The party is there. For one brief window, everything is actually fine. Then the temperature rises. The sky outside changes color. Something ancient lands outside with a sound like the end of an argument.
+    </div>
+
+    <div class="xalixx-rule">
+      <strong>THE STAGING &mdash; RUN THIS EXACTLY</strong>
+      The door doesn't open dramatically. The wall ceases to be a wall. Xal'ixx does not fit through doors. She is enormous and ancient and her scales are the color of something that has been on fire for a thousand years. She looks at the room. She looks at Chad &mdash; a look that contains an entire conversation about leaving home without telling your mother, which she will be having with him later, at length. Then she looks at Gary. The room is very quiet. She says: <em>"You stayed."</em> It is not a compliment. It is not an accusation. It is the most dangerous thing she could say because it is simply true, and she sounds, underneath all of it, almost surprised.
+    </div>
+
+    <div class="xalixx-rule">
+      <strong>WHAT XAL'IXX WANTS FROM GARY &mdash; THE REAL VERSION</strong>
+      Not the money. She stopped caring about the money approximately the moment Chad packed his bag and walked out the door to find the man she raised him to know better than. She wants Gary to understand what he made. Not the chaos, not the wild magic, not the reality-bending &mdash; she has been watching Gary's child outthink warlords and connive his way through situations that would break adults, and she wants Gary to look at that and understand it didn't come from her discipline. It came from whatever Gary is underneath all the running. She hates that she knows this. She is here because someone has to say it and she has decided, furiously, that it will be her.
+    </div>
+
+    <div class="xalixx-rule">
+      <strong>THE DEBT &mdash; WHAT SHE ACTUALLY SAYS</strong>
+      After a long silence in which Gary does not run &mdash; which she clocks immediately &mdash; Xal'ixx says the following, or words to this effect: <em>"I did not come here for gold, Gary. I came here because my son crossed three planes alone at ten years old to find a man who sends anonymous gifts and calls it investment, and when he walked through that door I am told you did not run. I want to know if that is permanent or if I am wasting my time."</em> Then she waits. She is a dragon. She can wait longer than Gary has been alive.
+    </div>
+
+    <div style="margin-top:14px;padding:12px 14px;background:rgba(224,92,26,0.06);border-left:3px solid var(--dragon-orange);">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--dragon-orange);margin-bottom:8px;text-transform:uppercase;">Gary's Answer &mdash; The Only Moment That Matters In The Whole Campaign</div>
+      <div style="font-size:12px;font-style:italic;color:var(--text-dim-dm);line-height:1.7;">
+        There is no scripted answer. Gary's player decides. Whatever they say &mdash; whatever version of Gary has emerged across all the sessions, all the baby mama chaos, all the journal entries about Moradin, all the small deniable things &mdash; that answer is the campaign's ending note. The DM's job is to make sure Xal'ixx receives it with exactly as much grace as it deserves. No more. No less. She is not easy. She was never going to be easy. But she did fly across planes to ask the question in person, which means somewhere underneath the fire and the fury, she already knows what she's hoping to hear.
+      </div>
+    </div>
+
+    <div style="margin-top:14px;padding:12px 14px;background:rgba(0,0,0,0.3);border-left:3px solid var(--astral-bright);">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--astral-bright);margin-bottom:8px;text-transform:uppercase;">Chad During This Scene</div>
+      <div style="font-size:12px;font-style:italic;color:var(--text-dim-dm);line-height:1.7;">
+        Chad watches the whole exchange without speaking. His scales are fully visible &mdash; he is not calm, he is intensely, completely awake. He does not intervene. He has been waiting for this conversation longer than he has been waiting for Gary. When it ends &mdash; however it ends &mdash; he looks at Gary the same way he looked at him when he first walked through the door: calibrating. Updating the model. He has always been doing this. He will keep doing it. That's the whole point of having a business partner. You have to know what they're made of.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /dm-page -->
+</div><!-- /panel-arc -->
+
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; TOOLS PANEL &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div id="panel-tools" class="panel">
+<div class="tools-page">
+
+  <!-- DICE ROLLER -->
+  <div class="tools-section">
+    <div class="tools-title">&#127922; Dice Roller</div>
+
+    <div class="modifier-row">
+      <span class="mod-label">Modifier</span>
+      <input type="number" class="mod-input" id="modifier" value="0" min="-10" max="20">
+      <span class="mod-label" style="margin-left:4px;">to roll</span>
+    </div>
+
+    <div class="dice-result-area" id="resultArea">
+      <div class="dice-result-num" id="resultNum">&mdash;</div>
+      <div class="dice-result-label" id="resultLabel">tap a die to roll</div>
+      <div class="dice-result-flavor" id="resultFlavor"></div>
+    </div>
+
+    <div class="dice-grid">
+      <button class="dice-btn" onclick="rollDie(4)" ontouchstart="">
+        <span>d4</span>
+        <span class="dice-label">d4</span>
+      </button>
+      <button class="dice-btn" onclick="rollDie(6)" ontouchstart="">
+        <span>d6</span>
+        <span class="dice-label">d6</span>
+      </button>
+      <button class="dice-btn" onclick="rollDie(8)" ontouchstart="">
+        <span>d8</span>
+        <span class="dice-label">d8</span>
+      </button>
+      <button class="dice-btn" onclick="rollDie(10)" ontouchstart="">
+        <span>d10</span>
+        <span class="dice-label">d10</span>
+      </button>
+      <button class="dice-btn" onclick="rollDie(12)" ontouchstart="">
+        <span>d12</span>
+        <span class="dice-label">d12</span>
+      </button>
+      <button class="dice-btn d20-btn" onclick="rollDie(20)" ontouchstart="">
+        <span>d20</span>
+        <span class="dice-label">d20 &middot; nat 1 / nat 20 detected</span>
+      </button>
+    </div>
+
+    <div style="margin-bottom:10px;">
+      <div class="dm-block-title" style="margin-bottom:8px;font-size:9px;">Roll History</div>
+      <div class="roll-history" id="rollHistory">
+        <div class="history-item" style="justify-content:center;font-style:italic;color:var(--text-faint-dm);">No rolls yet</div>
+      </div>
+      <button class="clear-btn" onclick="clearHistory()">Clear History</button>
+    </div>
+  </div>
+
+  <!-- SOCIAL ENCOUNTER ROLLER -->
+  <div class="tools-section red-top">
+    <div class="tools-title red">&#9876; Baby Mama Social Encounter</div>
+    <div style="font-size:12px;font-style:italic;color:var(--text-faint-dm);margin-bottom:12px;">Roll when a baby mama interrupts a critical social situation. Result determines the outcome.</div>
+    <button class="dice-btn d20-btn" onclick="rollSocial()" ontouchstart="" style="width:100%;border-color:#c0392b;background:rgba(192,57,43,0.06);">
+      <span style="color:#e74c3c;">Roll Social Encounter d20</span>
+      <span class="dice-label" style="color:#c0392b;">tap to determine baby mama outcome</span>
+    </button>
+    <div class="social-roll-result" id="socialResult">
+      <span style="color:var(--text-faint-dm);font-size:12px;">Roll to see what happens when she walks in...</span>
+    </div>
+  </div>
+
+  <!-- SURGE ROLL -->
+  <div class="tools-section astral-top" style="border-top-color:var(--astral-bright);">
+    <div class="tools-title" style="color:var(--astral-glow);">&#8767; Wild Magic Surge Check</div>
+    <div style="font-size:12px;font-style:italic;color:var(--text-faint-dm);margin-bottom:12px;">Roll after Gary casts a spell. Current surge threshold tracked below.</div>
+    <div class="modifier-row" style="margin-bottom:12px;">
+      <span class="mod-label">Surge on</span>
+      <select id="surgeThreshold" style="background:var(--surface2-dm);border:1px solid var(--border-dm);color:var(--text-dm);font-family:Cinzel,serif;font-size:14px;padding:8px 12px;border-radius:2px;-webkit-appearance:none;min-width:80px;">
+        <option value="1">1</option>
+        <option value="2">1&ndash;2</option>
+        <option value="3">1&ndash;3</option>
+        <option value="4">1&ndash;4</option>
+        <option value="5">1&ndash;5</option>
+      </select>
+      <span class="mod-label">or lower</span>
+    </div>
+    <button class="dice-btn d20-btn" onclick="rollSurge()" ontouchstart="" style="width:100%;border-color:var(--astral-bright);background:rgba(123,47,255,0.06);">
+      <span style="color:var(--astral-glow);">Roll Surge Check</span>
+      <span class="dice-label" style="color:var(--astral-bright);">tap after casting a spell</span>
+    </button>
+    <div class="social-roll-result" id="surgeResult" style="border-left-color:var(--astral-bright);">
+      <span style="color:var(--text-faint-dm);font-size:12px;">Cast a spell and roll...</span>
+    </div>
+  </div>
+
+  <!-- CAMPAIGN TRACKER -->
+  <div class="tools-section">
+    <div class="tools-title">&#128205; Campaign Progress</div>
+
+    <div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;color:var(--text-faint-dm);text-transform:uppercase;margin-bottom:8px;">Chad Arc Phases</div>
+    <div class="phase-tracker" id="phaseTracker">
+      <div class="phase-item" onclick="togglePhase(this)" data-phase="0">
+        <div class="phase-check">&#10003;</div>
+        <div class="phase-text">Phase 1 &mdash; The Frequency (surges get strange)</div>
+      </div>
+      <div class="phase-item" onclick="togglePhase(this)" data-phase="1">
+        <div class="phase-check">&#10003;</div>
+        <div class="phase-text">Phase 2 &mdash; Party finds out (sleep talk)</div>
+      </div>
+      <div class="phase-item" onclick="togglePhase(this)" data-phase="2">
+        <div class="phase-check">&#10003;</div>
+        <div class="phase-text">Phase 3 &mdash; The No Attachments Monologue</div>
+      </div>
+      <div class="phase-item" onclick="togglePhase(this)" data-phase="3">
+        <div class="phase-check">&#10003;</div>
+        <div class="phase-text">Phase 4 &mdash; First Contact (Chad walks in)</div>
+      </div>
+      <div class="phase-item" onclick="togglePhase(this)" data-phase="4">
+        <div class="phase-check">&#10003;</div>
+        <div class="phase-text">Phase 5 &mdash; Chad joins the party</div>
+      </div>
+      <div class="phase-item" onclick="togglePhase(this)" data-phase="5">
+        <div class="phase-check">&#10003;</div>
+        <div class="phase-text">Phase 6 &mdash; Xal'ixx arrives (the reckoning)</div>
+      </div>
+    </div>
+
+    <div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;color:var(--text-faint-dm);text-transform:uppercase;margin:16px 0 8px;">Baby Mama Appearances</div>
+    <div class="bm-tracker-grid" id="bmTracker">
+      <div class="bm-tracker-card">
+        <div class="bm-tracker-name">01 &middot; Thrak'veth</div>
+        <div class="bm-slot-row">
+          <div class="bm-slot" onclick="toggleSlot(this)" data-bm="0" data-slot="0">&#9711;</div>
+          <span style="font-size:10px;font-style:italic;color:var(--text-faint-dm);margin-left:6px;">1 shot</span>
+        </div>
+      </div>
+      <div class="bm-tracker-card">
+        <div class="bm-tracker-name">02 &middot; Sylmara</div>
+        <div class="bm-slot-row">
+          <div class="bm-slot" onclick="toggleSlot(this)" data-bm="1" data-slot="0">&#9711;</div>
+          <span style="font-size:10px;font-style:italic;color:var(--text-faint-dm);margin-left:6px;">1 shot</span>
+        </div>
+      </div>
+      <div class="bm-tracker-card">
+        <div class="bm-tracker-name">03 &middot; Bryndis</div>
+        <div class="bm-slot-row">
+          <div class="bm-slot" onclick="toggleSlot(this)" data-bm="2" data-slot="0">&#9711;</div>
+          <span style="font-size:10px;font-style:italic;color:var(--text-faint-dm);margin-left:6px;">1 shot</span>
+        </div>
+      </div>
+      <div class="bm-tracker-card">
+        <div class="bm-tracker-name">04 &middot; Vel</div>
+        <div class="bm-slot-row">
+          <div class="bm-slot" onclick="toggleSlot(this)" data-bm="3" data-slot="0">&#9711;</div>
+          <span style="font-size:10px;font-style:italic;color:var(--text-faint-dm);margin-left:6px;">1 shot</span>
+        </div>
+      </div>
+      <div class="bm-tracker-card">
+        <div class="bm-tracker-name">05 &middot; Mira</div>
+        <div class="bm-slot-row">
+          <div class="bm-slot" onclick="toggleSlot(this)" data-bm="4" data-slot="0">&#9711;</div>
+          <span style="font-size:10px;font-style:italic;color:var(--text-faint-dm);margin-left:6px;">1 shot</span>
+        </div>
+      </div>
+      <div class="bm-tracker-card" style="border-color:#5a2a08;">
+        <div class="bm-tracker-name" style="color:var(--dragon-orange);">&#128009; Xal'ixx</div>
+        <div class="bm-slot-row">
+          <div class="bm-slot" onclick="toggleSlot(this)" data-bm="5" data-slot="0" style="border-color:#6b2a08;font-size:9px;">Mid</div>
+          <div class="bm-slot" onclick="toggleSlot(this)" data-bm="5" data-slot="1" style="border-color:#6b2a08;font-size:9px;">End</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SESSION NOTES -->
+  <div class="tools-section">
+    <div class="tools-title">&#128221; Campaign Log</div>
+    <div style="font-size:12px;font-style:italic;color:var(--text-faint-dm);margin-bottom:14px;line-height:1.5;">Shared campaign history &mdash; what actually happened each session. Export as JSON to back up or share with the party.</div>
+
+    <!-- NEW ENTRY FORM -->
+    <div style="background:rgba(0,0,0,0.3);border:1px solid var(--border-dm);padding:14px;margin-bottom:14px;">
+      <div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;color:var(--gold-bright);text-transform:uppercase;margin-bottom:12px;">+ New Session Entry</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div>
+          <div class="notes-meta" style="margin-bottom:4px;">Session #</div>
+          <input type="number" id="entrySession" class="mod-input" style="width:100%;font-size:16px;font-family:Cinzel,serif;" placeholder="1" min="1">
+        </div>
+        <div>
+          <div class="notes-meta" style="margin-bottom:4px;">Date</div>
+          <input type="text" id="entryDate" class="mod-input" style="width:100%;font-size:14px;font-family:IM Fell English,serif;" placeholder="Jun 1, 2026">
+        </div>
+      </div>
+
+      <div style="margin-bottom:8px;">
+        <div class="notes-meta" style="margin-bottom:4px;">Location / Scene</div>
+        <input type="text" id="entryLocation" class="mod-input" style="width:100%;font-size:15px;font-family:IM Fell English,serif;" placeholder="Where did the session take place?">
+      </div>
+
+      <div style="margin-bottom:8px;">
+        <div class="notes-meta" style="margin-bottom:4px;">Key Events</div>
+        <input type="text" id="entryEvent1" class="mod-input" style="width:100%;font-size:14px;font-family:IM Fell English,serif;margin-bottom:6px;" placeholder="Event 1">
+        <input type="text" id="entryEvent2" class="mod-input" style="width:100%;font-size:14px;font-family:IM Fell English,serif;margin-bottom:6px;" placeholder="Event 2">
+        <input type="text" id="entryEvent3" class="mod-input" style="width:100%;font-size:14px;font-family:IM Fell English,serif;" placeholder="Event 3">
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div>
+          <div class="notes-meta" style="margin-bottom:4px;">NPCs Met</div>
+          <textarea class="notes-textarea" id="entryNPCs" style="min-height:70px;font-size:14px;" placeholder="Name &mdash; who they are&#10;Name &mdash; who they are"></textarea>
+        </div>
+        <div>
+          <div class="notes-meta" style="margin-bottom:4px;">Loot / Rewards</div>
+          <textarea class="notes-textarea" id="entryLoot" style="min-height:70px;font-size:14px;" placeholder="Gold, items, XP..."></textarea>
+        </div>
+      </div>
+
+      <div style="margin-bottom:8px;">
+        <div class="notes-meta" style="margin-bottom:4px;">Next Session Hook</div>
+        <input type="text" id="entryHook" class="mod-input" style="width:100%;font-size:14px;font-family:IM Fell English,serif;" placeholder="What are you walking into next time?">
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <div class="notes-meta" style="margin-bottom:4px;">Free Notes</div>
+        <textarea class="notes-textarea" id="entryFree" style="min-height:80px;font-size:14px;" placeholder="Anything else worth remembering &mdash; quotes, decisions, funny moments..."></textarea>
+      </div>
+
+      <div class="notes-actions">
+        <button class="notes-btn save-btn" onclick="saveCampaignEntry()">+ Save Entry</button>
+        <button class="notes-btn" onclick="clearEntryForm()">Clear</button>
+      </div>
+      <div class="save-indicator" id="campaignSaveIndicator">&#10003; Entry Saved</div>
+    </div>
+
+    <!-- EXPORT / IMPORT -->
+    <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+      <button class="notes-btn" onclick="exportNotes()" style="border-color:var(--gold-bright);color:var(--gold-bright);flex:1;">&#11015; Export JSON</button>
+      <label class="notes-btn" style="flex:1;cursor:pointer;text-align:center;display:flex;align-items:center;justify-content:center;">
+        &#11014; Import JSON
+        <input type="file" id="importFile" accept=".json" onchange="importNotes(event)" style="display:none;">
+      </label>
+    </div>
+
+    <!-- LOG -->
+    <div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;color:var(--text-faint-dm);text-transform:uppercase;margin-bottom:8px;">Session Log</div>
+    <div class="session-log" id="campaignLog">
+      <div class="empty-log">No sessions logged yet.</div>
+    </div>
+  </div>
+
+  <!-- PERSONAL NOTES -->
+  <div class="tools-section" style="border-top-color:var(--astral-bright);">
+    <div class="tools-title" style="color:var(--astral-glow);">&#129504; Personal Notes</div>
+    <div style="font-size:12px;font-style:italic;color:var(--text-faint-dm);margin-bottom:10px;">Private to this device. Things only Gary's player tracks. Not exported with campaign log.</div>
+    <textarea
+      class="notes-textarea"
+      id="personalNoteInput"
+      placeholder="Private thoughts, suspicions, things you noticed that the party didn't..."
+      rows="5"
+      oninput="savePersonalNote()"
+    ></textarea>
+    <div class="save-indicator" id="personalSaveIndicator" style="opacity:0;">&#10003; Auto-saved</div>
+  </div>
+
+</div>
+</div><!-- /panel-tools -->
+
+<script>
+  // -- NAV --
+  function showPanel(name) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  // -- DICE --
+  const diceHistory = [];
+  const socialFlavors = {
+    catastrophe: ["The noble IS one of Gary's baby mamas. She is here officially. She has been here the whole time.", "She's been chairing this meeting for an hour. Gary didn't recognize her. She recognized him immediately."],
+    complicates: ["Gary is escorted out. The mission stalls. New approach required &mdash; the door isn't closed, just harder.", "The deal collapses. The noble is offended. Gary now has two problems where he had one.", "He's thrown out but the party still has access. Gary has to work around his own reputation. Again."],
+    survives: ["The deal wobbles but holds. Everyone in the room saw it. No one will forget. The party may not bring it up.", "Gary escapes with his dignity barely intact. The noble pretends it didn't happen. Gary pretends it didn't happen. It happened.", "Awkward. Survivable. A story the party will tell for years without Gary's permission."],
+    miraculous: ["The noble finds it hilarious. Gary looks like a legend. He takes full credit.", "Her arrival accidentally reveals information that shifts the political situation in the party's favor. Gary acts like he planned this.", "The noble is genuinely impressed by Gary's composure under impossible pressure. This is the version Gary tells."]
+  };
+  const surgeFlavors = [
+    "Fireball centered on yourself. Again.",
+    "Turn into a potted plant until next turn.",
+    "All creatures within 30ft teleport randomly.",
+    "Speak only in rhymes for 1 minute.",
+    "A single small boot appears in your hand. It is warm.",
+    "The smell of smoke and scales. Gone in a second.",
+    "Roll on the full Wild Magic Surge table (PHB p.104).",
+    "Nine baby mamas materialize. They are VERY upset.",
+    "A goat appears and stares at Gary with unusual intentionality."
+  ];
+
+  function rollDie(sides) {
+    const raw = Math.floor(Math.random() * sides) + 1;
+    const mod = parseInt(document.getElementById('modifier').value) || 0;
+    const total = Math.max(1, raw + mod);
+    const el = document.getElementById('resultNum');
+    const label = document.getElementById('resultLabel');
+    const flavor = document.getElementById('resultFlavor');
+
+    el.className = 'dice-result-num';
+    let flavorText = '';
+    if (sides === 20 && raw === 20) { el.classList.add('nat20'); flavorText = '&#10022; Natural 20 &mdash; Gary claims he planned this &#10022;'; }
+    else if (sides === 20 && raw === 1) { el.classList.add('nat1'); flavorText = '&#128128; Natural 1 &mdash; The Moradin Situation intensifies'; }
+    else if (mod !== 0) { el.classList.add('chaos'); }
+
+    el.textContent = total;
+    label.textContent = mod !== 0 ? `d${sides} (${raw}) ${mod >= 0 ? '+' : ''}${mod} = ${total}` : `d${sides}`;
+    flavor.textContent = flavorText;
+
+    // history
+    const entry = { die: `d${sides}`, raw, mod, total, time: new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) };
+    diceHistory.unshift(entry);
+    if (diceHistory.length > 20) diceHistory.pop();
+    renderHistory();
+
+    // haptic if available
+    if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(30);
+  }
+
+  function renderHistory() {
+    const el = document.getElementById('rollHistory');
+    if (!diceHistory.length) { el.innerHTML = '<div class="history-item" style="justify-content:center;font-style:italic;color:var(--text-faint-dm);">No rolls yet</div>'; return; }
+    el.innerHTML = diceHistory.map(r => `
+      <div class="history-item">
+        <span>${r.time} &middot; ${r.die}</span>
+        <span class="history-val">${r.total}${r.mod !== 0 ? ` <span style="font-size:10px;color:var(--text-faint-dm)">(raw ${r.raw})</span>` : ''}</span>
+      </div>`).join('');
+  }
+
+  function clearHistory() { diceHistory.length = 0; renderHistory(); document.getElementById('resultNum').textContent = '&mdash;'; document.getElementById('resultLabel').textContent = 'tap a die to roll'; document.getElementById('resultFlavor').textContent = ''; }
+
+  function rollSocial() {
+    const roll = Math.floor(Math.random() * 20) + 1;
+    const el = document.getElementById('socialResult');
+    let tag, cls, text;
+    if (roll <= 2) {
+      tag = `&#128128; CATASTROPHE (rolled ${roll})`;
+      cls = 'color:#e74c3c';
+      text = socialFlavors.catastrophe[Math.floor(Math.random() * socialFlavors.catastrophe.length)];
+    } else if (roll <= 10) {
+      tag = `&#10007; COMPLICATES (rolled ${roll})`;
+      cls = 'color:var(--dragon-orange)';
+      text = socialFlavors.complicates[Math.floor(Math.random() * socialFlavors.complicates.length)];
+    } else if (roll <= 17) {
+      tag = `~ SURVIVES AWKWARDLY (rolled ${roll})`;
+      cls = 'color:#b8b030';
+      text = socialFlavors.survives[Math.floor(Math.random() * socialFlavors.survives.length)];
+    } else {
+      tag = `&#10003; MIRACULOUS SAVE (rolled ${roll})`;
+      cls = 'color:#2ecc71';
+      text = socialFlavors.miraculous[Math.floor(Math.random() * socialFlavors.miraculous.length)];
+    }
+    el.innerHTML = `<span class="social-outcome-tag" style="${cls}">${tag}</span>${text}`;
+    el.style.borderLeftColor = roll <= 2 ? '#e74c3c' : roll <= 10 ? 'var(--dragon-orange)' : roll <= 17 ? '#b8b030' : '#2ecc71';
+    if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(roll === 1 || roll === 20 ? [50,30,50] : 30);
+  }
+
+  function rollSurge() {
+    const roll = Math.floor(Math.random() * 20) + 1;
+    const threshold = parseInt(document.getElementById('surgeThreshold').value);
+    const el = document.getElementById('surgeResult');
+    const surged = roll <= threshold;
+    const flavor = surged ? surgeFlavors[Math.floor(Math.random() * surgeFlavors.length)] : '';
+    el.innerHTML = surged
+      ? `<span class="social-outcome-tag" style="color:var(--astral-glow);">&#8767; SURGE TRIGGERED (rolled ${roll})</span>${flavor}`
+      : `<span class="social-outcome-tag" style="color:#2ecc71;">&#10003; No surge (rolled ${roll})</span>Safe. For now. The Moradin Situation is unrelated.`;
+    el.style.borderLeftColor = surged ? 'var(--astral-bright)' : '#2ecc71';
+    if (surged && window.navigator && window.navigator.vibrate) window.navigator.vibrate([40,20,40,20,40]);
+  }
+
+  // -- TRACKERS --
+  const state = { phases: [], slots: [[],[],[],[],[],[]] };
+
+  function loadState() {
+    try {
+      const saved = localStorage.getItem('gary-state');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        state.phases = parsed.phases || [];
+        // ensure 6 bm arrays
+        state.slots = [0,1,2,3,4,5].map(i => (parsed.slots && parsed.slots[i]) ? parsed.slots[i] : []);
+      }
+    } catch(e) {}
+    renderTrackers();
+  }
+
+  function renderTrackers() {
+    // phases
+    document.querySelectorAll('.phase-item').forEach((el, i) => {
+      const done = state.phases.includes(i);
+      el.classList.toggle('completed', done);
+      el.querySelector('.phase-check').textContent = done ? '&#10003;' : '';
+    });
+    // interactive bm slots (tools tab)
+    document.querySelectorAll('.bm-slot[data-bm]').forEach(el => {
+      const bm = parseInt(el.dataset.bm), slot = parseInt(el.dataset.slot);
+      const used = state.slots[bm] && state.slots[bm].includes(slot);
+      el.classList.toggle('used', used);
+      if (!el.classList.contains('sendoff')) {
+        el.textContent = used ? '&#10003;' : '&#9711;';
+      } else {
+        el.textContent = used ? '&#10003;' : '&#9733;';
+      }
+    });
+    syncDMSlots();
+    // DM companion static slots
+    [0,1,2,3,4].forEach(bm => {
+      const el = document.getElementById('dm-bm' + bm + '-0');
+      if (el) {
+        const used = state.slots[bm] && state.slots[bm].includes(0);
+        el.textContent = used ? '&#10003;' : '&#9711;';
+        el.style.borderColor = used ? '#e74c3c' : '';
+        el.style.color = used ? '#e74c3c' : '';
+        el.style.background = used ? 'rgba(192,57,43,0.1)' : '';
+      }
+    });
+    [0,1].forEach(slot => {
+      const el = document.getElementById('dm-bm5-' + slot);
+      if (el) {
+        const used = state.slots[5] && state.slots[5].includes(slot);
+        el.style.borderColor = used ? '#e67e22' : '#5a2a08';
+        el.style.color = used ? '#e67e22' : '';
+        el.style.background = used ? 'rgba(224,92,26,0.1)' : '';
+      }
+    });
+  }
+
+  function saveState() {
+    try { localStorage.setItem('gary-state', JSON.stringify(state)); } catch(e) {}
+  }
+
+  function togglePhase(el) {
+    const i = parseInt(el.dataset.phase);
+    const idx = state.phases.indexOf(i);
+    if (idx === -1) state.phases.push(i);
+    else state.phases.splice(idx, 1);
+    saveState();
+    renderTrackers();
+    if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(20);
+  }
+
+  function toggleSlot(el) {
+    const bm = parseInt(el.dataset.bm), slot = parseInt(el.dataset.slot);
+    if (!state.slots[bm]) state.slots[bm] = [];
+    const idx = state.slots[bm].indexOf(slot);
+    if (idx === -1) state.slots[bm].push(slot);
+    else state.slots[bm].splice(idx, 1);
+    saveState();
+    renderTrackers();
+    if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(20);
+  }
+
+  // -- CAMPAIGN LOG --
+  const CHARACTER_KEY = 'gary-wicksworth';
+
+  function loadNotes() {
+    try {
+      const entries = JSON.parse(localStorage.getItem(CHARACTER_KEY + '-campaign') || '[]');
+      renderCampaignLog(entries);
+    } catch(e) {}
+    try {
+      const personal = localStorage.getItem(CHARACTER_KEY + '-personal') || '';
+      document.getElementById('personalNoteInput').value = personal;
+    } catch(e) {}
+  }
+
+  function saveCampaignEntry() {
+    const session = document.getElementById('entrySession').value.trim();
+    const date = document.getElementById('entryDate').value.trim() || new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    const location = document.getElementById('entryLocation').value.trim();
+    const events = [
+      document.getElementById('entryEvent1').value.trim(),
+      document.getElementById('entryEvent2').value.trim(),
+      document.getElementById('entryEvent3').value.trim()
+    ].filter(Boolean);
+    const npcs = document.getElementById('entryNPCs').value.trim();
+    const loot = document.getElementById('entryLoot').value.trim();
+    const hook = document.getElementById('entryHook').value.trim();
+    const free = document.getElementById('entryFree').value.trim();
+
+    if (!session && !location && !events.length && !free) return;
+
+    try {
+      const entries = JSON.parse(localStorage.getItem(CHARACTER_KEY + '-campaign') || '[]');
+      entries.unshift({ session: session || entries.length + 1, date, location, events, npcs, loot, hook, free, saved: Date.now() });
+      localStorage.setItem(CHARACTER_KEY + '-campaign', JSON.stringify(entries));
+      renderCampaignLog(entries);
+      clearEntryForm();
+      const ind = document.getElementById('campaignSaveIndicator');
+      ind.style.opacity = 1;
+      setTimeout(() => ind.style.opacity = 0, 2000);
+    } catch(e) {}
+  }
+
+  function clearEntryForm() {
+    ['entrySession','entryDate','entryLocation','entryEvent1','entryEvent2','entryEvent3','entryNPCs','entryLoot','entryHook','entryFree'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+  }
+
+  function deleteCampaignEntry(i) {
+    try {
+      const entries = JSON.parse(localStorage.getItem(CHARACTER_KEY + '-campaign') || '[]');
+      entries.splice(i, 1);
+      localStorage.setItem(CHARACTER_KEY + '-campaign', JSON.stringify(entries));
+      renderCampaignLog(entries);
+    } catch(e) {}
+  }
+
+  function renderCampaignLog(entries) {
+    const el = document.getElementById('campaignLog');
+    if (!entries || !entries.length) { el.innerHTML = '<div class="empty-log">No sessions logged yet.</div>'; return; }
+    el.innerHTML = entries.map((e, i) => `
+      <div class="log-entry">
+        <button class="log-delete" onclick="deleteCampaignEntry(${i})">&#10005;</button>
+        <div class="log-entry-header">
+          <span class="log-session-tag">Session ${e.session}</span>
+          <span class="log-date">${e.date}</span>
+        </div>
+        ${e.location ? `<div style="font-family:Cinzel,serif;font-size:10px;letter-spacing:1px;color:var(--gold-bright);margin-bottom:6px;">&#128205; ${e.location.replace(/</g,'&lt;')}</div>` : ''}
+        ${e.events && e.events.length ? `<div style="margin-bottom:6px;">${e.events.map(ev => `<div style="font-size:12px;color:var(--text-dim-dm);padding:2px 0;">&middot; ${ev.replace(/</g,'&lt;')}</div>`).join('')}</div>` : ''}
+        ${e.npcs ? `<div style="margin-bottom:4px;"><span style="font-family:Cinzel,serif;font-size:8px;letter-spacing:2px;color:var(--text-faint-dm);">NPCS MET &middot; </span><span class="log-text">${e.npcs.replace(/</g,'&lt;').replace(/
+/g,'<br>')}</span></div>` : ''}
+        ${e.loot ? `<div style="margin-bottom:4px;"><span style="font-family:Cinzel,serif;font-size:8px;letter-spacing:2px;color:var(--text-faint-dm);">LOOT &middot; </span><span class="log-text">${e.loot.replace(/</g,'&lt;')}</span></div>` : ''}
+        ${e.hook ? `<div style="margin-bottom:4px;padding:6px 8px;border-left:2px solid var(--astral-bright);background:rgba(123,47,255,0.05);"><span style="font-family:Cinzel,serif;font-size:8px;letter-spacing:2px;color:var(--astral-glow);">NEXT &middot; </span><span class="log-text">${e.hook.replace(/</g,'&lt;')}</span></div>` : ''}
+        ${e.free ? `<div class="log-text" style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border-dm);">${e.free.replace(/</g,'&lt;').replace(/
+/g,'<br>')}</div>` : ''}
+      </div>`).join('');
+  }
+
+  let personalTimer;
+  function savePersonalNote() {
+    clearTimeout(personalTimer);
+    personalTimer = setTimeout(() => {
+      try {
+        localStorage.setItem(CHARACTER_KEY + '-personal', document.getElementById('personalNoteInput').value);
+        const ind = document.getElementById('personalSaveIndicator');
+        ind.style.opacity = 1;
+        setTimeout(() => ind.style.opacity = 0, 1500);
+      } catch(e) {}
+    }, 800);
+  }
+
+  function exportNotes() {
+    try {
+      const campaign = JSON.parse(localStorage.getItem(CHARACTER_KEY + '-campaign') || '[]');
+      const personal = localStorage.getItem(CHARACTER_KEY + '-personal') || '';
+      const trackerState = JSON.parse(localStorage.getItem('gary-state') || '{}');
+      const payload = { character: 'Gary Wicksworth III', exported: new Date().toISOString(), campaign, personal, trackerState };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'gary-wicksworth-notes.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch(e) { alert('Export failed: ' + e.message); }
+  }
+
+  function importNotes(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const payload = JSON.parse(e.target.result);
+        if (payload.campaign) {
+          localStorage.setItem(CHARACTER_KEY + '-campaign', JSON.stringify(payload.campaign));
+          renderCampaignLog(payload.campaign);
+        }
+        if (payload.personal) {
+          localStorage.setItem(CHARACTER_KEY + '-personal', payload.personal);
+          document.getElementById('personalNoteInput').value = payload.personal;
+        }
+        if (payload.trackerState) {
+          localStorage.setItem('gary-state', JSON.stringify(payload.trackerState));
+          Object.assign(state, payload.trackerState);
+          renderTrackers();
+        }
+        const ind = document.getElementById('campaignSaveIndicator');
+        ind.textContent = '&#10003; Imported';
+        ind.style.opacity = 1;
+        setTimeout(() => { ind.style.opacity = 0; ind.textContent = '&#10003; Entry Saved'; }, 2500);
+      } catch(err) { alert('Import failed &mdash; make sure this is a valid Gary Wicksworth export file.'); }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+  }
+
+  // -- INIT --
+  // -- DM SUB-TABS --
+  function showDMTab(name) {
+    document.querySelectorAll('.dm-subtab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.dm-subnav').forEach(b => b.classList.remove('active'));
+    document.getElementById('dmtab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // BM COMPACT TOGGLE
+  function toggleBM(el) {
+    el.classList.toggle('open');
+  }
+
+  // SLOT TOGGLE FOR DM TAB (syncs with main state)
+  function toggleSlot2(idx) {
+    // map: 0-4 = baby mamas, 5 = xal'ixx slot 0, 6 = xal'ixx slot 1
+    let bm, slot;
+    if (idx <= 4) { bm = idx; slot = 0; }
+    else { bm = 5; slot = idx - 5; }
+    if (!state.slots[bm]) state.slots[bm] = [];
+    const i = state.slots[bm].indexOf(slot);
+    if (i === -1) state.slots[bm].push(slot);
+    else state.slots[bm].splice(i, 1);
+    saveState();
+    renderTrackers();
+    syncDMSlots();
+    if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(20);
+  }
+
+  function syncDMSlots() {
+    // sync baby mama slots 0-4
+    for (let i = 0; i <= 4; i++) {
+      const el = document.getElementById('slot-' + i);
+      if (!el) continue;
+      const used = state.slots[i] && state.slots[i].includes(0);
+      el.classList.toggle('used', used);
+      el.textContent = used ? '&#10003;' : '&#9711;';
+    }
+    // xal'ixx slots 5 and 6
+    [5, 6].forEach(idx => {
+      const el = document.getElementById('slot-' + idx);
+      if (!el) continue;
+      const bm = 5, slot = idx - 5;
+      const used = state.slots[bm] && state.slots[bm].includes(slot);
+      el.classList.toggle('used', used);
+      el.classList.add('dragon-slot');
+      el.textContent = used ? '&#10003;' : '&#9711;';
+    });
+  }
+
+    document.addEventListener('DOMContentLoaded', () => { loadState(); loadNotes(); syncDMSlots(); /* auto-fill today's date */ const d = document.getElementById('entryDate'); if(d) d.value = new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); });
+</script>
+
+</body>
+</html>
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; ARC PANEL &mdash; CHAD & XAL'IXX &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
