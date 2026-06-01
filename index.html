@@ -316,6 +316,207 @@
     .hero-title { font-size: 22px; }
     .char-card { min-height: auto; }
   }
+
+  /* &#9552;&#9552; QUESTIONNAIRE &#9552;&#9552; */
+  .q-progress-bar {
+    height: 4px; background: var(--border);
+    margin-bottom: 24px; border-radius: 2px; overflow: hidden;
+  }
+  .q-progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
+    transition: width 0.4s ease; border-radius: 2px;
+  }
+  .q-step { display: none; animation: fadeIn 0.35s ease-out; }
+  .q-step.active { display: block; }
+
+  .q-step-label {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 6px;
+  }
+  .q-step-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 20px; font-weight: 700; color: var(--gold);
+    margin-bottom: 6px; line-height: 1.2;
+  }
+  .q-step-sub {
+    font-style: italic; font-size: 13px;
+    color: var(--text-dim); margin-bottom: 20px; line-height: 1.5;
+  }
+
+  .q-field { margin-bottom: 16px; }
+  .q-label {
+    font-family: 'Cinzel', serif; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim); display: block; margin-bottom: 6px;
+  }
+  .q-sublabel {
+    font-size: 11px; font-style: italic;
+    color: var(--text-faint); display: block;
+    margin-bottom: 6px; line-height: 1.4;
+  }
+  .q-input {
+    width: 100%; background: var(--surface2);
+    border: 1px solid var(--border); color: var(--text);
+    font-family: 'IM Fell English', serif;
+    font-size: 16px; padding: 11px 12px;
+    border-radius: 2px; -webkit-appearance: none; display: block;
+  }
+  .q-input:focus { outline: none; border-color: var(--gold); }
+  .q-textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
+  .q-select {
+    width: 100%; background: var(--surface2);
+    border: 1px solid var(--border); color: var(--text);
+    font-family: 'Cinzel', serif; font-size: 14px;
+    padding: 11px 12px; border-radius: 2px;
+    -webkit-appearance: none; display: block;
+  }
+  .q-select:focus { outline: none; border-color: var(--gold); }
+
+  .q-option-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .q-option {
+    padding: 10px 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim); font-size: 12px;
+    cursor: pointer; touch-action: manipulation;
+    transition: all 0.15s; line-height: 1.4;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+  }
+  .q-option:active, .q-option.selected {
+    border-color: var(--gold);
+    color: var(--gold); background: rgba(201,162,39,0.08);
+  }
+  .q-option .q-opt-label {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text-faint); display: block; margin-bottom: 3px;
+    font-style: normal;
+  }
+  .q-option.selected .q-opt-label { color: var(--gold-dim); }
+
+  .q-stat-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .q-stat-box { text-align: center; }
+  .q-stat-label {
+    font-family: 'Cinzel', serif; font-size: 8px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-faint); display: block; margin-bottom: 4px;
+  }
+  .q-stat-input {
+    width: 100%; background: var(--surface2);
+    border: 1px solid var(--border); color: var(--gold);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 22px; text-align: center;
+    padding: 10px 4px; border-radius: 2px;
+    -webkit-appearance: none;
+  }
+  .q-stat-input:focus { outline: none; border-color: var(--gold); }
+
+  .q-nav-row {
+    display: flex; gap: 10px; margin-top: 24px;
+    padding-top: 16px; border-top: 1px solid var(--border);
+  }
+  .q-back {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-faint); font-family: 'Cinzel', serif;
+    font-size: 10px; letter-spacing: 2px; padding: 12px 18px;
+    cursor: pointer; touch-action: manipulation;
+    text-transform: uppercase; min-height: 46px;
+  }
+  .q-back:active { border-color: var(--text-faint); }
+  .q-next {
+    flex: 1; background: var(--gold-dim);
+    border: none; color: #0a0604;
+    font-family: 'Cinzel', serif; font-size: 11px;
+    letter-spacing: 3px; padding: 14px;
+    cursor: pointer; touch-action: manipulation;
+    text-transform: uppercase; font-weight: 700;
+    min-height: 46px; transition: background 0.2s;
+  }
+  .q-next:active { background: var(--gold-bright); }
+
+  /* RESULT CARD */
+  .q-result {
+    display: none; background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-top: 3px solid var(--gold); padding: 20px;
+  }
+  .q-result.show { display: block; animation: fadeIn 0.4s ease-out; }
+  .q-result-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px; color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .q-result-sub {
+    font-style: italic; font-size: 12px;
+    color: var(--text-dim); margin-bottom: 16px;
+  }
+  .q-result-block {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    padding: 12px; margin-bottom: 10px;
+  }
+  .q-result-block-title {
+    font-family: 'Cinzel', serif; font-size: 9px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 8px;
+  }
+  .q-result-row {
+    display: flex; justify-content: space-between;
+    padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 12px; gap: 12px;
+  }
+  .q-result-key { color: var(--text-faint); flex-shrink: 0; }
+  .q-result-val { color: var(--text); text-align: right; font-style: italic; }
+  .q-copy-btn {
+    width: 100%; margin-top: 14px;
+    background: var(--gold-dim); border: none;
+    color: #0a0604; font-family: 'Cinzel', serif;
+    font-size: 10px; letter-spacing: 3px;
+    padding: 14px; cursor: pointer;
+    text-transform: uppercase; font-weight: 700;
+    min-height: 46px; touch-action: manipulation;
+  }
+  .q-copy-btn:active { background: var(--gold-bright); }
+  .q-restart-btn {
+    width: 100%; margin-top: 8px;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-faint); font-family: 'Cinzel', serif;
+    font-size: 10px; letter-spacing: 2px;
+    padding: 12px; cursor: pointer;
+    text-transform: uppercase; min-height: 42px;
+    touch-action: manipulation;
+  }
+  .q-result-json {
+    font-family: monospace; font-size: 11px;
+    background: rgba(0,0,0,0.5); border: 1px solid var(--border);
+    padding: 12px; color: var(--astral-glow);
+    white-space: pre-wrap; word-break: break-all;
+    max-height: 200px; overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 10px; display: none;
+  }
+  .q-show-json-btn {
+    width: 100%; margin-top: 8px;
+    background: transparent; border: 1px solid var(--astral);
+    color: var(--astral-glow); font-family: 'Cinzel', serif;
+    font-size: 9px; letter-spacing: 2px;
+    padding: 10px; cursor: pointer;
+    text-transform: uppercase; min-height: 38px;
+    touch-action: manipulation;
+  }
+  @media (max-width: 480px) {
+    .q-option-grid { grid-template-columns: 1fr; }
+    .q-stat-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
 </style>
 </head>
 <body>
@@ -633,6 +834,530 @@
     const d = document.getElementById('sh-date');
     if (d) d.value = new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
   });
+
+  // &#9552;&#9552; QUESTIONNAIRE &#9552;&#9552;
+  const TOTAL_STEPS = 8;
+  let currentStep = 1;
+
+  function qNext(step) {
+    document.getElementById('qStep' + step).classList.remove('active');
+    currentStep = step + 1;
+    document.getElementById('qStep' + currentStep).classList.add('active');
+    updateProgress();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  function qBack(step) {
+    document.getElementById('qStep' + step).classList.remove('active');
+    currentStep = step - 1;
+    document.getElementById('qStep' + currentStep).classList.add('active');
+    updateProgress();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  function updateProgress() {
+    const pct = Math.round((currentStep / (TOTAL_STEPS + 1)) * 100);
+    document.getElementById('qProgress').style.width = pct + '%';
+  }
+
+  function selectOpt(el, field) {
+    const parent = el.parentElement;
+    parent.querySelectorAll('.q-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById(field).value = el.querySelector('.q-opt-label').textContent + ' &#8212; ' + el.childNodes[el.childNodes.length - 1].textContent.trim();
+    if (navigator.vibrate) navigator.vibrate(15);
+  }
+
+  function toggleSpells(show) {
+    document.getElementById('q-spell-section').style.display = show ? 'block' : 'none';
+  }
+
+  function qSubmit() {
+    // Hide all steps
+    document.querySelectorAll('.q-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('qProgress').style.width = '100%';
+
+    const isCaster = document.getElementById('q-caster').value.startsWith('Yes');
+    const charName = document.getElementById('q-charname').value || 'Unknown';
+
+    const data = {
+      player: document.getElementById('q-player').value,
+      character: {
+        name: charName,
+        race: document.getElementById('q-race').value,
+        class: document.getElementById('q-class').value,
+        level: document.getElementById('q-level').value,
+        background: document.getElementById('q-bg').value,
+        alignment: document.getElementById('q-alignment').value,
+      },
+      appearance: {
+        description: document.getElementById('q-appearance').value,
+        memorable: document.getElementById('q-memorable').value,
+      },
+      personality: {
+        type: document.getElementById('q-personality').value,
+        notes: document.getElementById('q-personality-extra').value,
+      },
+      wants: document.getElementById('q-want').value,
+      fears: document.getElementById('q-fear').value,
+      backstory: {
+        why_adventuring: document.getElementById('q-why-adventuring').value,
+        why_group: document.getElementById('q-why-group').value,
+        defining_moment: document.getElementById('q-defining').value,
+      },
+      combat: {
+        ac: document.getElementById('q-ac').value,
+        hp: document.getElementById('q-hp').value,
+        speed: document.getElementById('q-speed').value,
+        initiative: document.getElementById('q-init').value,
+        passive_perception: document.getElementById('q-pp').value,
+        proficiency_bonus: document.getElementById('q-prof').value,
+      },
+      ability_scores: {
+        STR: document.getElementById('q-str').value,
+        DEX: document.getElementById('q-dex').value,
+        CON: document.getElementById('q-con').value,
+        INT: document.getElementById('q-int').value,
+        WIS: document.getElementById('q-wis').value,
+        CHA: document.getElementById('q-cha').value,
+      },
+      weapons: {
+        main: document.getElementById('q-weapon').value,
+        attack_bonus: document.getElementById('q-atk').value,
+        damage: document.getElementById('q-dmg').value,
+      },
+      magic: isCaster ? {
+        is_spellcaster: true,
+        spell_attack: document.getElementById('q-spell-atk').value,
+        spell_dc: document.getElementById('q-spell-dc').value,
+        cantrips: document.getElementById('q-cantrips').value,
+        spells: document.getElementById('q-spells').value,
+        spell_slots: document.getElementById('q-slots').value,
+      } : { is_spellcaster: false },
+      skills: document.getElementById('q-skills').value,
+      goal: document.getElementById('q-goal').value,
+      extra_notes: document.getElementById('q-extra').value,
+      submitted: new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}),
+    };
+
+    // Build readable result
+    const r = document.getElementById('qResult');
+    const content = document.getElementById('qResultContent');
+    document.getElementById('qResultName').textContent = charName;
+    document.getElementById('qResultJSON').textContent = JSON.stringify(data, null, 2);
+
+    const row = (k, v) => v ? `<div class="q-result-row"><span class="q-result-key">${k}</span><span class="q-result-val">${String(v).replace(/</g,'&lt;')}</span></div>` : '';
+    const block = (title, rows) => `<div class="q-result-block"><div class="q-result-block-title">${title}</div>${rows}</div>`;
+
+    content.innerHTML =
+      block('Identity', [
+        row('Player', data.player),
+        row('Character', data.character.name),
+        row('Race / Class', data.character.race + ' ' + data.character.class),
+        row('Level', data.character.level),
+        row('Background', data.character.background),
+        row('Alignment', data.character.alignment),
+      ].join('')) +
+      block('Appearance', [
+        row('Look', data.appearance.description),
+        row('Memorable', data.appearance.memorable),
+      ].join('')) +
+      block('Personality', [
+        row('Type', data.personality.type),
+        row('Notes', data.personality.notes),
+        row('Wants', data.wants),
+        row('Fears', data.fears),
+      ].join('')) +
+      block('Backstory', [
+        row('Why adventuring', data.backstory.why_adventuring),
+        row('Why group', data.backstory.why_group),
+        row('Defining moment', data.backstory.defining_moment),
+      ].join('')) +
+      block('Combat Stats', [
+        row('AC', data.combat.ac), row('HP', data.combat.hp),
+        row('Speed', data.combat.speed + 'ft'), row('Initiative', data.combat.initiative),
+        row('Passive Perception', data.combat.passive_perception),
+        row('Proficiency', data.combat.proficiency_bonus),
+      ].join('')) +
+      block('Ability Scores', Object.entries(data.ability_scores).map(([k,v]) => row(k, v)).join('')) +
+      block('Weapons', [
+        row('Main Weapon', data.weapons.main),
+        row('Attack Bonus', data.weapons.attack_bonus),
+        row('Damage', data.weapons.damage),
+      ].join('')) +
+      (isCaster ? block('Magic', [
+        row('Spell Attack', data.magic.spell_attack),
+        row('Spell Save DC', data.magic.spell_dc),
+        row('Cantrips', data.magic.cantrips),
+        row('Spells', data.magic.spells),
+        row('Spell Slots', data.magic.spell_slots),
+      ].join('')) : '') +
+      block('Skills & Goal', [
+        row('Best Skills', data.skills),
+        row('Character Goal', data.goal),
+        row('Extra Notes', data.extra_notes),
+      ].join(''));
+
+    r.classList.add('show');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+
+    // Save to localStorage as backup
+    try { localStorage.setItem('q-submission-' + charName.replace(/\s/g,'-'), JSON.stringify(data)); } catch(e) {}
+  }
+
+  function copyResult() {
+    const data = JSON.parse(document.getElementById('qResultJSON').textContent);
+    const lines = [
+      '=== CHARACTER SUBMISSION ===',
+      'Player: ' + data.player,
+      'Character: ' + data.character.name,
+      'Race/Class: ' + data.character.race + ' ' + data.character.class,
+      'Level: ' + data.character.level,
+      'Background: ' + data.character.background,
+      'Alignment: ' + data.character.alignment,
+      '',
+      '--- APPEARANCE ---',
+      data.appearance.description,
+      'Memorable: ' + data.appearance.memorable,
+      '',
+      '--- PERSONALITY ---',
+      data.personality.type,
+      data.personality.notes,
+      'Wants: ' + data.wants,
+      'Fears: ' + data.fears,
+      '',
+      '--- BACKSTORY ---',
+      'Why adventuring: ' + data.backstory.why_adventuring,
+      'Why group: ' + data.backstory.why_group,
+      'Defining moment: ' + data.backstory.defining_moment,
+      '',
+      '--- COMBAT ---',
+      'AC: ' + data.combat.ac + '  HP: ' + data.combat.hp + '  Speed: ' + data.combat.speed + 'ft',
+      'Initiative: ' + data.combat.initiative + '  Passive Perception: ' + data.combat.passive_perception,
+      'STR:' + data.ability_scores.STR + ' DEX:' + data.ability_scores.DEX + ' CON:' + data.ability_scores.CON + ' INT:' + data.ability_scores.INT + ' WIS:' + data.ability_scores.WIS + ' CHA:' + data.ability_scores.CHA,
+      'Weapon: ' + data.weapons.main + ' ' + data.weapons.attack_bonus + ' to hit, ' + data.weapons.damage,
+    ];
+    if (data.magic.is_spellcaster) {
+      lines.push('', '--- MAGIC ---', 'Spell Attack: ' + data.magic.spell_attack + '  DC: ' + data.magic.spell_dc, 'Slots: ' + data.magic.spell_slots, 'Cantrips:', data.magic.cantrips, 'Spells:', data.magic.spells);
+    }
+    lines.push('', '--- SKILLS & GOAL ---', data.skills, 'Goal: ' + data.goal);
+    if (data.extra_notes) lines.push('', 'Extra: ' + data.extra_notes);
+
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const btn = document.querySelector('.q-copy-btn');
+      btn.textContent = '&#10003; Copied!';
+      setTimeout(() => btn.innerHTML = '&#128203; Copy to Clipboard', 2000);
+    }).catch(() => alert('Copy failed &#8212; use the JSON button below and copy manually.'));
+  }
+
+  function toggleJSON() {
+    const el = document.getElementById('qResultJSON');
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function qRestart() {
+    document.querySelector('.q-result').classList.remove('show');
+    document.querySelectorAll('.q-step').forEach((s,i) => {
+      s.classList.remove('active');
+      if (i === 0) s.classList.add('active');
+    });
+    document.querySelectorAll('.q-input, .q-textarea, .q-select').forEach(el => el.value = '');
+    document.querySelectorAll('.q-option').forEach(el => el.classList.remove('selected'));
+    document.getElementById('q-spell-section').style.display = 'none';
+    document.getElementById('q-caster').value = 'No';
+    currentStep = 1;
+    updateProgress();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
 </script>
+
+<!-- ===== CHARACTER BUILDER PANEL ===== -->
+<div id="panel-onboard" class="panel">
+
+  <div class="section-block" style="padding:20px;">
+    <div class="section-title" style="margin-bottom:4px;">&#128203; Character Builder</div>
+    <div class="section-hint">Answer these questions and we&apos;ll build your character profile. Send the result to your DM and your sheet gets made for you.</div>
+
+    <!-- PROGRESS BAR -->
+    <div class="q-progress-bar"><div class="q-progress-fill" id="qProgress" style="width:12%;"></div></div>
+
+    <!-- STEP 1: WHO ARE YOU -->
+    <div class="q-step active" id="qStep1">
+      <div class="q-step-label">Step 1 of 8 &mdash; The Basics</div>
+      <div class="q-step-title">Let&apos;s start simple.</div>
+      <div class="q-step-sub">No wrong answers here. We just need to know who you&apos;re bringing to the table.</div>
+
+      <div class="q-field">
+        <label class="q-label">Your name (the player, not the character)</label>
+        <input class="q-input" id="q-player" type="text" placeholder="e.g. Jamie" autocomplete="off">
+      </div>
+      <div class="q-field">
+        <label class="q-label">Your character&apos;s name</label>
+        <span class="q-sublabel">Real name, alias, title &mdash; whatever they go by.</span>
+        <input class="q-input" id="q-charname" type="text" placeholder="e.g. Petra Stormhand" autocomplete="off">
+      </div>
+      <div class="q-field">
+        <label class="q-label">Race / Species</label>
+        <input class="q-input" id="q-race" type="text" placeholder="e.g. Human, Elf, Tiefling, Dragonborn..." autocomplete="off">
+      </div>
+      <div class="q-field">
+        <label class="q-label">Class</label>
+        <input class="q-input" id="q-class" type="text" placeholder="e.g. Paladin, Rogue, Wizard..." autocomplete="off">
+      </div>
+      <div class="q-field">
+        <label class="q-label">Level &amp; Background</label>
+        <div style="display:grid;grid-template-columns:1fr 2fr;gap:8px;">
+          <input class="q-input" id="q-level" type="number" placeholder="1" min="1" max="20">
+          <input class="q-input" id="q-bg" type="text" placeholder="e.g. Soldier, Criminal, Sage..." autocomplete="off">
+        </div>
+      </div>
+      <div class="q-field">
+        <label class="q-label">Alignment</label>
+        <span class="q-sublabel">If your group uses it. Skip if not.</span>
+        <select class="q-select" id="q-alignment">
+          <option value="">-- Skip / Not using alignment --</option>
+          <option>Lawful Good</option><option>Neutral Good</option><option>Chaotic Good</option>
+          <option>Lawful Neutral</option><option>True Neutral</option><option>Chaotic Neutral</option>
+          <option>Lawful Evil</option><option>Neutral Evil</option><option>Chaotic Evil</option>
+        </select>
+      </div>
+      <div class="q-nav-row">
+        <button class="q-next" onclick="qNext(1)">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: APPEARANCE -->
+    <div class="q-step" id="qStep2">
+      <div class="q-step-label">Step 2 of 8 &mdash; What You Look Like</div>
+      <div class="q-step-title">Paint the picture.</div>
+      <div class="q-step-sub">Someone spots your character across a crowded tavern. What do they see first?</div>
+
+      <div class="q-field">
+        <label class="q-label">Describe your character&apos;s appearance</label>
+        <span class="q-sublabel">Height, build, distinctive features, what they wear. Two or three sentences is plenty.</span>
+        <textarea class="q-input q-textarea" id="q-appearance" placeholder="e.g. Short and broad-shouldered, with a shaved head and a scar across her left eyebrow. Always wearing battered half-plate she clearly hasn&apos;t cleaned in a while. You notice her before you hear her."></textarea>
+      </div>
+      <div class="q-field">
+        <label class="q-label">One thing about their appearance that&apos;s memorable or unusual</label>
+        <span class="q-sublabel">The thing people notice second, after the obvious stuff.</span>
+        <input class="q-input" id="q-memorable" type="text" placeholder="e.g. Her eyes are two different colours. She always smells faintly of smoke." autocomplete="off">
+      </div>
+      <div class="q-nav-row">
+        <button class="q-back" onclick="qBack(2)">&#8592; Back</button>
+        <button class="q-next" onclick="qNext(2)">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: PERSONALITY -->
+    <div class="q-step" id="qStep3">
+      <div class="q-step-label">Step 3 of 8 &mdash; How You Act</div>
+      <div class="q-step-title">Who are they in a room?</div>
+      <div class="q-step-sub">Not their backstory yet &mdash; just the vibe. The thing people pick up on in the first five minutes.</div>
+
+      <div class="q-field">
+        <label class="q-label">Pick the closest match &mdash; how does your character generally act?</label>
+        <div class="q-option-grid" id="q-personality-opts">
+          <div class="q-option" onclick="selectOpt(this,&apos;q-personality&apos;)"><span class="q-opt-label">The Talker</span>Always has something to say. Probably already in a conversation you didn&apos;t start.</div>
+          <div class="q-option" onclick="selectOpt(this,&apos;q-personality&apos;)"><span class="q-opt-label">The Watcher</span>Quiet until they&apos;re not. Takes everything in before saying anything.</div>
+          <div class="q-option" onclick="selectOpt(this,&apos;q-personality&apos;)"><span class="q-opt-label">The Fixer</span>Sees a problem and immediately starts solving it. Sometimes before anyone asked.</div>
+          <div class="q-option" onclick="selectOpt(this,&apos;q-personality&apos;)"><span class="q-opt-label">The Spark</span>Chaotic energy. Things happen around them. Not always their fault. Usually a little their fault.</div>
+          <div class="q-option" onclick="selectOpt(this,&apos;q-personality&apos;)"><span class="q-opt-label">The Rock</span>The one everyone looks at when things go wrong. Steady. Dependable. Tired of being dependable.</div>
+          <div class="q-option" onclick="selectOpt(this,&apos;q-personality&apos;)"><span class="q-opt-label">The Wildcard</span>Nobody&apos;s sure what they&apos;ll do next. Including them.</div>
+        </div>
+        <input type="hidden" id="q-personality">
+      </div>
+      <div class="q-field">
+        <label class="q-label">In your own words &mdash; anything to add about how they act?</label>
+        <span class="q-sublabel">Optional. The option above is enough if you&apos;re happy with it.</span>
+        <textarea class="q-input q-textarea" id="q-personality-extra" placeholder="e.g. She&apos;s funny but doesn&apos;t realise it. She means everything completely seriously." style="min-height:60px;"></textarea>
+      </div>
+      <div class="q-nav-row">
+        <button class="q-back" onclick="qBack(3)">&#8592; Back</button>
+        <button class="q-next" onclick="qNext(3)">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: WANT & FEAR -->
+    <div class="q-step" id="qStep4">
+      <div class="q-step-label">Step 4 of 8 &mdash; Want &amp; Fear</div>
+      <div class="q-step-title">The real stuff.</div>
+      <div class="q-step-sub">Not what they&apos;d tell a stranger. What&apos;s actually driving them &mdash; and what keeps them up at night.</div>
+
+      <div class="q-field">
+        <label class="q-label">One thing your character wants</label>
+        <span class="q-sublabel">Could be a goal, a feeling, a person, a thing. The thing underneath all the other things.</span>
+        <textarea class="q-input q-textarea" id="q-want" placeholder="e.g. To prove to her father that she made the right choice leaving the order. &#10;e.g. Enough gold to never take orders from anyone again.&#10;e.g. Someone to actually see her, not just what she can do." style="min-height:80px;"></textarea>
+      </div>
+      <div class="q-field">
+        <label class="q-label">One thing your character fears</label>
+        <span class="q-sublabel">Bonus points if it&apos;s specific, weird, or embarrassing. The more real the better.</span>
+        <textarea class="q-input q-textarea" id="q-fear" placeholder="e.g. That she&apos;s exactly like her father and doesn&apos;t know it yet.&#10;e.g. Geese. Specifically geese. She won&apos;t explain.&#10;e.g. Silence. Real silence. It means something&apos;s wrong." style="min-height:80px;"></textarea>
+      </div>
+      <div class="q-nav-row">
+        <button class="q-back" onclick="qBack(4)">&#8592; Back</button>
+        <button class="q-next" onclick="qNext(4)">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 5: BACKSTORY -->
+    <div class="q-step" id="qStep5">
+      <div class="q-step-label">Step 5 of 8 &mdash; Your Story</div>
+      <div class="q-step-title">How did you get here?</div>
+      <div class="q-step-sub">We&apos;re not writing a novel. Just enough to understand who they are and why they showed up.</div>
+
+      <div class="q-field">
+        <label class="q-label">Why is your character adventuring?</label>
+        <span class="q-sublabel">The real reason &mdash; not just "seeking glory." What actually got them out the door?</span>
+        <textarea class="q-input q-textarea" id="q-why-adventuring" placeholder="e.g. She got kicked out of the Paladin order for &apos;unprofessional conduct&apos; (she punched a duke) and this was the only work available."></textarea>
+      </div>
+      <div class="q-field">
+        <label class="q-label">Why would they work with a group?</label>
+        <span class="q-sublabel">What&apos;s the reason they&apos;re not doing this alone?</span>
+        <textarea class="q-input q-textarea" id="q-why-group" placeholder="e.g. She can&apos;t afford not to. Also she hates eating alone and will never admit this."></textarea>
+      </div>
+      <div class="q-field">
+        <label class="q-label">One defining moment from their past</label>
+        <span class="q-sublabel">One thing that happened that made them who they are. Two sentences max.</span>
+        <textarea class="q-input q-textarea" id="q-defining" placeholder="e.g. She was the only survivor of a mission she led. She&apos;s never talked about what she did to survive it."></textarea>
+      </div>
+      <div class="q-nav-row">
+        <button class="q-back" onclick="qBack(5)">&#8592; Back</button>
+        <button class="q-next" onclick="qNext(5)">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 6: COMBAT NUMBERS -->
+    <div class="q-step" id="qStep6">
+      <div class="q-step-label">Step 6 of 8 &mdash; Your Numbers</div>
+      <div class="q-step-title">The stats. Almost done.</div>
+      <div class="q-step-sub">These are on your character sheet. Find them there &mdash; you don&apos;t need to know what they all mean yet.</div>
+
+      <div class="q-field">
+        <label class="q-label">Core Combat Stats</label>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px;">
+          <div class="q-stat-box"><span class="q-stat-label">AC</span><input class="q-input q-stat-input" id="q-ac" type="number" placeholder="13"></div>
+          <div class="q-stat-box"><span class="q-stat-label">Hit Points</span><input class="q-input q-stat-input" id="q-hp" type="number" placeholder="10"></div>
+          <div class="q-stat-box"><span class="q-stat-label">Speed (ft)</span><input class="q-input q-stat-input" id="q-speed" type="number" placeholder="30"></div>
+          <div class="q-stat-box"><span class="q-stat-label">Initiative</span><input class="q-input q-stat-input" id="q-init" type="text" placeholder="+2"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">
+          <div class="q-stat-box"><span class="q-stat-label">Passive Perception</span><input class="q-input q-stat-input" id="q-pp" type="number" placeholder="12"></div>
+          <div class="q-stat-box"><span class="q-stat-label">Proficiency Bonus</span><input class="q-input q-stat-input" id="q-prof" type="text" placeholder="+2"></div>
+        </div>
+      </div>
+
+      <div class="q-field">
+        <label class="q-label">Ability Scores</label>
+        <div class="q-stat-grid">
+          <div class="q-stat-box"><span class="q-stat-label">STR</span><input class="q-input q-stat-input" id="q-str" type="number" placeholder="10"></div>
+          <div class="q-stat-box"><span class="q-stat-label">DEX</span><input class="q-input q-stat-input" id="q-dex" type="number" placeholder="10"></div>
+          <div class="q-stat-box"><span class="q-stat-label">CON</span><input class="q-input q-stat-input" id="q-con" type="number" placeholder="10"></div>
+          <div class="q-stat-box"><span class="q-stat-label">INT</span><input class="q-input q-stat-input" id="q-int" type="number" placeholder="10"></div>
+          <div class="q-stat-box"><span class="q-stat-label">WIS</span><input class="q-input q-stat-input" id="q-wis" type="number" placeholder="10"></div>
+          <div class="q-stat-box"><span class="q-stat-label">CHA</span><input class="q-input q-stat-input" id="q-cha" type="number" placeholder="10"></div>
+        </div>
+      </div>
+      <div class="q-nav-row">
+        <button class="q-back" onclick="qBack(6)">&#8592; Back</button>
+        <button class="q-next" onclick="qNext(6)">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 7: WEAPONS & SPELLS -->
+    <div class="q-step" id="qStep7">
+      <div class="q-step-label">Step 7 of 8 &mdash; Weapons &amp; Magic</div>
+      <div class="q-step-title">What do you do in a fight?</div>
+      <div class="q-step-sub">Main weapon first, then spells if you have them. If you&apos;re not a spellcaster, skip the magic section.</div>
+
+      <div class="q-field">
+        <label class="q-label">Main Weapon</label>
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;">
+          <div><span class="q-stat-label" style="font-size:8px;letter-spacing:1px;">Weapon Name</span><input class="q-input" id="q-weapon" type="text" placeholder="e.g. Longsword"></div>
+          <div><span class="q-stat-label" style="font-size:8px;letter-spacing:1px;">Attack Bonus</span><input class="q-input q-stat-input" id="q-atk" type="text" placeholder="+4"></div>
+          <div><span class="q-stat-label" style="font-size:8px;letter-spacing:1px;">Damage</span><input class="q-input q-stat-input" id="q-dmg" type="text" placeholder="1d8+2"></div>
+        </div>
+      </div>
+      <div class="q-field">
+        <label class="q-label">Are you a spellcaster?</label>
+        <div class="q-option-grid" id="q-caster-opts">
+          <div class="q-option selected" onclick="selectOpt(this,&apos;q-caster&apos;);toggleSpells(false)"><span class="q-opt-label">No</span>I hit things. Sometimes with a lot of force.</div>
+          <div class="q-option" onclick="selectOpt(this,&apos;q-caster&apos;);toggleSpells(true)"><span class="q-opt-label">Yes</span>I have spells, spell slots, and opinions about concentration.</div>
+        </div>
+        <input type="hidden" id="q-caster" value="No">
+      </div>
+
+      <div id="q-spell-section" style="display:none;">
+        <div class="q-field">
+          <label class="q-label">Spell Attack Bonus &amp; Save DC</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div><span class="q-stat-label" style="font-size:8px;">Spell Attack</span><input class="q-input q-stat-input" id="q-spell-atk" type="text" placeholder="+5"></div>
+            <div><span class="q-stat-label" style="font-size:8px;">Spell Save DC</span><input class="q-input q-stat-input" id="q-spell-dc" type="text" placeholder="13"></div>
+          </div>
+        </div>
+        <div class="q-field">
+          <label class="q-label">Cantrips (always available, no slots)</label>
+          <span class="q-sublabel">List each one and what it does in one sentence.</span>
+          <textarea class="q-input q-textarea" id="q-cantrips" placeholder="Fire Bolt &mdash; Ranged fire damage&#10;Minor Illusion &mdash; Create a sound or image&#10;Prestidigitation &mdash; Small magical tricks"></textarea>
+        </div>
+        <div class="q-field">
+          <label class="q-label">Known / Prepared Spells</label>
+          <span class="q-sublabel">List each spell, its level, and what it does in one sentence.</span>
+          <textarea class="q-input q-textarea" id="q-spells" placeholder="Shield (1st) &mdash; +5 AC as a reaction&#10;Thunderwave (1st) &mdash; Push enemies away in a cone&#10;Misty Step (2nd) &mdash; Teleport 30ft as bonus action" style="min-height:100px;"></textarea>
+        </div>
+        <div class="q-field">
+          <label class="q-label">Spell Slots</label>
+          <span class="q-sublabel">How many per level? e.g. &ldquo;2x Level 1, 1x Level 2&rdquo;</span>
+          <input class="q-input" id="q-slots" type="text" placeholder="e.g. 2x Level 1">
+        </div>
+      </div>
+
+      <div class="q-nav-row">
+        <button class="q-back" onclick="qBack(7)">&#8592; Back</button>
+        <button class="q-next" onclick="qNext(7)">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 8: BEST SKILLS & GOAL -->
+    <div class="q-step" id="qStep8">
+      <div class="q-step-label">Step 8 of 8 &mdash; Almost There</div>
+      <div class="q-step-title">Last few things.</div>
+      <div class="q-step-sub">What your character is actually good at &mdash; and one sentence that sums up what they&apos;re after.</div>
+
+      <div class="q-field">
+        <label class="q-label">Your best skills &amp; bonuses</label>
+        <span class="q-sublabel">The ones you&apos;re proficient in that you&apos;d actually use. List up to 6.</span>
+        <textarea class="q-input q-textarea" id="q-skills" placeholder="Persuasion +5&#10;Athletics +4&#10;Perception +3&#10;Stealth +3"></textarea>
+      </div>
+      <div class="q-field">
+        <label class="q-label">Character goal &mdash; one sentence</label>
+        <span class="q-sublabel">Not their whole arc. Just the thing they&apos;re working toward right now.</span>
+        <input class="q-input" id="q-goal" type="text" placeholder="e.g. Find the person who burned down her village and have a conversation about it." autocomplete="off">
+      </div>
+      <div class="q-field">
+        <label class="q-label">Anything else your DM should know?</label>
+        <span class="q-sublabel">Optional. Quirks, connections, secrets, things you want to play out.</span>
+        <textarea class="q-input q-textarea" id="q-extra" placeholder="Optional &mdash; whatever feels important." style="min-height:60px;"></textarea>
+      </div>
+      <div class="q-nav-row">
+        <button class="q-back" onclick="qBack(8)">&#8592; Back</button>
+        <button class="q-next" onclick="qSubmit()" style="background:var(--gold-bright);">Generate My Sheet &#10003;</button>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="q-result" id="qResult">
+      <div class="q-result-title" id="qResultName">Character Profile</div>
+      <div class="q-result-sub">Send this to your DM &mdash; they&apos;ll build your character sheet from this.</div>
+      <div id="qResultContent"></div>
+      <button class="q-copy-btn" onclick="copyResult()">&#128203; Copy to Clipboard</button>
+      <button class="q-show-json-btn" onclick="toggleJSON()">&#123; &#125; Show Raw JSON</button>
+      <pre class="q-result-json" id="qResultJSON"></pre>
+      <button class="q-restart-btn" onclick="qRestart()">&#8635; Start Over (New Character)</button>
+    </div>
+
+  </div><!-- /section-block -->
+</div><!-- /panel-onboard -->
+
 </body>
 </html>
