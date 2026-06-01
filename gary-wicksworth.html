@@ -884,10 +884,10 @@
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-title">Gary Dicksworth III</div>
-  <button class="nav-btn active" onclick="showPanel('player')">&#9876; Player Sheet</button>
-  <button class="nav-btn dm-btn" onclick="showPanel('dm')">&#127922; DM Companion</button>
-  <button class="nav-btn dm-btn" onclick="showPanel('arc')">&#128009; Chad &amp; Xal'ixx Arc</button>
-  <button class="nav-btn" onclick="showPanel('tools')">&#127922; Dice &amp; Notes</button>
+  <button class="nav-btn active" onclick="showPanel(event,'player')">&#9876; Player Sheet</button>
+  <button class="nav-btn dm-btn" onclick="showPanel(event,'dm')">&#127922; DM Companion</button>
+  <button class="nav-btn dm-btn" onclick="showPanel(event,'arc')">&#128009; Chad &amp; Xal'ixx Arc</button>
+  <button class="nav-btn" onclick="showPanel(event,'tools')">&#127922; Dice &amp; Notes</button>
 </nav>
 
 <!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; PLAYER PANEL &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
@@ -1181,9 +1181,9 @@
 
   <!-- DM SUB-NAV -->
   <div style="display:flex;gap:0;border-bottom:1px solid var(--border-dm);margin-bottom:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
-    <button class="dm-subnav active" onclick="showDMTab('rules')">&#9878; Rules</button>
-    <button class="dm-subnav" onclick="showDMTab('mamas')">&#128081; Baby Mamas</button>
-    <button class="dm-subnav" onclick="showDMTab('chad')">&#128009; Chad & Xal'ixx</button>
+    <button class="dm-subnav active" onclick="showDMTab(event,'rules')">&#9878; Rules</button>
+    <button class="dm-subnav" onclick="showDMTab(event,'mamas')">&#128081; Baby Mamas</button>
+    <button class="dm-subnav" onclick="showDMTab(event,'chad')">&#128009; Chad & Xal'ixx</button>
   </div>
 
   <!-- -- RULES SUB-TAB -- -->
@@ -1931,11 +1931,12 @@
 
 <script>
   // -- NAV --
-  function showPanel(name) {
+  function showPanel(evt, name) {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('panel-' + name).classList.add('active');
-    event.target.classList.add('active');
+    var btn = evt && evt.currentTarget ? evt.currentTarget : evt && evt.target ? evt.target : null;
+    if (btn) btn.classList.add('active');
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
 
@@ -2260,11 +2261,12 @@
 
   // -- INIT --
   // -- DM SUB-TABS --
-  function showDMTab(name) {
+  function showDMTab(evt, name) {
     document.querySelectorAll('.dm-subtab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.dm-subnav').forEach(b => b.classList.remove('active'));
     document.getElementById('dmtab-' + name).classList.add('active');
-    event.target.classList.add('active');
+    var btn = evt && evt.currentTarget ? evt.currentTarget : evt && evt.target ? evt.target : null;
+    if (btn) btn.classList.add('active');
   }
 
   // BM COMPACT TOGGLE
