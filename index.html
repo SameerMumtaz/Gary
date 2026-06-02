@@ -531,9 +531,10 @@
 
 <!-- NAV -->
 <nav class="nav">
-  <button class="nav-btn active" onclick="showPanel('party')">&#9876; The Party</button>
-  <button class="nav-btn" onclick="showPanel('log')">&#128220; Campaign Log</button>
-  <button class="nav-btn" onclick="showPanel('add')">&#128736; Add Character</button>
+  <button class="nav-btn active" onclick="showPanel(event,'party')">&#9876; The Party</button>
+  <button class="nav-btn" onclick="showPanel(event,'log')">&#128220; Campaign Log</button>
+  <button class="nav-btn" onclick="showPanel(event,'add')">&#128736; Add Character</button>
+  <button class="nav-btn" onclick="showPanel(event,'onboard')">&#128203; Character Builder</button>
 </nav>
 
 <!-- ==== PARTY TAB ==== -->
@@ -587,7 +588,18 @@
 
   <div class="section-block">
     <div class="section-title">&#128220; Shared Campaign Log</div>
-    <div class="section-hint">The objective record &mdash; what actually happened each session. Export as JSON and share with the party to sync across devices.</div>
+    <div class="section-hint">The shared party record. Add entries manually or import a player&apos;s session export directly.</div>
+
+    <!-- PLAYER SUBMISSIONS -->
+    <div style="background:rgba(0,0,0,0.25);border:1px solid var(--border);padding:14px;margin-bottom:14px;">
+      <div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;">&#128228; Import Player Session</div>
+      <div style="font-size:12px;font-style:italic;color:var(--text-faint);margin-bottom:10px;line-height:1.5;">When a player exports their session from their character sheet, import it here. Their party notes and summary get added to the shared log.</div>
+      <label class="btn" style="cursor:pointer;text-align:center;display:flex;align-items:center;justify-content:center;width:100%;border-color:var(--gold-bright);color:var(--gold-bright);">
+        &#128228; Import Player Session File
+        <input type="file" id="playerImportFile" accept=".json" onchange="importPlayerSession(event)" style="display:none;">
+      </label>
+      <div class="flash" id="importFlash" style="margin-top:6px;">&#10003; Imported</div>
+    </div>
 
     <div class="entry-form">
       <div class="form-title">+ New Session Entry</div>
@@ -724,11 +736,12 @@
 
 <script>
   // -- NAV --
-  function showPanel(name) {
+  function showPanel(evt, name) {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('panel-' + name).classList.add('active');
-    event.target.classList.add('active');
+    var btn = evt && evt.currentTarget ? evt.currentTarget : evt && evt.target ? evt.target : null;
+    if (btn) btn.classList.add('active');
     window.scrollTo({top: 56, behavior: 'smooth'});
   }
 
@@ -784,6 +797,7 @@
           <span class="log-session">Session ${e.session}</span>
           <span class="log-date">${e.date}</span>
         </div>
+        ${e.submittedBy ? `<div style="font-family:Cinzel,serif;font-size:8px;letter-spacing:1px;color:var(--text-faint);text-transform:uppercase;margin-bottom:4px;">&#128228; Submitted by ${esc(e.submittedBy)}</div>` : ''}
         ${e.location ? `<div class="log-location">&#128205; ${esc(e.location)}</div>` : ''}
         ${e.events && e.events.length ? `<div class="log-events">${e.events.map(ev=>`<div class="log-event">&middot; ${esc(ev)}</div>`).join('')}</div>` : ''}
         ${e.npcs ? `<div style="margin-bottom:4px;"><span class="log-meta-label">NPCs &middot; </span><span class="log-text">${esc(e.npcs).replace(/\n/g,'<br>')}</span></div>` : ''}
@@ -829,8 +843,56 @@
   }
 
   // -- INIT --
+  function importPlayerSession(event) {
+    var file = event.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        var payload = JSON.parse(e.target.result);
+        if (payload.type !== 'player-session') {
+          alert('This doesn\'t look like a player session file. Use the campaign log import for campaign JSON files.');
+          return;
+        }
+        var entries = getEntries();
+        var s = payload.summary || {};
+        var partyNotes = (payload.partyNotes || []).map(function(n) { return n.text; }).join('\n');
+        var gameState = payload.gameState || {};
+        var freeText = '';
+        if (partyNotes) freeText += 'Notes from ' + payload.character + ':\n' + partyNotes;
+        if (gameState.hp !== undefined) freeText += (freeText ? '\n' : '') + 'End state: ' + gameState.hp + '/' + gameState.maxHp + ' HP' + (gameState.conditions && gameState.conditions.length ? ', Conditions: ' + gameState.conditions.join(', ') : '');
+
+        var entry = {
+          session: s.session || '?',
+          date: s.date || new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+          location: s.location || '',
+          events: s.events || [],
+          npcs: s.npcs || '',
+          loot: s.loot || '',
+          hook: s.hook || '',
+          free: freeText,
+          submittedBy: payload.player + ' (' + payload.character + ')',
+          ts: Date.now()
+        };
+        entries.unshift(entry);
+        localStorage.setItem(LOG_KEY, JSON.stringify(entries));
+        renderLog(entries);
+        var f = document.getElementById('importFlash');
+        f.innerHTML = '&#10003; ' + payload.character + '\'s session imported';
+        f.style.opacity = 1;
+        setTimeout(function() { f.style.opacity = 0; }, 3000);
+        if (navigator.vibrate) navigator.vibrate([20,10,20]);
+      } catch(err) {
+        alert('Import failed. Make sure this is a player session export file.');
+      }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     renderLog(getEntries());
+    renderPendingCards();
     const d = document.getElementById('sh-date');
     if (d) d.value = new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
   });
@@ -1003,6 +1065,10 @@
 
     // Save to localStorage as backup
     try { localStorage.setItem('q-submission-' + charName.replace(/\s/g,'-'), JSON.stringify(data)); } catch(e) {}
+
+    // Generate character sheet file + placeholder card
+    downloadCharacterSheet(data);
+    addPlaceholderCard(data);
   }
 
   function copyResult() {
@@ -1068,6 +1134,337 @@
     currentStep = 1;
     updateProgress();
     window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+
+  // &#9552;&#9552; CHARACTER SHEET GENERATOR &#9552;&#9552;
+  function generateCharacterSheet(data) {
+    var c = data.character;
+    var mod = function(score) {
+      var m = Math.floor((parseInt(score) - 10) / 2);
+      return (m >= 0 ? '+' : '') + m;
+    };
+    var esc = function(s) {
+      if (!s) return '';
+      return String(s).split('&').join('&amp;').split('<').join('&lt;').split('>').join('&gt;');
+    };
+    var key = (c.name || 'character').toLowerCase().replace(/[^a-z0-9]/g, '-');
+    var spellSection = data.magic && data.magic.is_spellcaster ? [
+      '<div class="p-section" style="margin-bottom:20px;">',
+      '<div class="p-section-title">&#10022; Spells</div>',
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">',
+      '<div style="text-align:center;border:2px solid var(--astral-bright);padding:8px;background:rgba(123,47,255,0.05);">',
+      '<span style="font-family:Cinzel Decorative,serif;font-size:22px;color:var(--astral);">' + esc(data.magic.spell_attack) + '</span>',
+      '<span style="font-family:Cinzel,serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faded);display:block;">Spell Attack</span>',
+      '</div>',
+      '<div style="text-align:center;border:2px solid var(--astral-bright);padding:8px;background:rgba(123,47,255,0.05);">',
+      '<span style="font-family:Cinzel Decorative,serif;font-size:22px;color:var(--astral);">DC ' + esc(data.magic.spell_dc) + '</span>',
+      '<span style="font-family:Cinzel,serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faded);display:block;">Spell Save</span>',
+      '</div></div>',
+      data.magic.cantrips ? '<div style="margin-bottom:8px;"><div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Cantrips</div><div style="font-style:italic;font-size:13px;color:var(--ink-faded);line-height:1.7;white-space:pre-wrap;">' + esc(data.magic.cantrips) + '</div></div>' : '',
+      data.magic.spells ? '<div style="margin-bottom:8px;"><div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Spells</div><div style="font-style:italic;font-size:13px;color:var(--ink-faded);line-height:1.7;white-space:pre-wrap;">' + esc(data.magic.spells) + '</div></div>' : '',
+      data.magic.spell_slots ? '<div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint-dm);margin-top:4px;">Slots: ' + esc(data.magic.spell_slots) + '</div>' : '',
+      '</div>'
+    ].join('') : '';
+
+    var scores = data.ability_scores || {};
+    var html = '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">\n<title>' + esc(c.name) + ' &mdash; Character Sheet</title>\n' +
+    '<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">\n' +
+    '<style>\n' +
+    ':root{--parchment:#f4e8c1;--parchment-aged:#d4b896;--ink:#1a0f0a;--ink-faded:#3d2b1f;--astral:#4a0e8f;--astral-bright:#7b2fff;--astral-glow:#a855f7;--gold:#b8860b;--gold-bright:#d4a017;--red-ink:#8b1a1a;--surface-dm:#1a1208;--surface2-dm:#221a0a;--border-dm:#4a3510;--border-bright-dm:#8b6914;--text-dm:#e8d5a3;--text-dim-dm:#a08c5a;--text-faint-dm:#6b5a35;--green-bright:#2ecc71;--dragon-orange:#e67e22;}\n' +
+    '*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}\n' +
+    'body{background:#0d0208;font-family:"IM Fell English",serif;color:var(--ink);min-height:100vh;padding:0;}\n' +
+    '.nav{position:sticky;top:0;z-index:100;background:#0a0604;border-bottom:2px solid var(--gold);display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}\n' +
+    '.nav::-webkit-scrollbar{display:none;}\n' +
+    '.nav-btn{font-family:"Cinzel",serif;font-size:10px;letter-spacing:2px;padding:13px 16px;border:none;border-bottom:3px solid transparent;color:#6b5a35;background:transparent;cursor:pointer;white-space:nowrap;text-transform:uppercase;touch-action:manipulation;min-height:46px;flex-shrink:0;transition:all 0.2s;}\n' +
+    '.nav-btn.active,.nav-btn:active{color:var(--gold-bright);border-bottom-color:var(--gold-bright);}\n' +
+    '.panel{display:none;}\n' +
+    '.panel.active{display:block;animation:fadeIn 0.35s ease-out;}\n' +
+    '@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}\n' +
+    '.parchment-page{max-width:900px;margin:0 auto;background:var(--parchment);background-image:linear-gradient(135deg,#f9f0d8 0%,#f4e8c1 30%,#ead5a0 70%,#e0c88a 100%);padding:28px 20px 40px;box-shadow:0 0 0 2px var(--parchment-aged),0 0 0 4px #8b1a0b,0 20px 80px rgba(0,0,0,0.8);}\n' +
+    '.char-name{font-family:"Cinzel Decorative",serif;font-size:clamp(20px,5vw,32px);font-weight:900;color:var(--ink);line-height:1.1;text-shadow:2px 2px 0 rgba(180,140,80,0.4);margin-bottom:4px;}\n' +
+    '.char-sub{font-style:italic;font-size:13px;color:var(--ink-faded);margin-bottom:12px;}\n' +
+    '.identity-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}\n' +
+    '.identity-pill{background:var(--ink);color:var(--parchment);font-family:"Cinzel",serif;font-size:9px;letter-spacing:2px;padding:4px 12px;clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%);}\n' +
+    '.p-section{border:1px solid var(--parchment-aged);border-top:3px solid var(--gold);padding:14px;background:rgba(255,255,255,0.15);margin-bottom:16px;}\n' +
+    '.p-section-title{font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:700;}\n' +
+    '.stat-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}\n' +
+    '.stat-bubble{flex:1;min-width:70px;text-align:center;border:2px solid var(--gold);padding:8px 6px;background:rgba(255,255,255,0.2);}\n' +
+    '.stat-bubble .val{font-family:"Cinzel Decorative",serif;font-size:22px;font-weight:700;color:var(--ink);line-height:1;display:block;}\n' +
+    '.stat-bubble .lbl{font-family:"Cinzel",serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faded);margin-top:3px;display:block;}\n' +
+    '.abilities{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}\n' +
+    '.ability{flex:1;min-width:60px;text-align:center;border:2px solid var(--parchment-aged);padding:8px 4px 6px;background:rgba(255,255,255,0.1);}\n' +
+    '.ability-name{font-family:"Cinzel",serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:3px;}\n' +
+    '.ability-score{font-family:"Cinzel Decorative",serif;font-size:20px;font-weight:700;display:block;line-height:1;}\n' +
+    '.ability-mod{font-family:"Cinzel",serif;font-size:12px;font-weight:600;color:var(--astral);display:block;border-top:1px solid var(--parchment-aged);margin-top:3px;padding-top:3px;}\n' +
+    '.prose{font-style:italic;font-size:14px;line-height:1.8;color:var(--ink-faded);}\n' +
+    '.prose strong{color:var(--ink);font-style:normal;font-family:"Cinzel",serif;font-size:11px;letter-spacing:1px;}\n' +
+    '.trait-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}\n' +
+    '.trait-box{padding:10px;border:1px solid var(--parchment-aged);background:rgba(255,255,255,0.1);}\n' +
+    '.trait-label{font-family:"Cinzel",serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:5px;}\n' +
+    '.trait-text{font-style:italic;font-size:13px;line-height:1.5;color:var(--ink-faded);}\n' +
+    '.quick-ref{background:var(--ink);color:var(--parchment);padding:18px;margin-top:8px;}\n' +
+    '.qr-title{font-family:"Cinzel Decorative",serif;font-size:11px;letter-spacing:4px;color:var(--gold-bright);margin-bottom:12px;text-align:center;}\n' +
+    '.qr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}\n' +
+    '.qr-item{text-align:center;}\n' +
+    '.qr-val{font-family:"Cinzel Decorative",serif;font-size:20px;color:var(--astral-glow);display:block;line-height:1;}\n' +
+    '.qr-lbl{font-family:"Cinzel",serif;font-size:8px;letter-spacing:1px;color:#a08c5a;display:block;margin-top:2px;}\n' +
+    '.skills-block{font-size:13px;color:var(--ink-faded);font-style:italic;line-height:2;white-space:pre-wrap;}\n' +
+    /* Play tab styles */
+    '.dm-page{max-width:900px;margin:0 auto;padding:16px 14px 60px;color:var(--text-dm);}\n' +
+    '.play-section{background:var(--surface-dm);border:1px solid var(--border-dm);border-top:3px solid var(--gold-bright);padding:16px;margin-bottom:14px;}\n' +
+    '.play-section.red-top{border-top-color:#e74c3c;}\n' +
+    '.play-section.astral-top{border-top-color:var(--astral-bright);}\n' +
+    '.play-section.green-top{border-top-color:var(--green-bright);}\n' +
+    '.play-title{font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-bright);margin-bottom:12px;font-weight:700;}\n' +
+    '.play-title.red{color:#e74c3c;}\n' +
+    '.play-title.astral{color:var(--astral-glow);}\n' +
+    '.play-title.green{color:var(--green-bright);}\n' +
+    '.hp-display{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:10px;}\n' +
+    '.hp-btn{width:54px;height:54px;border:2px solid var(--border-dm);background:var(--surface2-dm);color:var(--text-dm);font-size:26px;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;justify-content:center;user-select:none;flex-shrink:0;-webkit-tap-highlight-color:transparent;}\n' +
+    '.hp-btn:active{background:rgba(201,162,39,0.15);}\n' +
+    '.hp-current{font-family:"Cinzel Decorative",serif;font-size:50px;color:var(--gold-bright);line-height:1;min-width:80px;text-align:center;transition:color 0.3s;}\n' +
+    '.hp-bar{height:6px;background:var(--surface2-dm);border:1px solid var(--border-dm);margin-bottom:8px;}\n' +
+    '.hp-bar-fill{height:100%;background:var(--green-bright);transition:width 0.4s,background 0.4s;}\n' +
+    '.hp-meta{display:flex;justify-content:center;gap:14px;font-family:"Cinzel",serif;font-size:9px;letter-spacing:1px;color:var(--text-faint-dm);text-transform:uppercase;margin-bottom:8px;}\n' +
+    '.hp-meta span{cursor:pointer;touch-action:manipulation;}\n' +
+    '.slot-pips{display:flex;gap:6px;flex-wrap:wrap;}\n' +
+    '.slot-pip{width:32px;height:32px;border:2px solid var(--astral-bright);border-radius:50%;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all 0.15s;user-select:none;background:rgba(123,47,255,0.15);color:var(--astral-bright);-webkit-tap-highlight-color:transparent;}\n' +
+    '.slot-pip.used{background:transparent;border-color:var(--border-dm);color:var(--text-faint-dm);opacity:0.4;}\n' +
+    '.condition-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}\n' +
+    '.condition-tag{padding:7px 6px;text-align:center;border:1px solid var(--border-dm);background:var(--surface2-dm);font-family:"Cinzel",serif;font-size:9px;letter-spacing:1px;color:var(--text-faint-dm);text-transform:uppercase;cursor:pointer;touch-action:manipulation;user-select:none;transition:all 0.15s;-webkit-tap-highlight-color:transparent;}\n' +
+    '.condition-tag.active{border-color:#e74c3c;color:#e74c3c;background:rgba(192,57,43,0.12);}\n' +
+    '.notes-textarea{width:100%;min-height:120px;background:var(--surface2-dm);border:1px solid var(--border-dm);color:var(--text-dm);font-family:"IM Fell English",serif;font-size:15px;padding:12px;resize:vertical;border-radius:2px;-webkit-appearance:none;line-height:1.6;}\n' +
+    '.notes-textarea:focus{outline:none;border-color:var(--gold-bright);}\n' +
+    '.notes-btn{background:transparent;border:1px solid var(--border-dm);color:var(--text-dim-dm);font-family:"Cinzel",serif;font-size:9px;letter-spacing:2px;padding:10px 8px;cursor:pointer;text-transform:uppercase;touch-action:manipulation;min-height:40px;width:100%;}\n' +
+    '.notes-btn.save-btn{border-color:var(--gold-bright);color:var(--gold-bright);}\n' +
+    '.dice-btn{flex:1;min-width:80px;text-align:center;border:2px solid var(--border-dm);padding:14px 8px;background:var(--surface2-dm);cursor:pointer;touch-action:manipulation;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text-dm);font-family:"Cinzel Decorative",serif;font-size:18px;-webkit-tap-highlight-color:transparent;}\n' +
+    '.dice-btn .dice-label{font-family:"Cinzel",serif;font-size:9px;letter-spacing:2px;color:var(--text-faint-dm);text-transform:uppercase;}\n' +
+    '.dice-result-area{text-align:center;padding:20px 12px;background:rgba(0,0,0,0.4);border:1px solid var(--border-dm);margin-bottom:14px;min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}\n' +
+    '.dice-result-num{font-family:"Cinzel Decorative",serif;font-size:60px;color:var(--gold-bright);line-height:1;}\n' +
+    '.dice-result-label{font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;color:var(--text-faint-dm);text-transform:uppercase;}\n' +
+    '@media(max-width:480px){.trait-grid{grid-template-columns:1fr;}.qr-grid{grid-template-columns:repeat(2,1fr);}.condition-grid{grid-template-columns:repeat(2,1fr);}}\n' +
+    '</style>\n</head>\n<body>\n';
+
+    // NAV
+    html += '<nav class="nav">\n';
+    html += '<button class="nav-btn active" onclick="showTab(event,\'sheet\')">&#9876; ' + esc(c.name) + '</button>\n';
+    html += '<button class="nav-btn" onclick="showTab(event,\'play\')">&#127922; Play</button>\n';
+    html += '<button class="nav-btn" onclick="showTab(event,\'notes\')">&#128221; Notes</button>\n';
+    html += '</nav>\n';
+
+    // SHEET TAB
+    html += '<div id="tab-sheet" class="panel active">\n<div class="parchment-page">\n';
+    html += '<div style="margin-bottom:20px;">\n';
+    html += '<div class="char-name">' + esc(c.name) + '</div>\n';
+    html += '<div class="char-sub">played by ' + esc(data.player) + '</div>\n';
+    html += '<div class="identity-row">\n';
+    html += '<span class="identity-pill">' + esc(c.race) + '</span>\n';
+    html += '<span class="identity-pill">' + esc(c.class) + ' &middot; Lvl ' + esc(c.level) + '</span>\n';
+    if (c.alignment) html += '<span class="identity-pill">' + esc(c.alignment) + '</span>\n';
+    if (c.background) html += '<span class="identity-pill">' + esc(c.background) + '</span>\n';
+    html += '</div></div>\n';
+
+    // Appearance & Personality
+    html += '<div class="p-section" style="margin-bottom:16px;">\n';
+    html += '<div class="p-section-title">&#128100; Who They Are</div>\n';
+    html += '<div class="prose">';
+    if (data.appearance && data.appearance.description) html += '<strong>Appearance</strong> ' + esc(data.appearance.description) + '<br><br>';
+    if (data.appearance && data.appearance.memorable) html += '<strong>Notable</strong> ' + esc(data.appearance.memorable) + '<br><br>';
+    if (data.personality && data.personality.type) html += '<strong>Personality</strong> ' + esc(data.personality.type) + (data.personality.notes ? ' &mdash; ' + esc(data.personality.notes) : '') + '<br><br>';
+    if (data.wants) html += '<strong>Wants</strong> ' + esc(data.wants) + '<br><br>';
+    if (data.fears) html += '<strong>Fears</strong> ' + esc(data.fears);
+    html += '</div></div>\n';
+
+    // Combat stats
+    var combat = data.combat || {};
+    html += '<div class="p-section-title" style="margin-bottom:10px;">&#9876; Combat</div>\n';
+    html += '<div class="stat-row">\n';
+    if (combat.ac) html += '<div class="stat-bubble"><span class="val">' + esc(combat.ac) + '</span><span class="lbl">AC</span></div>\n';
+    if (combat.hp) html += '<div class="stat-bubble"><span class="val">' + esc(combat.hp) + '</span><span class="lbl">HP</span></div>\n';
+    if (combat.speed) html += '<div class="stat-bubble"><span class="val">' + esc(combat.speed) + '</span><span class="lbl">Speed</span></div>\n';
+    if (combat.initiative) html += '<div class="stat-bubble"><span class="val">' + esc(combat.initiative) + '</span><span class="lbl">Initiative</span></div>\n';
+    if (combat.passive_perception) html += '<div class="stat-bubble"><span class="val">' + esc(combat.passive_perception) + '</span><span class="lbl">Pass. Perc.</span></div>\n';
+    html += '</div>\n';
+
+    // Ability scores
+    var ab = data.ability_scores || {};
+    html += '<div class="abilities">\n';
+    var abils = ['STR','DEX','CON','INT','WIS','CHA'];
+    for (var ai = 0; ai < abils.length; ai++) {
+      var aName = abils[ai];
+      var aVal = ab[aName] || '10';
+      html += '<div class="ability"><span class="ability-name">' + aName + '</span><span class="ability-score">' + esc(aVal) + '</span><span class="ability-mod">' + mod(aVal) + '</span></div>\n';
+    }
+    html += '</div>\n';
+
+    // Backstory
+    if (data.backstory) {
+      html += '<div class="p-section" style="margin-bottom:16px;">\n<div class="p-section-title">&#128220; Backstory</div>\n<div class="prose">';
+      if (data.backstory.why_adventuring) html += '<strong>Why Adventuring</strong> ' + esc(data.backstory.why_adventuring) + '<br><br>';
+      if (data.backstory.why_group) html += '<strong>Why This Group</strong> ' + esc(data.backstory.why_group) + '<br><br>';
+      if (data.backstory.defining_moment) html += '<strong>Defining Moment</strong> ' + esc(data.backstory.defining_moment);
+      html += '</div></div>\n';
+    }
+
+    // Traits
+    html += '<div class="trait-grid">\n';
+    if (data.personality && data.personality.type) {
+      html += '<div class="trait-box"><span class="trait-label">&#9889; Personality</span><div class="trait-text">' + esc(data.personality.type) + '</div></div>\n';
+    }
+    if (data.wants) html += '<div class="trait-box"><span class="trait-label">&#128279; Wants</span><div class="trait-text">' + esc(data.wants) + '</div></div>\n';
+    if (data.fears) html += '<div class="trait-box"><span class="trait-label">&#128128; Fears</span><div class="trait-text">' + esc(data.fears) + '</div></div>\n';
+    if (data.goal) html += '<div class="trait-box"><span class="trait-label">&#127919; Goal</span><div class="trait-text">' + esc(data.goal) + '</div></div>\n';
+    html += '</div>\n';
+
+    // Weapons
+    if (data.weapons && data.weapons.main) {
+      html += '<div class="p-section" style="margin-bottom:16px;">\n<div class="p-section-title">&#9876; Weapons</div>\n';
+      html += '<div style="display:flex;gap:10px;flex-wrap:wrap;">';
+      html += '<div style="flex:2;min-width:120px;"><div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;">Weapon</div><div style="font-style:italic;font-size:14px;color:var(--ink-faded);">' + esc(data.weapons.main) + '</div></div>';
+      if (data.weapons.attack_bonus) html += '<div style="text-align:center;border:1px solid var(--parchment-aged);padding:8px 12px;"><div style="font-family:Cinzel Decorative,serif;font-size:20px;color:var(--ink);">' + esc(data.weapons.attack_bonus) + '</div><div style="font-family:Cinzel,serif;font-size:8px;letter-spacing:1px;color:var(--ink-faded);text-transform:uppercase;">Attack</div></div>';
+      if (data.weapons.damage) html += '<div style="text-align:center;border:1px solid var(--parchment-aged);padding:8px 12px;"><div style="font-family:Cinzel Decorative,serif;font-size:20px;color:var(--ink);">' + esc(data.weapons.damage) + '</div><div style="font-family:Cinzel,serif;font-size:8px;letter-spacing:1px;color:var(--ink-faded);text-transform:uppercase;">Damage</div></div>';
+      html += '</div></div>\n';
+    }
+
+    // Spells
+    html += spellSection;
+
+    // Skills
+    if (data.skills) {
+      html += '<div class="p-section" style="margin-bottom:16px;">\n<div class="p-section-title">&#127919; Skills</div>\n<div class="skills-block">' + esc(data.skills) + '</div></div>\n';
+    }
+
+    // Quick Ref
+    html += '<div class="quick-ref">\n<div class="qr-title">&#10022; Quick Reference &#10022;</div>\n<div class="qr-grid">\n';
+    if (combat.ac) html += '<div class="qr-item"><span class="qr-val">' + esc(combat.ac) + '</span><span class="qr-lbl">AC</span></div>\n';
+    if (combat.hp) html += '<div class="qr-item"><span class="qr-val">' + esc(combat.hp) + '</span><span class="qr-lbl">HP</span></div>\n';
+    if (combat.initiative) html += '<div class="qr-item"><span class="qr-val">' + esc(combat.initiative) + '</span><span class="qr-lbl">Initiative</span></div>\n';
+    if (combat.speed) html += '<div class="qr-item"><span class="qr-val">' + esc(combat.speed) + 'ft</span><span class="qr-lbl">Speed</span></div>\n';
+    if (data.weapons && data.weapons.attack_bonus) html += '<div class="qr-item"><span class="qr-val">' + esc(data.weapons.attack_bonus) + '</span><span class="qr-lbl">Atk Bonus</span></div>\n';
+    if (data.weapons && data.weapons.damage) html += '<div class="qr-item"><span class="qr-val">' + esc(data.weapons.damage) + '</span><span class="qr-lbl">Damage</span></div>\n';
+    if (data.magic && data.magic.spell_attack) html += '<div class="qr-item"><span class="qr-val">' + esc(data.magic.spell_attack) + '</span><span class="qr-lbl">Spell Atk</span></div>\n';
+    if (data.magic && data.magic.spell_dc) html += '<div class="qr-item"><span class="qr-val">DC ' + esc(data.magic.spell_dc) + '</span><span class="qr-lbl">Spell Save</span></div>\n';
+    if (combat.passive_perception) html += '<div class="qr-item"><span class="qr-val">' + esc(combat.passive_perception) + '</span><span class="qr-lbl">Pass. Perc.</span></div>\n';
+    if (data.goal) html += '<div style="grid-column:1/-1;margin-top:8px;padding-top:8px;border-top:1px solid #3a2a08;text-align:center;font-style:italic;font-size:12px;color:#a08c5a;">' + esc(data.goal) + '</div>\n';
+    html += '</div></div>\n</div></div>\n';
+
+    // PLAY TAB
+    var startHp = combat.hp || '10';
+    html += '<div id="tab-play" class="panel">\n<div class="dm-page">\n';
+    html += '<div class="play-section red-top"><div class="play-title red">&#10084; Hit Points</div>';
+    html += '<div class="hp-bar"><div class="hp-bar-fill" id="hpBar" style="width:100%;"></div></div>';
+    html += '<div class="hp-display"><button class="hp-btn" onclick="adjHP(-1)" ontouchstart="">&#8722;</button><div class="hp-current" id="hpNum">' + esc(startHp) + '</div><button class="hp-btn" onclick="adjHP(1)" ontouchstart="">+</button></div>';
+    html += '<div class="hp-meta"><span onclick="adjHP(-5)">-5</span><span onclick="adjHP(-10)">-10</span><span style="cursor:default;">/ ' + esc(startHp) + ' max</span><span onclick="adjHP(10)">+10</span><span onclick="resetHP()">Reset</span></div>';
+    html += '</div>\n';
+    // Spell slots if caster
+    if (data.magic && data.magic.is_spellcaster && data.magic.spell_slots) {
+      html += '<div class="play-section astral-top"><div class="play-title astral">&#10022; Spell Slots</div>';
+      html += '<div class="slot-pips" id="slotPips"></div>';
+      html += '<button class="notes-btn" onclick="restoreSlots()" style="margin-top:8px;border-color:var(--astral-bright);color:var(--astral-glow);">Long Rest &#8635;</button></div>\n';
+    }
+    html += '<div class="play-section red-top"><div class="play-title red">&#9888; Conditions</div><div class="condition-grid">';
+    var conds = ['Blinded','Charmed','Frightened','Grappled','Incapacitated','Invisible','Paralyzed','Poisoned','Prone','Restrained','Stunned','Exhausted'];
+    for (var ci = 0; ci < conds.length; ci++) {
+      html += '<div class="condition-tag" onclick="toggleCond(this)" data-c="' + conds[ci] + '">' + conds[ci] + '</div>';
+    }
+    html += '</div></div>\n';
+    html += '<div class="play-section green-top"><div class="play-title green">&#128221; Session Notes</div>';
+    html += '<textarea class="notes-textarea" id="playNotes" placeholder="Quick notes for this session..." oninput="saveNotes()"></textarea></div>\n';
+    html += '</div></div>\n';
+
+    // NOTES TAB
+    html += '<div id="tab-notes" class="panel">\n<div class="dm-page">\n';
+    html += '<div class="play-section"><div class="play-title">&#128221; Campaign Log</div>';
+    html += '<div style="font-size:12px;font-style:italic;color:var(--text-faint-dm);margin-bottom:10px;">Your session notes and campaign history. Export to share with the party.</div>';
+    html += '<textarea class="notes-textarea" id="campaignNotes" placeholder="Session notes, campaign log, things to remember..." style="min-height:200px;" oninput="saveCNotes()"></textarea>';
+    html += '<button class="notes-btn save-btn" onclick="exportNotes()" style="margin-top:8px;">&#8595; Export Notes</button>';
+    html += '</div></div></div>\n';
+
+    // SCRIPT
+    html += '<script>\n';
+    html += 'var CKEY = "' + key + '";\n';
+    html += 'var maxHP = ' + (parseInt(startHp) || 10) + ';\n';
+    html += 'var currentHP = maxHP;\n';
+    html += 'var slots = [true,true];\n'; // default 2 slots
+    html += 'function showTab(evt,name){document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active");});document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.remove("active");});document.getElementById("tab-"+name).classList.add("active");var btn=evt&&evt.currentTarget?evt.currentTarget:evt&&evt.target?evt.target:null;if(btn)btn.classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}\n';
+    html += 'function adjHP(d){currentHP=Math.max(0,Math.min(maxHP,currentHP+d));document.getElementById("hpNum").textContent=currentHP;var pct=(currentHP/maxHP)*100;var bar=document.getElementById("hpBar");bar.style.width=pct+"%";bar.style.background=pct<=25?"#e74c3c":pct<=50?"#e67e22":"var(--green-bright)";try{localStorage.setItem(CKEY+"-hp",currentHP);}catch(e){}}\n';
+    html += 'function resetHP(){currentHP=maxHP;adjHP(0);}\n';
+    html += 'function toggleCond(el){el.classList.toggle("active");if(navigator.vibrate)navigator.vibrate(15);}\n';
+    html += 'function renderSlots(){var c=document.getElementById("slotPips");if(!c)return;c.innerHTML="";for(var i=0;i<slots.length;i++){var p=document.createElement("div");p.className="slot-pip"+(slots[i]?"":" used");p.innerHTML=slots[i]?"&#10022;":"&#9711;";p.dataset.i=i;p.onclick=function(){slots[parseInt(this.dataset.i)]=!slots[parseInt(this.dataset.i)];renderSlots();};c.appendChild(p);}}\n';
+    html += 'function restoreSlots(){slots=slots.map(function(){return true;});renderSlots();}\n';
+    html += 'var nTimer;function saveNotes(){clearTimeout(nTimer);nTimer=setTimeout(function(){try{localStorage.setItem(CKEY+"-playnotes",document.getElementById("playNotes").value);}catch(e){}},600);}\n';
+    html += 'function saveCNotes(){clearTimeout(nTimer);nTimer=setTimeout(function(){try{localStorage.setItem(CKEY+"-cnotes",document.getElementById("campaignNotes").value);}catch(e){}},600);}\n';
+    html += 'function exportNotes(){var txt=document.getElementById("campaignNotes").value;var blob=new Blob([txt],{type:"text/plain"});var url=URL.createObjectURL(blob);var a=document.createElement("a");a.href=url;a.download="' + key + '-notes.txt";a.click();URL.revokeObjectURL(url);}\n';
+    html += 'document.addEventListener("DOMContentLoaded",function(){try{var h=localStorage.getItem(CKEY+"-hp");if(h){currentHP=parseInt(h)||maxHP;adjHP(0);}var pn=localStorage.getItem(CKEY+"-playnotes");if(pn)document.getElementById("playNotes").value=pn;var cn=localStorage.getItem(CKEY+"-cnotes");if(cn)document.getElementById("campaignNotes").value=cn;}catch(e){}renderSlots();});\n';
+    html += '<\/script>\n</body>\n</html>';
+
+    return html;
+  }
+
+  // DOWNLOAD CHARACTER SHEET
+  function downloadCharacterSheet(data) {
+    var html = generateCharacterSheet(data);
+    var charName = (data.character.name || 'character').toLowerCase().replace(/[^a-z0-9]/g, '-');
+    var blob = new Blob([html], {type: 'text/html'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = charName + '.html';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // ADD PLACEHOLDER CARD TO DASHBOARD
+  function addPlaceholderCard(data) {
+    try {
+      var c = data.character;
+      var cards = JSON.parse(localStorage.getItem('party-pending-cards') || '[]');
+      cards.push({
+        name: c.name,
+        race: c.race,
+        cls: c.class,
+        level: c.level,
+        player: data.player,
+        tagline: data.personality && data.personality.type ? data.personality.type.split('&#')[0].split('&#8212;')[0].trim() : 'Sheet incoming.',
+        filename: (c.name || 'character').toLowerCase().replace(/[^a-z0-9]/g, '-') + '.html',
+        pending: true,
+        added: Date.now()
+      });
+      localStorage.setItem('party-pending-cards', JSON.stringify(cards));
+      renderPendingCards();
+    } catch(e) {}
+  }
+
+  function renderPendingCards() {
+    try {
+      var cards = JSON.parse(localStorage.getItem('party-pending-cards') || '[]');
+      var container = document.getElementById('pendingCards');
+      if (!container) return;
+      if (!cards.length) { container.innerHTML = ''; return; }
+      var html = '<div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:8px;">&#128228; Sheets Being Built</div>';
+      for (var i = 0; i < cards.length; i++) {
+        var c = cards[i];
+        html += '<div style="background:var(--surface);border:1px dashed var(--border-bright);padding:14px;margin-bottom:8px;position:relative;opacity:0.85;">';
+        html += '<div style="font-family:Cinzel,serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint);margin-bottom:3px;">' + esc(c.race) + ' &middot; ' + esc(c.cls) + ' &middot; Lvl ' + esc(c.level) + '</div>';
+        html += '<div style="font-family:Cinzel Decorative,serif;font-size:16px;color:var(--gold);margin-bottom:2px;">' + esc(c.name) + '</div>';
+        html += '<div style="font-style:italic;font-size:11px;color:var(--text-dim);margin-bottom:6px;">played by ' + esc(c.player) + '</div>';
+        html += '<div style="font-size:11px;font-style:italic;color:var(--text-faint);border-left:2px solid var(--border-bright);padding-left:8px;margin-bottom:8px;">' + esc(c.tagline) + '</div>';
+        html += '<div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:2px;color:#e67e22;text-transform:uppercase;">&#9201; Sheet incoming &mdash; upload ' + esc(c.filename) + ' to GitHub</div>';
+        html += '<button onclick="removePending(' + i + ')" style="position:absolute;top:8px;right:8px;background:transparent;border:none;color:var(--text-faint);font-size:16px;cursor:pointer;padding:4px 8px;">&#10005;</button>';
+        html += '</div>';
+      }
+      container.innerHTML = html;
+    } catch(e) {}
+  }
+
+  function removePending(i) {
+    try {
+      var cards = JSON.parse(localStorage.getItem('party-pending-cards') || '[]');
+      cards.splice(i, 1);
+      localStorage.setItem('party-pending-cards', JSON.stringify(cards));
+      renderPendingCards();
+    } catch(e) {}
   }
 
 </script>
